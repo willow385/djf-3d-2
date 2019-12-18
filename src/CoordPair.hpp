@@ -19,6 +19,6 @@ public:
     void rotate_around(
         float axis_x,
         float axis_y,
-        float radians
+        float theta_degrees
     );
 };

@@ -6,6 +6,8 @@ CoordPair::CoordPair(float x, float y) {
     y_pos = y;
 }
 
+CoordPair::~CoordPair(void) {}
+
 float CoordPair::get_x_pos(void) {
     return x_pos;
 }
@@ -27,19 +29,18 @@ void CoordPair::rotate_around(
     float axis_y,
     float theta_degrees
 ) {
-    const float degree_radian_ratio = 0.0174533;
+    float radians = theta_degrees * (3.14159 / 180.0);
 
-    float radians = theta_degrees * degree_radian_ratio;
+    float sin_theta = std::sin(radians);
+    float cos_theta = std::cos(radians);
 
-    float s = std::sin(radians);
-    float c = std::cos(radians);
+    x_pos -= axis_x;
+    y_pos -= axis_y;
 
-    float translated_x = x_pos - axis_x;
-    float translated_y = y_pos - axis_y;
+    float xnew = x_pos * cos_theta - y_pos * sin_theta;
+    float ynew = x_pos * sin_theta + y_pos * cos_theta;
 
-    float x_new = translated_x * c - translated_y * s;
-    float y_new = translated_y * s + translated_y * c;
+    x_pos = xnew + axis_x;
+    y_pos = ynew + axis_y;
 
-    x_pos = x_new;
-    y_pos = y_new;
 }
