@@ -26,4 +26,6 @@ public:
     void set_draw_color(int r, int g, int b);
 
     void draw_line(int x0, int y0, int x1, int y1);
+
+    void fill_window(void);
 };

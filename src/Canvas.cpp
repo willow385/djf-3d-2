@@ -90,3 +90,7 @@ void Canvas::draw_line(
         y1
     );
 }
+
+void Canvas::fill_window(void) {
+    SDL_RenderClear(renderer);
+}
