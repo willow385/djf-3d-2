@@ -20,6 +20,19 @@
 #include "../src/Canvas.hpp"
 
 int main(void) {
-    std::unique_ptr<Canvas> my_canvas(new Canvas("foo", 20, 20));
+    std::unique_ptr<Canvas> canvas(
+        new Canvas(
+            "Dante's C++ Project",
+            600,
+            600
+        )
+    );
+
+    canvas->set_draw_color(0, 255, 50);
+    while (!canvas->exit()) {
+        canvas->draw_line(50, 150, 150, 50);
+        canvas->refresh();
+    }
+
     return 0;
 }
