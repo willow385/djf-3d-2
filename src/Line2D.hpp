@@ -16,10 +16,10 @@ public:
      * @param y1 the y-coordinate of the second endpoint
      */
     Line2D(
-        float x0,
-        float y0,
-        float x1,
-        float y1
+        const float x0,
+        const float y0,
+        const float x1,
+        const float y1
     );
 
     /**
@@ -63,9 +63,9 @@ public:
      * @param theta_degrees number of degrees to rotate
      */
     void rotate_endpoint_0(
-        float axis_x,
-        float axis_y,
-        float theta_degrees
+        const float axis_x,
+        const float axis_y,
+        const float theta_degrees
     );
 
     /**
@@ -76,9 +76,9 @@ public:
      * @param theta_degrees number of degrees to rotate
      */
     void rotate_endpoint_1(
-        float axis_x,
-        float axis_y,
-        float theta_degrees
+        const float axis_x,
+        const float axis_y,
+        const float theta_degrees
     );
 
 };

@@ -3,9 +3,9 @@
 #include "CoordTriple.hpp"
 
 CoordTriple::CoordTriple(
-    float x,
-    float y,
-    float z
+    const float x,
+    const float y,
+    const float z
 ) {
     x_pos = x;
     y_pos = y;
@@ -14,7 +14,7 @@ CoordTriple::CoordTriple(
 
 CoordTriple::~CoordTriple(void) {}
 
-float CoordTriple::get_pos(Axis axis) const {
+float CoordTriple::get_pos(const Axis axis) const {
     switch (axis) {
         case Axis::X:
             return x_pos;
@@ -29,7 +29,10 @@ float CoordTriple::get_pos(Axis axis) const {
     }
 }
 
-void CoordTriple::translate(Axis axis, float amount) {
+void CoordTriple::translate(
+    const Axis axis,
+    const float amount
+) {
     float *which_pos;
     switch (axis) {
         case Axis::X:
@@ -51,9 +54,9 @@ void CoordTriple::translate(Axis axis, float amount) {
 }
 
 void CoordTriple::rotate_3d(
-    Axis axis,
+    const Axis axis,
     const CoordTriple *axis_point,
-    float theta_degrees
+    const float theta_degrees
 ) {
     float *pos_0;
     float *pos_1;
@@ -84,50 +87,46 @@ void CoordTriple::rotate_3d(
             );
     }
 
-    float radians = theta_degrees * (3.14159 / 180.0);
+    const float radians = theta_degrees * (3.14159 / 180.0);
 
-    float sin_theta = std::sin(radians);
-    float cos_theta = std::cos(radians);
+    const float sin_theta = std::sin(radians);
+    const float cos_theta = std::cos(radians);
 
     *pos_0 -= about_0;
     *pos_1 -= about_1;
 
-    float new_0 = *pos_0 * cos_theta - *pos_1 * sin_theta;
-    float new_1 = *pos_0 * sin_theta + *pos_1 * cos_theta;
+    const float new_0 = *pos_0 * cos_theta - *pos_1 * sin_theta;
+    const float new_1 = *pos_0 * sin_theta + *pos_1 * cos_theta;
 
     *pos_0 = new_0 + about_0;
     *pos_1 = new_1 + about_1;
 }
 
 float CoordTriple::project_2d_x(
-    float vanish_x,
-    float fov
+    const float vanish_x,
+    const float fov
 ) const {
     /* The apparent x-position is going to be a weighted average
        between the actual x-position and the x-position of the
        vanishing point, weighted by the y-position. */
-    float average = (
+    return (
         x_pos + (
             (y_pos / fov) * vanish_x
         )
     ) / (
         1 + (y_pos / fov)
     );
-
-    return average;
 }
 
 float CoordTriple::project_2d_y(
-    float vanish_y,
-    float fov
+    const float vanish_y,
+    const float fov
 ) const {
-    float average = (
+    return (
         z_pos + (
             (y_pos / fov) * vanish_y
         )
     ) / (
         1 + (y_pos / fov)
     );
-
-    return average;
 }

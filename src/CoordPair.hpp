@@ -11,7 +11,7 @@ public:
      * @param x the x-coordinate
      * @param y the y-coordinate
      */
-    CoordPair(float x, float y);
+    CoordPair(const float x, const float y);
 
     /**
      * The destructor for a CoordPair.
@@ -37,14 +37,14 @@ public:
      *
      * @param amount the amount by which to translate the CoordPair
      */
-    void translate_x_pos(float amount);
+    void translate_x_pos(const float amount);
 
     /**
      * This method translates the CoordPair along the y-axis.
      *
      * @param amount the amount by which to translate the CoordPair
      */
-    void translate_y_pos(float amount);
+    void translate_y_pos(const float amount);
 
     /**
      * This method rotates the CoordPair around another CoordPair.
@@ -54,8 +54,8 @@ public:
      * @param theta_degrees number of degrees to rotate
      */
     void rotate_around(
-        float axis_x,
-        float axis_y,
-        float theta_degrees
+        const float axis_x,
+        const float axis_y,
+        const float theta_degrees
     );
 };

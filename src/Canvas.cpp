@@ -9,9 +9,9 @@
 #include "Canvas.hpp"
 
 Canvas::Canvas(
-    std::string title,
-    int width,
-    int height
+    const std::string title,
+    const int width,
+    const int height
 ) {
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -37,7 +37,8 @@ Canvas::Canvas(
         throw std::exception();
     }
 
-    std::cout << "Click the close button or press the X key to exit"
+    std::cout
+        << "Click the close button or press the X key to exit"
         << std::endl;
 
 }
@@ -67,9 +68,9 @@ bool Canvas::exit(void) {
 }
 
 void Canvas::set_draw_color(
-    int r,
-    int g,
-    int b
+    const int r,
+    const int g,
+    const int b
 ) {
     SDL_SetRenderDrawColor(
         renderer,
@@ -80,7 +81,7 @@ void Canvas::set_draw_color(
     );
 }
 
-void Canvas::draw_point(int x, int y) {
+void Canvas::draw_point(const int x, const int y) {
     SDL_RenderDrawPoint(
         renderer,
         x,
@@ -89,10 +90,10 @@ void Canvas::draw_point(int x, int y) {
 }
 
 void Canvas::draw_line(
-    int x0,
-    int y0,
-    int x1,
-    int y1
+    const int x0,
+    const int y0,
+    const int x1,
+    const int y1
 ) {
     SDL_RenderDrawLine(
         renderer,

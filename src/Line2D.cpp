@@ -1,10 +1,10 @@
 #include "Line2D.hpp"
 
 Line2D::Line2D(
-    float x0,
-    float y0,
-    float x1,
-    float y1
+    const float x0,
+    const float y0,
+    const float x1,
+    const float y1
 ) {
     endpoint_0 = new CoordPair(x0, y0);
     endpoint_1 = new CoordPair(x1, y1);
@@ -32,9 +32,9 @@ float Line2D::get_endpoint_1_y(void) const {
 }
 
 void Line2D::rotate_endpoint_0(
-    float axis_x,
-    float axis_y,
-    float theta_degrees
+    const float axis_x,
+    const float axis_y,
+    const float theta_degrees
 ) {
     endpoint_0->rotate_around(
         axis_x,
@@ -44,9 +44,9 @@ void Line2D::rotate_endpoint_0(
 }
 
 void Line2D::rotate_endpoint_1(
-    float axis_x,
-    float axis_y,
-    float theta_degrees
+    const float axis_x,
+    const float axis_y,
+    const float theta_degrees
 ) {
     endpoint_1->rotate_around(
         axis_x,
