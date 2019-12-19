@@ -42,5 +42,4 @@ void CoordPair::rotate_around(
 
     x_pos = xnew + axis_x;
     y_pos = ynew + axis_y;
-
 }

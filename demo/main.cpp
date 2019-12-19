@@ -21,15 +21,46 @@
 #include <thread>
 #include <chrono>
 #include "../src/Canvas.hpp"
-#include "../src/Line2D.hpp"
+#include "../src/CoordTriple.hpp"
+
+/* This Trianlge class is just for demo purposes. Later I
+   intend to write functionality for displaying arbitrary
+   geometric shapes loaded from external files. */
+class Triangle {
+public:
+    CoordTriple *vertex_0;
+    CoordTriple *vertex_1;
+    CoordTriple *vertex_2;
+
+    Triangle(
+        float v_0_x,
+        float v_0_y,
+        float v_0_z,
+        float v_1_x,
+        float v_1_y,
+        float v_1_z,
+        float v_2_x,
+        float v_2_y,
+        float v_2_z
+    ) {
+        vertex_0 = new CoordTriple(v_0_x, v_0_y, v_0_z);
+        vertex_1 = new CoordTriple(v_1_x, v_1_y, v_1_z);
+        vertex_2 = new CoordTriple(v_2_x, v_2_y, v_2_z);
+    }
+
+    ~Triangle(void) {
+        delete vertex_0;
+        delete vertex_1;
+        delete vertex_2;
+    }
+};
 
 int game_loop(std::unique_ptr<Canvas> canvas) {
-    std::unique_ptr<Line2D> line(
-        new Line2D(
-            200.0,
-            200.0,
-            300.0,
-            300.0
+    std::unique_ptr<Triangle> triangle(
+        new Triangle(
+            300, 0, 300,
+            200, 0, 500,
+            400, 0, 500
         )
     );
 
@@ -46,19 +77,37 @@ int game_loop(std::unique_ptr<Canvas> canvas) {
         canvas->fill_window();
         canvas->set_draw_color(0, 255, 50);
         canvas->draw_line(
-            (int) line->get_endpoint_0_x(),
-            (int) line->get_endpoint_0_y(),
-            (int) line->get_endpoint_1_x(),
-            (int) line->get_endpoint_1_y()
+            (int) triangle->vertex_0->project_2d_x(300, 1000),
+            (int) triangle->vertex_0->project_2d_y(300, 1000),
+            (int) triangle->vertex_1->project_2d_x(300, 1000),
+            (int) triangle->vertex_1->project_2d_y(300, 1000)
         );
-
-        line->rotate_endpoint_0(
-            line->get_endpoint_1_x(),
-            line->get_endpoint_1_y(),
-            1.0
+        canvas->draw_line(
+            (int) triangle->vertex_1->project_2d_x(300, 1000),
+            (int) triangle->vertex_1->project_2d_y(300, 1000),
+            (int) triangle->vertex_2->project_2d_x(300, 1000),
+            (int) triangle->vertex_2->project_2d_y(300, 1000)
+        );
+        canvas->draw_line(
+            (int) triangle->vertex_2->project_2d_x(300, 1000),
+            (int) triangle->vertex_2->project_2d_y(300, 1000),
+            (int) triangle->vertex_0->project_2d_x(300, 1000),
+            (int) triangle->vertex_0->project_2d_y(300, 1000)
         );
 
         canvas->refresh();
+
+        triangle->vertex_1->rotate_3d(
+            Axis::Z,
+            triangle->vertex_0,
+            1
+        );
+
+        triangle->vertex_2->rotate_3d(
+            Axis::Z,
+            triangle->vertex_0,
+            1
+        );
 
         /* 60 FPS framerate */
         std::this_thread::sleep_for(
@@ -73,7 +122,7 @@ int main(void) {
     try {
         std::unique_ptr<Canvas> canvas(
             new Canvas(
-                "Dante's C++ Project",
+                "Rotating 3D triangle written in modern C++",
                 600,
                 600
             )
