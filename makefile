@@ -18,7 +18,7 @@ SRC = src/Canvas.cpp\
 
 FLAGS = -O3 -Wall -lm
 
-$(TARGET): $(OBJS) $(SRC)
+$(TARGET): $(SRC)
 	$(CPP) $(FLAGS) -c src/Canvas.cpp -o src/Canvas.o
 	$(CPP) $(FLAGS) -c src/CoordPair.cpp -o src/CoordPair.o
 	$(CPP) $(FLAGS) -c src/Line2D.cpp -o src/Line2D.o 
