@@ -16,7 +16,7 @@ public:
      *
      * @param title the text to display in the titlebar
      * @param width the width of the window in pixels
-     * @param height the height of the windwo in pixels
+     * @param height the height of the window in pixels
      */
     Canvas(
         std::string title,
