@@ -61,7 +61,7 @@ public:
     float project_2d_x(
         float vanish_x,
         float fov
-    );
+    ) const;
 
     /**
      * This returns the y-position correpsonding to the 2d
@@ -82,5 +82,5 @@ public:
     float project_2d_y(
         float vanish_y,
         float fov
-    );
+    ) const;
 };

@@ -15,19 +15,19 @@ Line2D::~Line2D(void) {
     delete endpoint_1;
 }
 
-float Line2D::get_endpoint_0_x(void) {
+float Line2D::get_endpoint_0_x(void) const {
     return endpoint_0->get_x_pos();
 }
 
-float Line2D::get_endpoint_0_y(void) {
+float Line2D::get_endpoint_0_y(void) const {
     return endpoint_0->get_y_pos();
 }
 
-float Line2D::get_endpoint_1_x(void) {
+float Line2D::get_endpoint_1_x(void) const {
     return endpoint_1->get_x_pos();
 }
 
-float Line2D::get_endpoint_1_y(void) {
+float Line2D::get_endpoint_1_y(void) const {
     return endpoint_1->get_y_pos();
 }
 

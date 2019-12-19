@@ -8,11 +8,11 @@ CoordPair::CoordPair(float x, float y) {
 
 CoordPair::~CoordPair(void) {}
 
-float CoordPair::get_x_pos(void) {
+float CoordPair::get_x_pos(void) const {
     return x_pos;
 }
 
-float CoordPair::get_y_pos(void) {
+float CoordPair::get_y_pos(void) const {
     return y_pos;
 }
 

@@ -102,7 +102,7 @@ void CoordTriple::rotate_3d(
 float CoordTriple::project_2d_x(
     float vanish_x,
     float fov
-) {
+) const {
     /* The apparent x-position is going to be a weighted average
        between the actual x-position and the x-position of the
        vanishing point, weighted by the y-position. */
@@ -120,7 +120,7 @@ float CoordTriple::project_2d_x(
 float CoordTriple::project_2d_y(
     float vanish_y,
     float fov
-) {
+) const {
     float average = (
         z_pos + (
             (y_pos / fov) * vanish_y

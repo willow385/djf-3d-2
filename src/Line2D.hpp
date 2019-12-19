@@ -32,28 +32,28 @@ public:
      *
      * @return x-coordinate of the first endpoint
      */
-    float get_endpoint_0_x(void);
+    float get_endpoint_0_x(void) const;
 
     /**
      * Getter for the y-coordinate of the first endpoint.
      *
      * @return y-coordinate of the first endpoint
      */
-    float get_endpoint_0_y(void);
+    float get_endpoint_0_y(void) const;
 
     /**
      * Getter for the x-coordinate of the second endpoint.
      *
      * @return x-coordinate of the second endpoint
      */
-    float get_endpoint_1_x(void);
+    float get_endpoint_1_x(void) const;
 
     /**
      * Getter for the y-coordinate of the second endpoint.
      *
      * @return y-coordinate of the second endpoint
      */
-    float get_endpoint_1_y(void);
+    float get_endpoint_1_y(void) const;
 
     /**
      * Method to rotate the first endpoint around another point.

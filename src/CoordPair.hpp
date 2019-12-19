@@ -23,14 +23,14 @@ public:
      *
      * @return x-coordinate of this CoordPair
      */
-    float get_x_pos(void);
+    float get_x_pos(void) const;
 
     /**
      * Getter for the y-coordinate.
      *
      * @return y-coordinate of this CoordPair
      */
-    float get_y_pos(void);
+    float get_y_pos(void) const;
 
     /**
      * This method translates the CoordPair along the x-axis.
