@@ -55,6 +55,15 @@ public:
     void set_draw_color(int r, int g, int b);
 
     /**
+     * This method will draw a single point at (x, y) in whatever color was
+     * picked by the last call to set_draw_color().
+     *
+     * @param x the x-position
+     * @param y the y-position
+     */
+    void draw_point(int x, int y);
+
+    /**
      * This method will draw a straight line from (x0, y0) to (x1, y1)
      * in whatever color was picked by the most recent call to
      * set_draw_color().

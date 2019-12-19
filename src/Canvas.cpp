@@ -76,6 +76,14 @@ void Canvas::set_draw_color(
     );
 }
 
+void Canvas::draw_point(int x, int y) {
+    SDL_RenderDrawPoint(
+        renderer,
+        x,
+        y
+    );
+}
+
 void Canvas::draw_line(
     int x0,
     int y0,
