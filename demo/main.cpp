@@ -16,23 +16,14 @@
 */
 
 #include <iostream>
+#include <stdexcept>
 #include <memory>
 #include <thread>
 #include <chrono>
 #include "../src/Canvas.hpp"
 #include "../src/Line2D.hpp"
 
-int main(void) {
-    /* Here we use std::unique_ptr to create objects that will be
-       deallocated for us when they go out of scope. */
-    std::unique_ptr<Canvas> canvas(
-        new Canvas(
-            "Dante's C++ Project",
-            600,
-            600
-        )
-    );
-
+int game_loop(std::unique_ptr<Canvas> canvas) {
     std::unique_ptr<Line2D> line(
         new Line2D(
             200.0,
@@ -76,4 +67,22 @@ int main(void) {
     }
 
     return 0;
+}
+
+int main(void) {
+    try {
+        std::unique_ptr<Canvas> canvas(
+            new Canvas(
+                "Dante's C++ Project",
+                600,
+                600
+            )
+        );
+        int return_val = game_loop(std::move(canvas));
+        std::cout << "Game exited normally." << std::endl;
+        return return_val;
+    } catch (std::exception& e) {
+        std::cerr << "Aborting the program." << std::endl;
+        return 1;
+    }
 }

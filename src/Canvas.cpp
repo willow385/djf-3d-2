@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include <iostream>
 
 #ifndef SDL2_SDL_H
@@ -29,13 +30,16 @@ Canvas::Canvas(
         0
     );
 
+    if (!main_window || !renderer) {
+        std::cerr << "Error in Canvas::Canvas(): "
+            << SDL_GetError()
+            << std::endl;
+        throw std::exception();
+    }
+
     std::cout << "Click the close button or press the X key to exit"
         << std::endl;
 
-    if (!main_window || !renderer) {
-        std::cout << "Error in `Canvas::Canvas()`: ";
-        std::cout << SDL_GetError() << std::endl;
-    }
 }
 
 Canvas::~Canvas(void) {
