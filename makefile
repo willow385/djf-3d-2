@@ -13,7 +13,7 @@ SRC = src/Canvas.cpp\
       src/CoordTriple.hpp\
       demo/main.cpp
 
-FLAGS = -O3 -Wall -lm
+FLAGS = -O3 -Wall -lm -std=c++11
 
 $(TARGET): $(SRC)
 	$(CPP) $(FLAGS) -c src/Canvas.cpp -o src/Canvas.o
