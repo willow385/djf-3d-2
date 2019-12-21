@@ -1,5 +1,7 @@
 #include "Line2D.hpp"
 
+namespace djf_3d {
+
 Line2D::Line2D(
     const float x0,
     const float y0,
@@ -54,3 +56,5 @@ void Line2D::rotate_endpoint_1(
         theta_degrees
     );
 }
+
+} // end of namespace djf_3d

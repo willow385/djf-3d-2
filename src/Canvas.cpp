@@ -1,5 +1,12 @@
+#ifndef STDEXCEPT
+#define STDEXCEPT
 #include <stdexcept>
+#endif
+
+#ifndef IOSTREAM
+#define IOSTREAM
 #include <iostream>
+#endif
 
 #ifndef SDL2_SDL_H
 #define SDL2_SDL_H
@@ -8,8 +15,10 @@
 
 #include "Canvas.hpp"
 
+namespace djf_3d {
+
 Canvas::Canvas(
-    const std::string title,
+    const std::string& title,
     const int width,
     const int height
 ) {
@@ -107,3 +116,5 @@ void Canvas::draw_line(
 void Canvas::fill_window(void) {
     SDL_RenderClear(renderer);
 }
+
+} // end of namespace djf_3d

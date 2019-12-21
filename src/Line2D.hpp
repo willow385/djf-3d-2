@@ -1,4 +1,9 @@
+#ifndef COORDPAIR_HPP
+#define COORDPAIR_HPP
 #include "CoordPair.hpp"
+#endif
+
+namespace djf_3d {
 
 class Line2D {
 
@@ -82,3 +87,5 @@ public:
     );
 
 };
+
+} // end of namespace djf_3d

@@ -1,6 +1,16 @@
+#ifndef STDEXCEPT
+#define STDEXCEPT
 #include <stdexcept>
+#endif
+
+#ifndef CMATH
+#define CMATH
 #include <cmath>
+#endif
+
 #include "CoordTriple.hpp"
+
+namespace djf_3d {
 
 CoordTriple::CoordTriple(
     const float x,
@@ -130,3 +140,5 @@ float CoordTriple::project_2d_y(
         1 + (y_pos / fov)
     );
 }
+
+} // end of namespace djf_3d

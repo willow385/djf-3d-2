@@ -1,3 +1,5 @@
+namespace djf_3d {
+
 enum class Axis {
     X, // left/right axis (horizontal, paralell to screen)
     Y, // near/far axis (horizontal, perpendicular to screen)
@@ -87,3 +89,5 @@ public:
         const float fov
     ) const;
 };
+
+} // end of namespace djf_3d

@@ -1,5 +1,11 @@
 #include "CoordPair.hpp"
+
+#ifndef CMATH
+#define CMATH
 #include <cmath>
+#endif
+
+namespace djf_3d {
 
 CoordPair::CoordPair(const float x, const float y) {
     x_pos = x;
@@ -43,3 +49,5 @@ void CoordPair::rotate_around(
     x_pos = xnew + axis_x;
     y_pos = ynew + axis_y;
 }
+
+} // end of namespace djf_3d

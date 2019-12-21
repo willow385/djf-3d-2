@@ -1,3 +1,5 @@
+namespace djf_3d {
+
 class CoordPair {
 
 private:
@@ -59,3 +61,5 @@ public:
         const float theta_degrees
     );
 };
+
+} // end of namespace djf_3d

@@ -28,10 +28,10 @@
    geometric shapes loaded from external files. */
 class Pyramid {
 public:
-    CoordTriple *vertex_0;
-    CoordTriple *vertex_1;
-    CoordTriple *vertex_2;
-    CoordTriple *vertex_3;
+    djf_3d::CoordTriple *vertex_0;
+    djf_3d::CoordTriple *vertex_1;
+    djf_3d::CoordTriple *vertex_2;
+    djf_3d::CoordTriple *vertex_3;
 
     Pyramid(
         float v_0_x,
@@ -47,10 +47,10 @@ public:
         float v_3_y,
         float v_3_z
     ) {
-        vertex_0 = new CoordTriple(v_0_x, v_0_y, v_0_z);
-        vertex_1 = new CoordTriple(v_1_x, v_1_y, v_1_z);
-        vertex_2 = new CoordTriple(v_2_x, v_2_y, v_2_z);
-        vertex_3 = new CoordTriple(v_3_x, v_3_y, v_3_z);
+        vertex_0 = new djf_3d::CoordTriple(v_0_x, v_0_y, v_0_z);
+        vertex_1 = new djf_3d::CoordTriple(v_1_x, v_1_y, v_1_z);
+        vertex_2 = new djf_3d::CoordTriple(v_2_x, v_2_y, v_2_z);
+        vertex_3 = new djf_3d::CoordTriple(v_3_x, v_3_y, v_3_z);
     }
 
     ~Pyramid(void) {
@@ -61,7 +61,7 @@ public:
     }
 };
 
-int game_loop(std::unique_ptr<Canvas> canvas) {
+int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
     std::unique_ptr<Pyramid> pyramid(
         /* I used a calculator to work out what the coordinates should
            be to roughly approximate a regular tetrahedron of side
@@ -130,17 +130,17 @@ int game_loop(std::unique_ptr<Canvas> canvas) {
         canvas->refresh();
 
         pyramid->vertex_1->rotate_3d(
-            Axis::Z,
+            djf_3d::Axis::Z,
             pyramid->vertex_0,
             1
         );
         pyramid->vertex_2->rotate_3d(
-            Axis::Z,
+            djf_3d::Axis::Z,
             pyramid->vertex_0,
             1
         );
         pyramid->vertex_3->rotate_3d(
-            Axis::Z,
+            djf_3d::Axis::Z,
             pyramid->vertex_0,
             1
         );
@@ -156,8 +156,8 @@ int game_loop(std::unique_ptr<Canvas> canvas) {
 
 int main(void) {
     try {
-        std::unique_ptr<Canvas> canvas(
-            new Canvas(
+        std::unique_ptr<djf_3d::Canvas> canvas(
+            new djf_3d::Canvas(
                 "Rotating 3D Pyramid written in modern C++",
                 600,
                 600

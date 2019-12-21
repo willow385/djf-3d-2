@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #endif
 
+namespace djf_3d {
+
 class Canvas {
 
 private:
@@ -19,7 +21,7 @@ public:
      * @param height the height of the window in pixels
      */
     Canvas(
-        const std::string title,
+        const std::string& title,
         const int width,
         const int height
     );
@@ -86,3 +88,5 @@ public:
      */
     void fill_window(void);
 };
+
+} // end of namespace djf_3d
