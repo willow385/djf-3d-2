@@ -43,24 +43,21 @@ void CoordTriple::translate(
     const Axis axis,
     const float amount
 ) {
-    float *which_pos;
     switch (axis) {
         case Axis::X:
-            which_pos = &x_pos;
+            x_pos += amount;
             break;
         case Axis::Y:
-            which_pos = &y_pos;
+            y_pos += amount;
             break;
         case Axis::Z:
-            which_pos = &z_pos;
+            z_pos += amount;
             break;
         default:
             throw std::invalid_argument(
                 "Invalid axis for CoordTriple::translate()"
             );
     }
-
-    *which_pos += amount;
 }
 
 void CoordTriple::rotate_3d(

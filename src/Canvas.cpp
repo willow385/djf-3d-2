@@ -53,8 +53,10 @@ Canvas::Canvas(
 }
 
 Canvas::~Canvas(void) {
+/*
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
+*/
     SDL_Quit();
 }
 

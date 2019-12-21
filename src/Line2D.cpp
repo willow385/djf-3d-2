@@ -1,3 +1,8 @@
+#ifndef MEMORY
+#define MEMORY
+#include <memory>
+#endif
+
 #include "Line2D.hpp"
 
 namespace djf_3d {
@@ -8,14 +13,11 @@ Line2D::Line2D(
     const float x1,
     const float y1
 ) {
-    endpoint_0 = new CoordPair(x0, y0);
-    endpoint_1 = new CoordPair(x1, y1);
+    endpoint_0 = std::make_unique<CoordPair>(x0, y0);
+    endpoint_1 = std::make_unique<CoordPair>(x1, y1);
 }
 
-Line2D::~Line2D(void) {
-    delete endpoint_0;
-    delete endpoint_1;
-}
+Line2D::~Line2D(void) {}
 
 float Line2D::get_endpoint_0_x(void) const {
     return endpoint_0->get_x_pos();

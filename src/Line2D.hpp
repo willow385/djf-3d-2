@@ -1,3 +1,8 @@
+#ifndef MEMORY
+#define MEMORY
+#include <memory>
+#endif
+
 #ifndef COORDPAIR_HPP
 #define COORDPAIR_HPP
 #include "CoordPair.hpp"
@@ -8,8 +13,8 @@ namespace djf_3d {
 class Line2D {
 
 private:
-    CoordPair *endpoint_0;
-    CoordPair *endpoint_1;
+    std::unique_ptr<CoordPair> endpoint_0;
+    std::unique_ptr<CoordPair> endpoint_1;
 
 public:
     /**
