@@ -30,40 +30,40 @@ public:
         const float y0,
         const float x1,
         const float y1
-    );
+    ) noexcept;
 
     /**
      * Destructor for a Line2D.
      */
-    ~Line2D(void);
+    ~Line2D(void) noexcept;
 
     /**
      * Getter for the x-coordinate of the first endpoint.
      *
      * @return x-coordinate of the first endpoint
      */
-    float get_endpoint_0_x(void) const;
+    float get_endpoint_0_x(void) const noexcept;
 
     /**
      * Getter for the y-coordinate of the first endpoint.
      *
      * @return y-coordinate of the first endpoint
      */
-    float get_endpoint_0_y(void) const;
+    float get_endpoint_0_y(void) const noexcept;
 
     /**
      * Getter for the x-coordinate of the second endpoint.
      *
      * @return x-coordinate of the second endpoint
      */
-    float get_endpoint_1_x(void) const;
+    float get_endpoint_1_x(void) const noexcept;
 
     /**
      * Getter for the y-coordinate of the second endpoint.
      *
      * @return y-coordinate of the second endpoint
      */
-    float get_endpoint_1_y(void) const;
+    float get_endpoint_1_y(void) const noexcept;
 
     /**
      * Method to rotate the first endpoint around another point.
@@ -76,7 +76,7 @@ public:
         const float axis_x,
         const float axis_y,
         const float theta_degrees
-    );
+    ) noexcept;
 
     /**
      * Method to rotate the second endpoint around another point.
@@ -89,7 +89,7 @@ public:
         const float axis_x,
         const float axis_y,
         const float theta_degrees
-    );
+    ) noexcept;
 
 };
 

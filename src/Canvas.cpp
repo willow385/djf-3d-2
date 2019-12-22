@@ -52,19 +52,17 @@ Canvas::Canvas(
 
 }
 
-Canvas::~Canvas(void) {
-/*
+Canvas::~Canvas(void) noexcept {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
-*/
     SDL_Quit();
 }
 
-void Canvas::refresh(void) {
+void Canvas::refresh(void) noexcept {
     SDL_RenderPresent(renderer);
 }
 
-bool Canvas::exit(void) {
+bool Canvas::exit(void) noexcept {
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:
@@ -82,7 +80,7 @@ void Canvas::set_draw_color(
     const int r,
     const int g,
     const int b
-) {
+) noexcept {
     SDL_SetRenderDrawColor(
         renderer,
         r,
@@ -92,7 +90,10 @@ void Canvas::set_draw_color(
     );
 }
 
-void Canvas::draw_point(const int x, const int y) {
+void Canvas::draw_point(
+    const int x,
+    const int y
+) noexcept {
     SDL_RenderDrawPoint(
         renderer,
         x,
@@ -105,7 +106,7 @@ void Canvas::draw_line(
     const int y0,
     const int x1,
     const int y1
-) {
+) noexcept {
     SDL_RenderDrawLine(
         renderer,
         x0,
@@ -115,7 +116,7 @@ void Canvas::draw_line(
     );
 }
 
-void Canvas::fill_window(void) {
+void Canvas::fill_window(void) noexcept {
     SDL_RenderClear(renderer);
 }
 

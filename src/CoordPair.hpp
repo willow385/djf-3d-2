@@ -13,40 +13,43 @@ public:
      * @param x the x-coordinate
      * @param y the y-coordinate
      */
-    CoordPair(const float x, const float y);
+    CoordPair(
+        const float x,
+        const float y
+    ) noexcept;
 
     /**
      * The destructor for a CoordPair.
      */
-    ~CoordPair(void);
+    ~CoordPair(void) noexcept;
 
     /**
      * Getter for the x-coordinate.
      *
      * @return x-coordinate of this CoordPair
      */
-    float get_x_pos(void) const;
+    float get_x_pos(void) const noexcept;
 
     /**
      * Getter for the y-coordinate.
      *
      * @return y-coordinate of this CoordPair
      */
-    float get_y_pos(void) const;
+    float get_y_pos(void) const noexcept;
 
     /**
      * This method translates the CoordPair along the x-axis.
      *
      * @param amount the amount by which to translate the CoordPair
      */
-    void translate_x_pos(const float amount);
+    void translate_x_pos(const float amount) noexcept;
 
     /**
      * This method translates the CoordPair along the y-axis.
      *
      * @param amount the amount by which to translate the CoordPair
      */
-    void translate_y_pos(const float amount);
+    void translate_y_pos(const float amount) noexcept;
 
     /**
      * This method rotates the CoordPair around another CoordPair.
@@ -59,7 +62,7 @@ public:
         const float axis_x,
         const float axis_y,
         const float theta_degrees
-    );
+    ) noexcept;
 };
 
 } // end of namespace djf_3d

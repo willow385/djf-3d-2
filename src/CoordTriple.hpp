@@ -17,9 +17,9 @@ public:
         const float x,
         const float y,
         const float z
-    );
+    ) noexcept;
 
-    ~CoordTriple(void);
+    ~CoordTriple(void) noexcept;
 
     /**
      * This returns the value of one of a CoordTriple's
@@ -74,7 +74,7 @@ public:
     float project_2d_x(
         const float vanish_x,
         const float fov
-    ) const;
+    ) const noexcept;
 
     /**
      * This returns the y-position correpsonding to the 2d
@@ -87,7 +87,7 @@ public:
     float project_2d_y(
         const float vanish_y,
         const float fov
-    ) const;
+    ) const noexcept;
 };
 
 } // end of namespace djf_3d

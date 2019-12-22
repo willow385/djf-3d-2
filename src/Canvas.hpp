@@ -34,13 +34,13 @@ public:
     /**
      * Destructor for the Canvas class.
      */
-    ~Canvas(void);
+    ~Canvas(void) noexcept;
 
     /**
      * This function refreshes the window. The result of calling the
      * drawing methods will show up when this method is called.
      */
-    void refresh(void);
+    void refresh(void) noexcept;
 
     /**
      * This method will return true if, when it is called, the user
@@ -49,7 +49,7 @@ public:
      *
      * @return true if the user tries to close the window, else false
      */
-    bool exit(void);
+    bool exit(void) noexcept;
 
     /**
      * This method will change the color of whatever is drawn on the
@@ -59,7 +59,11 @@ public:
      * @param g the green portion of the color
      * @param b the blue portion of the color
      */
-    void set_draw_color(const int r, const int g, const int b);
+    void set_draw_color(
+        const int r,
+        const int g,
+        const int b
+    ) noexcept;
 
     /**
      * This method will draw a single point at (x, y) in whatever color was
@@ -68,7 +72,10 @@ public:
      * @param x the x-position
      * @param y the y-position
      */
-    void draw_point(const int x, const int y);
+    void draw_point(
+        const int x,
+        const int y
+    ) noexcept;
 
     /**
      * This method will draw a straight line from (x0, y0) to (x1, y1)
@@ -85,13 +92,13 @@ public:
         const int y0,
         const int x1,
         const int y1
-    );
+    ) noexcept;
 
     /**
      * This method will set every pixel in the window to whatever color
      * was picked by the most recent call to set_draw_color().
      */
-    void fill_window(void);
+    void fill_window(void) noexcept;
 };
 
 } // end of namespace djf_3d

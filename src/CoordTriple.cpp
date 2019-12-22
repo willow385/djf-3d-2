@@ -16,13 +16,13 @@ CoordTriple::CoordTriple(
     const float x,
     const float y,
     const float z
-) {
+) noexcept {
     x_pos = x;
     y_pos = y;
     z_pos = z;
 }
 
-CoordTriple::~CoordTriple(void) {}
+CoordTriple::~CoordTriple(void) noexcept {}
 
 float CoordTriple::get_pos(const Axis axis) const {
     switch (axis) {
@@ -112,7 +112,7 @@ void CoordTriple::rotate_3d(
 float CoordTriple::project_2d_x(
     const float vanish_x,
     const float fov
-) const {
+) const noexcept {
     /* The apparent x-position is going to be a weighted average
        between the actual x-position and the x-position of the
        vanishing point, weighted by the y-position. */
@@ -128,7 +128,7 @@ float CoordTriple::project_2d_x(
 float CoordTriple::project_2d_y(
     const float vanish_y,
     const float fov
-) const {
+) const noexcept {
     return (
         z_pos + (
             (y_pos / fov) * vanish_y
