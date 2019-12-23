@@ -63,7 +63,7 @@ public:
     );
 
 
-    /* IMPORTANT: REGARDING project_2d_x() AND project_2d_y().
+    /* IMPORTANT: REGARDING THE PROJECTION METHODS.
 
        Pay special note to the value selected for `fov`; this
        parameter specifies the degree to which a point's

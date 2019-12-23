@@ -63,6 +63,18 @@ public:
         const float axis_y,
         const float theta_degrees
     ) noexcept;
+
+    /**
+     * This method rotates the CoordPair around another CoordPair.
+     *
+     * @param axis the CoordPair about which to rotate
+     * @param theta_degrees number of degrees to rotate
+     */
+    void rotate_around(
+        const CoordPair& axis,
+        const float theta_degrees
+    ) noexcept;
+
 };
 
 } // end of namespace djf_3d

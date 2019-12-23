@@ -53,4 +53,23 @@ void CoordPair::rotate_around(
     y_pos = ynew + axis_y;
 }
 
+void CoordPair::rotate_around(
+    const CoordPair& axis,
+    const float theta_degrees
+) noexcept {
+    const float radians = theta_degrees * (3.14159 / 180.0);
+
+    const float sin_theta = std::sin(radians);
+    const float cos_theta = std::cos(radians);
+
+    x_pos -= axis.get_x_pos();
+    y_pos -= axis.get_y_pos();
+
+    const float xnew = x_pos * cos_theta - y_pos * sin_theta;
+    const float ynew = x_pos * sin_theta + y_pos * cos_theta;
+
+    x_pos = xnew + axis.get_x_pos();
+    y_pos = ynew + axis.get_y_pos();
+}
+
 } // end of namespace djf_3d
