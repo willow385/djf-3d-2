@@ -1,3 +1,13 @@
+#ifndef PERSPECTIVE_HPP
+#define PERSPECTIVE_HPP
+#include "Perspective.hpp"
+#endif
+
+#ifndef COORDPAIR_HPP
+#define COORDPAIR_HPP
+#include "CoordPair.hpp"
+#endif
+
 namespace djf_3d {
 
 enum class Axis {
@@ -48,7 +58,7 @@ public:
      */
     void rotate_3d(
         const Axis axis,
-        const CoordTriple *axis_point,
+        const CoordTriple& axis_point,
         const float theta_degrees
     );
 
@@ -64,7 +74,7 @@ public:
        flat, like medieval art that lacks perspective. */
 
     /**
-     * This returns the x-position correpsonding to the 2d
+     * This returns the x-position corresponding to the 2d
      * projection of the CoordTriple.
      *
      * @param vanish_x 2d x-coordinate of the vanishing point
@@ -77,7 +87,19 @@ public:
     ) const noexcept;
 
     /**
-     * This returns the y-position correpsonding to the 2d
+     * This returns the x-position corresponding to the 2d
+     * projection of the CoordTriple.
+     *
+     * @param perspective a Perspective with vp and fov
+     * @return 2d projection x-coordinate
+     */
+    float project_2d_x(
+        const Perspective& perspective
+    ) const noexcept;
+
+
+    /**
+     * This returns the y-position corresponding to the 2d
      * projection of the CoordTriple.
      *
      * @param vanish_y 2d y-coordinate of the vanishing point
@@ -87,6 +109,27 @@ public:
     float project_2d_y(
         const float vanish_y,
         const float fov
+    ) const noexcept;
+
+    /**
+     * This returns the y-position corresponding to the 2d
+     * projection of the CoordTriple.
+     *
+     * @param perspective a Perspective with vp and fov
+     * @return 2d projection y-coordinate
+     */
+    float project_2d_y(
+        const Perspective& perspective
+    ) const noexcept;
+
+    /**
+     * This projects the CoordTriple into a CoordPair
+     * based on a Perspective.
+     * @param perspective a Perspective
+     * @return 2d projection of the CoordTriple
+     */
+    CoordPair project_2d(
+        const Perspective& perspective
     ) const noexcept;
 };
 

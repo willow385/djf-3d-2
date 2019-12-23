@@ -8,6 +8,11 @@
 #include <cmath>
 #endif
 
+#ifndef COORDPAIR_HPP
+#define COORDPAIR_HPP
+#include "CoordPair.hpp"
+#endif
+
 #include "CoordTriple.hpp"
 
 namespace djf_3d {
@@ -62,7 +67,7 @@ void CoordTriple::translate(
 
 void CoordTriple::rotate_3d(
     const Axis axis,
-    const CoordTriple *axis_point,
+    const CoordTriple& axis_point,
     const float theta_degrees
 ) {
     float *pos_0;
@@ -73,20 +78,20 @@ void CoordTriple::rotate_3d(
         case Axis::X:
             pos_0 = &z_pos;
             pos_1 = &y_pos;
-            about_0 = axis_point->get_pos(Axis::Z);
-            about_1 = axis_point->get_pos(Axis::Y);
+            about_0 = axis_point.get_pos(Axis::Z);
+            about_1 = axis_point.get_pos(Axis::Y);
             break;
         case Axis::Y:
             pos_0 = &x_pos;
             pos_1 = &z_pos;
-            about_0 = axis_point->get_pos(Axis::X);
-            about_1 = axis_point->get_pos(Axis::Z);
+            about_0 = axis_point.get_pos(Axis::X);
+            about_1 = axis_point.get_pos(Axis::Z);
             break;
         case Axis::Z:
             pos_0 = &x_pos;
             pos_1 = &y_pos;
-            about_0 = axis_point->get_pos(Axis::X);
-            about_1 = axis_point->get_pos(Axis::Y);
+            about_0 = axis_point.get_pos(Axis::X);
+            about_1 = axis_point.get_pos(Axis::Y);
             break;
         default:
             throw std::invalid_argument(
@@ -125,6 +130,20 @@ float CoordTriple::project_2d_x(
     );
 }
 
+float CoordTriple::project_2d_x(
+    const Perspective& perspective
+) const noexcept {
+    return (
+        x_pos + (
+            (
+                y_pos / perspective.fov
+            ) * perspective.vanishing_point.get_x_pos()
+        )
+    ) / (
+        1 + (y_pos / perspective.fov)
+    );
+}
+
 float CoordTriple::project_2d_y(
     const float vanish_y,
     const float fov
@@ -136,6 +155,48 @@ float CoordTriple::project_2d_y(
     ) / (
         1 + (y_pos / fov)
     );
+}
+
+float CoordTriple::project_2d_y(
+    const Perspective& perspective
+) const noexcept {
+    return (
+        z_pos + (
+            (
+                y_pos / perspective.fov
+            ) * perspective.vanishing_point.get_y_pos()
+        )
+    ) / (
+        1 + (y_pos / perspective.fov)
+    );
+}
+
+CoordPair CoordTriple::project_2d(
+    const Perspective& perspective
+) const noexcept {
+    CoordPair result(
+        (
+            x_pos + (
+                (
+                    y_pos / perspective.fov
+                ) * perspective.vanishing_point.get_x_pos()
+            )
+        ) / (
+            1 + (y_pos / perspective.fov)
+        ),
+
+        (
+            z_pos + (
+                (
+                    y_pos / perspective.fov
+                ) * perspective.vanishing_point.get_y_pos()
+            )
+        ) / (
+            1 + (y_pos / perspective.fov)
+        )
+    );
+
+    return result;
 }
 
 } // end of namespace djf_3d

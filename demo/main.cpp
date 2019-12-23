@@ -13,6 +13,26 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+    //==================================================================//
+
+    This program is a demonstration of djf-3d-2, an object-oriented 3d
+    engine written in modern C++ by Dante Falzone.
+
+    Please note that the Pyramid class defined in this file is for
+    DEMONSTRATION PURPOSES ONLY and that djf-3d-2 is STILL UNDER
+    CONSTRUCTION.
+
+    I'm pretty happy with the interfaces for wrapping SDL2 and for
+    doing 3d geometry and projection, but I would like to be able to
+    load arbitrary 3d models from an external file and render them.
+
+    The Pyramid class is in my opinion the least well-written thing in
+    this entire git repo, but that's okay because it's a temporary thing
+    and only for this demo program; what this should really show off is
+    that a) this library works and b) it provides a pretty clean and
+    readable interface to the underlying SDL C functions and hairy mathematic
+    stuff.
 */
 
 #include <iostream>
@@ -20,12 +40,8 @@
 #include <memory>
 #include <thread>
 #include <chrono>
-#include "../src/Canvas.hpp"
-#include "../src/CoordTriple.hpp"
+#include "../src/djf_3d.hpp"
 
-/* This Pyramid class is just for demo purposes. Later I
-   intend to write functionality for displaying arbitrary
-   geometric shapes loaded from external files. */
 class Pyramid {
 public:
     djf_3d::CoordTriple *vertex_0;
@@ -63,7 +79,7 @@ public:
 
 int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
     std::unique_ptr<Pyramid> pyramid(
-        /* I used a calculator to work out what the coordinates should
+        /* I used trigonometry to work out what the coordinates should
            be to roughly approximate a regular tetrahedron of side
            length 300. */
         new Pyramid(
@@ -74,78 +90,80 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
         )
     );
 
-    const float vanish_location = 300.0;
-    const float fov = 1200.0;
+    /* This will contain information concerning the 2d surface onto which
+       we want to project our 3d points. */
+    djf_3d::Perspective perspective_context(
+        300.0, /* x-coordinate of the vanishing point */
+        300.0, /* y-coordinate of the vanishing point */
+        1200.0 /* how strongly objects appear to converge to horizon */
+    );
 
     /* The method exit() returns true if the user clicks the close
        button or presses the X key; otherwise it returns false. */
     while (!canvas->exit()) {
-        /* Thanks to this nice, clean, object-oriented API I've written,
-           we don't need to concern ourselves with the hairy SDL2
-           functions implemented in pure C under the hood. This makes
-           the code much less verbose and encapsulates all the raw
-           memory management while leaving us with control over what
-           actually matters to us. */
+
+        /* Set the color to black */
         canvas->set_draw_color(0, 0, 0);
+
+        /* Fill the window */
         canvas->fill_window();
+
+        /* Set the color to green */
         canvas->set_draw_color(0, 255, 50);
+
+        /* Draw lines between the pyramid's vertices */
         canvas->draw_line(
-            (int) pyramid->vertex_0->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_0->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_1->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_1->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_0,
+            *pyramid->vertex_1,
+            perspective_context
         );
         canvas->draw_line(
-            (int) pyramid->vertex_1->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_1->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_2->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_2->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_0,
+            *pyramid->vertex_2,
+            perspective_context
         );
         canvas->draw_line(
-            (int) pyramid->vertex_2->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_2->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_0->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_0->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_0,
+            *pyramid->vertex_3,
+            perspective_context
         );
         canvas->draw_line(
-            (int) pyramid->vertex_0->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_0->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_1,
+            *pyramid->vertex_2,
+            perspective_context
         );
         canvas->draw_line(
-            (int) pyramid->vertex_1->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_1->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_2,
+            *pyramid->vertex_3,
+            perspective_context
         );
         canvas->draw_line(
-            (int) pyramid->vertex_2->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_2->project_2d_y(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_x(vanish_location, fov),
-            (int) pyramid->vertex_3->project_2d_y(vanish_location, fov)
+            *pyramid->vertex_3,
+            *pyramid->vertex_1,
+            perspective_context
         );
 
-
+        /* Refresh the frame so we can see what we just drew */
         canvas->refresh();
 
+        /* Rotate the pyramid */
         pyramid->vertex_1->rotate_3d(
             djf_3d::Axis::Z,
-            pyramid->vertex_0,
+            *pyramid->vertex_0,
             1
         );
         pyramid->vertex_2->rotate_3d(
             djf_3d::Axis::Z,
-            pyramid->vertex_0,
+            *pyramid->vertex_0,
             1
         );
         pyramid->vertex_3->rotate_3d(
             djf_3d::Axis::Z,
-            pyramid->vertex_0,
+            *pyramid->vertex_0,
             1
         );
 
-        /* 60 FPS framerate */
+        /* Delay refreshing for a 60 FPS framerate */
         std::this_thread::sleep_for(
             std::chrono::microseconds(16667)
         );
@@ -156,6 +174,7 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
 
 int main(void) {
     try {
+        /* nice & fancy modern C++1x features */
         std::unique_ptr<djf_3d::Canvas> canvas(
             new djf_3d::Canvas(
                 "Rotating 3D Pyramid written in modern C++",

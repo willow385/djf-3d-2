@@ -8,6 +8,21 @@
 #include <SDL2/SDL.h>
 #endif
 
+#ifndef COORDPAIR_HPP
+#define COORDPAIR_HPP
+#include "CoordPair.hpp"
+#endif
+
+#ifndef COORDTRIPLE_HPP
+#define COORDTRIPLE_HPP
+#include "CoordTriple.hpp"
+#endif
+
+#ifndef PERSPECTIVE_HPP
+#define PERSPECTIVE_HPP
+#include "Perspective.hpp"
+#endif
+
 namespace djf_3d {
 
 class Canvas {
@@ -78,6 +93,44 @@ public:
     ) noexcept;
 
     /**
+     * This method will draw a djf::CoordPair in the color
+     * picked by the last call to set_draw_color().
+     *
+     * @param point the djf_3d::CoordPair to draw a point at
+     */
+    void draw_point(
+        const CoordPair& point
+    ) noexcept;
+
+    /**
+     * This method will draw a djf::CoordTriple in the color
+     * picked by the last call to set_draw_color(), projected
+     * according to a vanishing point and field of view.
+     *
+     * @param point the djf_3d::CoordTriple to draw
+     * @param vanish_point djf_3d::CoordPair where lines converge
+     * @param fov the degree to which a point appears distorted by perspective
+     */
+    void draw_point(
+        const CoordTriple& point,
+        const CoordPair& vanish_point,
+        const float fov
+    ) noexcept;
+
+    /**
+     * This method will draw a djf::CoordTriple in the color
+     * picked by the last call to set_draw_color(), projected
+     * according to a vanishing point and field of view.
+     *
+     * @param point the djf_3d::CoordTriple to draw
+     * @param perspective a Perspective
+     */
+    void draw_point(
+        const CoordTriple& point,
+        const Perspective& perspective
+    ) noexcept;
+
+    /**
      * This method will draw a straight line from (x0, y0) to (x1, y1)
      * in whatever color was picked by the most recent call to
      * set_draw_color().
@@ -92,6 +145,33 @@ public:
         const int y0,
         const int x1,
         const int y1
+    ) noexcept;
+
+    /**
+     * This method will draw a straight line between two CoordPairs
+     * in whatever color was picked by the most recent call to
+     * set_draw_color().
+     *
+     * @param point_0 the first endpoint
+     * @param point_1 the second endpoint
+     */
+    void draw_line(
+        const CoordPair& point_0,
+        const CoordPair& point_1
+    ) noexcept;
+
+    /**
+     * This method will draw a straight line betwen two CoordTriples
+     * according to the Perspective passed to it.
+     *
+     * @param point_0 the first endpoint
+     * @param point_1 the second endpoint
+     * @param perspective a Perspective
+     */
+    void draw_line(
+        const CoordTriple& point_0,
+        const CoordTriple& point_1,
+        const Perspective& perspective
     ) noexcept;
 
     /**

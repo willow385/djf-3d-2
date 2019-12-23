@@ -13,6 +13,21 @@
 #include <SDL2/SDL.h>
 #endif
 
+#ifndef COORDPAIR_HPP
+#define COORDPAIR_HPP
+#include "CoordPair.hpp"
+#endif
+
+#ifndef COORDTRIPLE_HPP
+#define COORDTRIPLE_HPP
+#include "CoordTriple.hpp"
+#endif
+
+#ifndef PERSPECTIVE_HPP
+#define PERSPECTIVE_HPP
+#include "Perspective.hpp"
+#endif
+
 #include "Canvas.hpp"
 
 namespace djf_3d {
@@ -101,6 +116,47 @@ void Canvas::draw_point(
     );
 }
 
+void Canvas::draw_point(
+    const CoordPair& point
+) noexcept {
+    SDL_RenderDrawPoint(
+        renderer,
+        (int) point.get_x_pos(),
+        (int) point.get_y_pos()
+    );
+}
+
+void Canvas::draw_point(
+    const CoordTriple& point,
+    const CoordPair& vanish_point,
+    const float fov
+) noexcept {
+    SDL_RenderDrawPoint(
+        renderer,
+        (int) point.project_2d_x(
+            (int) vanish_point.get_x_pos(),
+            fov
+        ),
+        (int) point.project_2d_y(
+            (int) vanish_point.get_y_pos(),
+            fov
+        )
+    );
+}
+
+void Canvas::draw_point(
+    const CoordTriple& point,
+    const Perspective& perspective
+) noexcept {
+    CoordPair projection_2d
+        = point.project_2d(perspective);
+    SDL_RenderDrawPoint(
+        renderer,
+        (int) projection_2d.get_x_pos(),
+        (int) projection_2d.get_y_pos()
+    );
+}
+
 void Canvas::draw_line(
     const int x0,
     const int y0,
@@ -113,6 +169,37 @@ void Canvas::draw_line(
         y0,
         x1,
         y1
+    );
+}
+
+void Canvas::draw_line(
+    const CoordPair& point_0,
+    const CoordPair& point_1
+) noexcept {
+    SDL_RenderDrawLine(
+        renderer,
+        (int) point_0.get_x_pos(),
+        (int) point_0.get_y_pos(),
+        (int) point_1.get_x_pos(),
+        (int) point_1.get_y_pos()
+    );
+}
+
+void Canvas::draw_line(
+    const CoordTriple& point_0,
+    const CoordTriple& point_1,
+    const Perspective& perspective
+) noexcept {
+    CoordPair point_0_2d
+        = point_0.project_2d(perspective);
+    CoordPair point_1_2d
+        = point_1.project_2d(perspective);
+    SDL_RenderDrawLine(
+        renderer,
+        (int) point_0_2d.get_x_pos(),
+        (int) point_0_2d.get_y_pos(),
+        (int) point_1_2d.get_x_pos(),
+        (int) point_1_2d.get_y_pos()
     );
 }
 
