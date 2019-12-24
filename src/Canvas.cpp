@@ -91,6 +91,32 @@ bool Canvas::exit(void) noexcept {
     return false;
 }
 
+WasdState Canvas::get_wasd_state(void) noexcept {
+    WasdState result = {false, false, false, false};
+
+    SDL_PumpEvents();
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    result.W_pressed = (bool) state[SDL_SCANCODE_W];
+    result.A_pressed = (bool) state[SDL_SCANCODE_A];
+    result.S_pressed = (bool) state[SDL_SCANCODE_S];
+    result.D_pressed = (bool) state[SDL_SCANCODE_D];
+
+    return result;
+}
+
+ArrowKeyState Canvas::get_arrow_key_state(void) noexcept {
+    ArrowKeyState result = {false, false, false, false};
+
+    SDL_PumpEvents();
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    result.up_pressed    = (bool) state[SDL_SCANCODE_UP];
+    result.left_pressed  = (bool) state[SDL_SCANCODE_LEFT];
+    result.down_pressed  = (bool) state[SDL_SCANCODE_DOWN];
+    result.right_pressed = (bool) state[SDL_SCANCODE_RIGHT];
+
+    return result;
+}
+
 void Canvas::set_draw_color(
     const int r,
     const int g,

@@ -20,6 +20,22 @@
 
 namespace djf_3d {
 
+/* This struct is used to keep track of the state of the WASD keys. */
+typedef struct {
+    bool W_pressed;
+    bool A_pressed;
+    bool S_pressed;
+    bool D_pressed;
+} WasdState;
+
+/* This struct is used to keep track of the state of the arrow keys. */
+typedef struct {
+    bool up_pressed;
+    bool left_pressed;
+    bool down_pressed;
+    bool right_pressed;
+} ArrowKeyState;
+
 class Canvas {
 
 private:
@@ -60,6 +76,22 @@ public:
      * @return true if the user tries to close the window, else false
      */
     bool exit(void) noexcept;
+
+    /**
+     * This method is used to get WASD key input, which is commonly used
+     * to control things.
+     *
+     * @return WasdState describing which WASD keys are pressed
+     */
+    WasdState get_wasd_state(void) noexcept;
+
+    /**
+     * This method is used to get arrow key input, which is commonly
+     * used to control things.
+     *
+     * @return ArrowKeyState describing which arrow keys are pressed
+     */
+    ArrowKeyState get_arrow_key_state(void) noexcept;
 
     /**
      * This method will change the color of whatever is drawn on the

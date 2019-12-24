@@ -48,6 +48,7 @@ public:
     djf_3d::CoordTriple *vertex_1;
     djf_3d::CoordTriple *vertex_2;
     djf_3d::CoordTriple *vertex_3;
+    djf_3d::CoordTriple *centroid;
 
     Pyramid(
         float v_0_x,
@@ -62,18 +63,53 @@ public:
         float v_3_x,
         float v_3_y,
         float v_3_z
-    ) {
+    ) noexcept {
         vertex_0 = new djf_3d::CoordTriple(v_0_x, v_0_y, v_0_z);
         vertex_1 = new djf_3d::CoordTriple(v_1_x, v_1_y, v_1_z);
         vertex_2 = new djf_3d::CoordTriple(v_2_x, v_2_y, v_2_z);
         vertex_3 = new djf_3d::CoordTriple(v_3_x, v_3_y, v_3_z);
+        float centroid_x =
+            (v_0_x + v_1_x + v_2_x + v_3_x) / 4;
+        float centroid_y =
+            (v_0_y + v_1_y + v_2_y + v_3_y) / 4;
+        float centroid_z =
+            (v_0_z + v_1_z + v_2_z + v_3_z) / 4;
+        centroid = new djf_3d::CoordTriple(
+            centroid_x,
+            centroid_y,
+            centroid_z
+        );
     }
 
-    ~Pyramid(void) {
+    ~Pyramid(void) noexcept {
         delete vertex_0;
         delete vertex_1;
         delete vertex_2;
         delete vertex_3;
+        delete centroid;
+    }
+
+    void rotate(const djf_3d::Axis axis, float degrees) {
+        vertex_0->rotate_3d(
+            axis,
+            *centroid,
+            degrees
+        );
+        vertex_1->rotate_3d(
+            axis,
+            *centroid,
+            degrees
+        );
+        vertex_2->rotate_3d(
+            axis,
+            *centroid,
+            degrees
+        );
+        vertex_3->rotate_3d(
+            axis,
+            *centroid,
+            degrees
+        );
     }
 };
 
@@ -98,9 +134,17 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
         1200.0 /* how strongly objects appear to converge to horizon */
     );
 
+    /* This will be used to store the state of the WASD keys. */
+    djf_3d::WasdState wasd_key_state;
+
+    /* This will be used to store the state of the arrow keys. */
+    djf_3d::ArrowKeyState arr_key_state;
+
     /* The method exit() returns true if the user clicks the close
        button or presses the X key; otherwise it returns false. */
     while (!canvas->exit()) {
+        wasd_key_state = canvas->get_wasd_state();
+        arr_key_state  = canvas->get_arrow_key_state();
 
         /* Set the color to black */
         canvas->set_draw_color(0, 0, 0);
@@ -146,22 +190,48 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
         /* Refresh the frame so we can see what we just drew */
         canvas->refresh();
 
-        /* Rotate the pyramid */
-        pyramid->vertex_1->rotate_3d(
-            djf_3d::Axis::Z,
-            *pyramid->vertex_0,
-            1
-        );
-        pyramid->vertex_2->rotate_3d(
-            djf_3d::Axis::Z,
-            *pyramid->vertex_0,
-            1
-        );
-        pyramid->vertex_3->rotate_3d(
-            djf_3d::Axis::Z,
-            *pyramid->vertex_0,
-            1
-        );
+        /* Handle WASD key input and rotate the pyramid */
+        if (wasd_key_state.W_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::X,
+                -1
+            );
+        }
+
+        if (wasd_key_state.S_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::X,
+                1
+            );
+        }
+
+        if (wasd_key_state.A_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::Z,
+                -1
+            );
+        }
+
+        if (wasd_key_state.D_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::Z,
+                1
+            );
+        }
+
+        if (arr_key_state.left_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::Y,
+                -1
+            );
+        }
+
+        if (arr_key_state.right_pressed) {
+            pyramid->rotate(
+                djf_3d::Axis::Y,
+                1
+            );
+        }
 
         /* Delay refreshing for a 60 FPS framerate */
         std::this_thread::sleep_for(
@@ -177,7 +247,7 @@ int main(void) {
         /* nice & fancy modern C++1x features */
         std::unique_ptr<djf_3d::Canvas> canvas(
             new djf_3d::Canvas(
-                "Rotating 3D Pyramid written in modern C++",
+                "3D Pyramid - use WASD and arrow keys to rotate",
                 600,
                 600
             )
