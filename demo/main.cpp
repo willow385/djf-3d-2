@@ -116,10 +116,8 @@ public:
 };
 
 int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
+
     std::unique_ptr<Pyramid> pyramid(
-        /* I used trigonometry to work out what the coordinates should
-           be to roughly approximate a regular tetrahedron of side
-           length 300. */
         new Pyramid(
             300, 0, 200,
             150, 100, 425,
