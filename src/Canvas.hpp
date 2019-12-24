@@ -1,8 +1,3 @@
-#ifndef MEMORY
-#define MEMORY
-#include <memory>
-#endif
-
 #ifndef SDL2_SDL_H
 #define SDL2_SDL_H
 #include <SDL2/SDL.h>
