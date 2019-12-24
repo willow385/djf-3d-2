@@ -28,6 +28,11 @@
 #include "Perspective.hpp"
 #endif
 
+#ifndef KEYBOARDSTATE_HPP
+#define KEYBOARDSTATE_HPP
+#include "KeyboardState.hpp"
+#endif
+
 #include "Canvas.hpp"
 
 namespace djf_3d {
@@ -91,28 +96,76 @@ bool Canvas::exit(void) noexcept {
     return false;
 }
 
-WasdState Canvas::get_wasd_state(void) noexcept {
-    WasdState result = {false, false, false, false};
+KeyboardState Canvas::get_keyboard_state(void) noexcept {
+    KeyboardState result;
 
     SDL_PumpEvents();
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    result.W_pressed = (bool) state[SDL_SCANCODE_W];
-    result.A_pressed = (bool) state[SDL_SCANCODE_A];
-    result.S_pressed = (bool) state[SDL_SCANCODE_S];
-    result.D_pressed = (bool) state[SDL_SCANCODE_D];
-
-    return result;
-}
-
-ArrowKeyState Canvas::get_arrow_key_state(void) noexcept {
-    ArrowKeyState result = {false, false, false, false};
-
-    SDL_PumpEvents();
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
-    result.up_pressed    = (bool) state[SDL_SCANCODE_UP];
-    result.left_pressed  = (bool) state[SDL_SCANCODE_LEFT];
-    result.down_pressed  = (bool) state[SDL_SCANCODE_DOWN];
-    result.right_pressed = (bool) state[SDL_SCANCODE_RIGHT];
+    result.escape    = (bool) state[SDL_SCANCODE_ESCAPE];
+    result.backtick  = (bool) state[SDL_SCANCODE_GRAVE];
+    result.dig_1     = (bool) state[SDL_SCANCODE_1];
+    result.dig_2     = (bool) state[SDL_SCANCODE_2];
+    result.dig_3     = (bool) state[SDL_SCANCODE_3];
+    result.dig_4     = (bool) state[SDL_SCANCODE_4];
+    result.dig_5     = (bool) state[SDL_SCANCODE_5];
+    result.dig_6     = (bool) state[SDL_SCANCODE_6];
+    result.dig_7     = (bool) state[SDL_SCANCODE_7];
+    result.dig_8     = (bool) state[SDL_SCANCODE_8];
+    result.dig_9     = (bool) state[SDL_SCANCODE_9];
+    result.dig_0     = (bool) state[SDL_SCANCODE_0];
+    result.hyphen    = (bool) state[SDL_SCANCODE_MINUS];
+    result.equals    = (bool) state[SDL_SCANCODE_EQUALS];
+    result.backspace = (bool) state[SDL_SCANCODE_BACKSPACE];
+    result.tab       = (bool) state[SDL_SCANCODE_TAB];
+    result.Q         = (bool) state[SDL_SCANCODE_Q];
+    result.W         = (bool) state[SDL_SCANCODE_W];
+    result.E         = (bool) state[SDL_SCANCODE_E];
+    result.R         = (bool) state[SDL_SCANCODE_R];
+    result.T         = (bool) state[SDL_SCANCODE_T];
+    result.Y         = (bool) state[SDL_SCANCODE_Y];
+    result.U         = (bool) state[SDL_SCANCODE_U];
+    result.I         = (bool) state[SDL_SCANCODE_I];
+    result.O         = (bool) state[SDL_SCANCODE_O];
+    result.P         = (bool) state[SDL_SCANCODE_P];
+    result.open_bracket = (bool) state[SDL_SCANCODE_LEFTBRACKET];
+    result.close_bracket = (bool) state[SDL_SCANCODE_RIGHTBRACKET];
+    result.back_slash = (bool) state[SDL_SCANCODE_BACKSLASH];
+    result.A         = (bool) state[SDL_SCANCODE_A];
+    result.S         = (bool) state[SDL_SCANCODE_S];
+    result.D         = (bool) state[SDL_SCANCODE_D];
+    result.F         = (bool) state[SDL_SCANCODE_F];
+    result.G         = (bool) state[SDL_SCANCODE_G];
+    result.H         = (bool) state[SDL_SCANCODE_H];
+    result.J         = (bool) state[SDL_SCANCODE_J];
+    result.K         = (bool) state[SDL_SCANCODE_K];
+    result.L         = (bool) state[SDL_SCANCODE_L];
+    result.semicolon = (bool) state[SDL_SCANCODE_SEMICOLON];
+    result.quote     = (bool) state[SDL_SCANCODE_APOSTROPHE];
+    result.enter     = (bool) state[SDL_SCANCODE_RETURN];
+    result.shift     = (bool) (
+        state[SDL_SCANCODE_RSHIFT] || state[SDL_SCANCODE_LSHIFT]
+    );
+    result.Z         = (bool) state[SDL_SCANCODE_Z];
+    result.X         = (bool) state[SDL_SCANCODE_X];
+    result.C         = (bool) state[SDL_SCANCODE_C];
+    result.V         = (bool) state[SDL_SCANCODE_V];
+    result.B         = (bool) state[SDL_SCANCODE_B];
+    result.N         = (bool) state[SDL_SCANCODE_N];
+    result.M         = (bool) state[SDL_SCANCODE_M];
+    result.comma     = (bool) state[SDL_SCANCODE_COMMA];
+    result.period    = (bool) state[SDL_SCANCODE_PERIOD];
+    result.forward_slash = (bool) state[SDL_SCANCODE_SLASH];
+    result.ctrl      = (bool) (
+        state[SDL_SCANCODE_RCTRL] || state[SDL_SCANCODE_LCTRL]
+    );
+    result.home      = (bool) state[SDL_SCANCODE_HOME];
+    result.alt       = (bool) (
+        state[SDL_SCANCODE_RALT] || state[SDL_SCANCODE_LALT]
+    );
+    result.left_arr  = (bool) state[SDL_SCANCODE_LEFT];
+    result.up_arr    = (bool) state[SDL_SCANCODE_UP];
+    result.down_arr  = (bool) state[SDL_SCANCODE_DOWN];
+    result.right_arr = (bool) state[SDL_SCANCODE_RIGHT];
 
     return result;
 }

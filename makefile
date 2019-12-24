@@ -21,12 +21,24 @@ SRC = src/Canvas.cpp\
 
 FLAGS = -O3 -Wall -lm -std=c++11
 
+GPROF_FLAGS = -O3 -pg -Wall -lm -std=c++11
+
 $(TARGET): $(SRC)
 	$(CPP) $(FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
 	$(CPP) $(FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
 	$(CPP) $(FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
 	$(CPP) $(FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
 	$(CPP) $(FLAGS) $(OBJS) demo/main.cpp -o $(TARGET) $(SDL2)
+
+prof: $(SRC)
+	$(CPP) $(GPROF_FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
+	$(CPP) $(GPROF_FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
+	$(CPP) $(GPROF_FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
+	$(CPP) $(GPROF_FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
+	$(CPP) $(GPROF_FLAGS) $(OBJS) demo/main.cpp -o $(TARGET) $(SDL2)
+	./$(TARGET)
+	gprof $(TARGET) gmon.out > profile.txt
+
 
 run: $(TARGET)
 	./$(TARGET)

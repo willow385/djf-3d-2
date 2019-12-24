@@ -26,13 +26,15 @@
     I'm pretty happy with the interfaces for wrapping SDL2 and for
     doing 3d geometry and projection, but I would like to be able to
     load arbitrary 3d models from an external file and render them.
+    Soon I will probably write a Model3D class whose constructor takes
+    a handle to a .obj file, or something similar.
 
     The Pyramid class is in my opinion the least well-written thing in
     this entire git repo, but that's okay because it's a temporary thing
     and only for this demo program; what this should really show off is
     that a) this library works and b) it provides a pretty clean and
-    readable interface to the underlying SDL C functions and hairy mathematic
-    stuff.
+    readable interface to the SDL C functions and hairy mathematic
+    stuff under the hood.
 */
 
 #include <iostream>
@@ -120,9 +122,9 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
            length 300. */
         new Pyramid(
             300, 0, 200,
-            150, 129.9038, 425,
-            450, 129.9038, 425,
-            300, -198.4313, 425
+            150, 100, 425,
+            450, 100, 425,
+            300, -150, 425
         )
     );
 
@@ -134,18 +136,12 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
         1200.0 /* how strongly objects appear to converge to horizon */
     );
 
-    /* This will be used to store the state of the WASD keys. */
-    djf_3d::WasdState wasd_key_state;
-
-    /* This will be used to store the state of the arrow keys. */
-    djf_3d::ArrowKeyState arr_key_state;
+    /* This will be used to store the state of the keyboard. */
+    djf_3d::KeyboardState keyboard_state;
 
     /* The method exit() returns true if the user clicks the close
        button or presses the X key; otherwise it returns false. */
     while (!canvas->exit()) {
-        wasd_key_state = canvas->get_wasd_state();
-        arr_key_state  = canvas->get_arrow_key_state();
-
         /* Set the color to black */
         canvas->set_draw_color(0, 0, 0);
 
@@ -190,43 +186,46 @@ int game_loop(std::unique_ptr<djf_3d::Canvas> canvas) {
         /* Refresh the frame so we can see what we just drew */
         canvas->refresh();
 
+        /* Get the present keyboard state */
+        keyboard_state = canvas->get_keyboard_state();
+
         /* Handle WASD key input and rotate the pyramid */
-        if (wasd_key_state.W_pressed) {
+        if (keyboard_state.W) {
             pyramid->rotate(
                 djf_3d::Axis::X,
                 -1
             );
         }
 
-        if (wasd_key_state.S_pressed) {
+        if (keyboard_state.S) {
             pyramid->rotate(
                 djf_3d::Axis::X,
                 1
             );
         }
 
-        if (wasd_key_state.A_pressed) {
+        if (keyboard_state.A) {
             pyramid->rotate(
                 djf_3d::Axis::Z,
                 -1
             );
         }
 
-        if (wasd_key_state.D_pressed) {
+        if (keyboard_state.D) {
             pyramid->rotate(
                 djf_3d::Axis::Z,
                 1
             );
         }
 
-        if (arr_key_state.left_pressed) {
+        if (keyboard_state.Q) {
             pyramid->rotate(
                 djf_3d::Axis::Y,
                 -1
             );
         }
 
-        if (arr_key_state.right_pressed) {
+        if (keyboard_state.E) {
             pyramid->rotate(
                 djf_3d::Axis::Y,
                 1
@@ -247,7 +246,7 @@ int main(void) {
         /* nice & fancy modern C++1x features */
         std::unique_ptr<djf_3d::Canvas> canvas(
             new djf_3d::Canvas(
-                "3D Pyramid - use WASD and arrow keys to rotate",
+                "Use W, A, S, D, Q, E keys to rotate pyramid",
                 600,
                 600
             )

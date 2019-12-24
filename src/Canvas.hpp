@@ -18,23 +18,12 @@
 #include "Perspective.hpp"
 #endif
 
+#ifndef KEYBOARDSTATE_HPP
+#define KEYBOARDSTATE_HPP
+#include "KeyboardState.hpp"
+#endif
+
 namespace djf_3d {
-
-/* This struct is used to keep track of the state of the WASD keys. */
-typedef struct {
-    bool W_pressed;
-    bool A_pressed;
-    bool S_pressed;
-    bool D_pressed;
-} WasdState;
-
-/* This struct is used to keep track of the state of the arrow keys. */
-typedef struct {
-    bool up_pressed;
-    bool left_pressed;
-    bool down_pressed;
-    bool right_pressed;
-} ArrowKeyState;
 
 class Canvas {
 
@@ -46,6 +35,10 @@ private:
 public:
     /**
      * Constructor for the Canvas class.
+     *
+     * This will throw an exception if it can't create a
+     * window for whatever reason (for example, if you try
+     * to run it without a windowing system).
      *
      * @param title the text to display in the titlebar
      * @param width the width of the window in pixels
@@ -78,20 +71,12 @@ public:
     bool exit(void) noexcept;
 
     /**
-     * This method is used to get WASD key input, which is commonly used
-     * to control things.
+     * This method gets the current state of the keyboard. See the
+     * file "KeyboardState.hpp" for more details.
      *
-     * @return WasdState describing which WASD keys are pressed
+     * @return KeyboardState describing which keys are pressed
      */
-    WasdState get_wasd_state(void) noexcept;
-
-    /**
-     * This method is used to get arrow key input, which is commonly
-     * used to control things.
-     *
-     * @return ArrowKeyState describing which arrow keys are pressed
-     */
-    ArrowKeyState get_arrow_key_state(void) noexcept;
+    KeyboardState get_keyboard_state(void) noexcept;
 
     /**
      * This method will change the color of whatever is drawn on the

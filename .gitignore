@@ -1,3 +1,5 @@
 *.x86
 *.o
 a.out
+gmon.out
+profile.txt

@@ -20,3 +20,8 @@
 #define CANVAS_HPP
 #include "Canvas.hpp"
 #endif
+
+#ifndef KEYBOARDSTATE_HPP
+#define KEYBOARDSTATE_HPP
+#include "KeyboardState.hpp"
+#endif
