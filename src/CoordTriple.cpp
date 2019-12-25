@@ -29,6 +29,16 @@ CoordTriple::CoordTriple(
 
 CoordTriple::~CoordTriple(void) noexcept {}
 
+void CoordTriple::teleport(
+    const float x,
+    const float y,
+    const float z
+) noexcept {
+    x_pos = x;
+    y_pos = y;
+    z_pos = z;
+}
+
 float CoordTriple::get_pos(const Axis axis) const {
     switch (axis) {
         case Axis::X:

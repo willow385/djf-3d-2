@@ -32,6 +32,19 @@ public:
     ~CoordTriple(void) noexcept;
 
     /**
+     * This moves a CoordTriple to somewhere else immediately.
+     *
+     * @param x destination x-coordinate
+     * @param y destination y-coordinate
+     * @param z destination z-coordinate
+     */
+    void teleport(
+        const float x,
+        const float y,
+        const float z
+    ) noexcept;
+
+    /**
      * This returns the value of one of a CoordTriple's
      * properties.
      *
