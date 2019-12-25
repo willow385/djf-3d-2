@@ -23,6 +23,11 @@
 #include "KeyboardState.hpp"
 #endif
 
+#ifndef MODEL3D_HPP
+#define MODEL3D_HPP
+#include "Model3d.hpp"
+#endif
+
 namespace djf_3d {
 
 class Canvas {
@@ -31,6 +36,8 @@ private:
     SDL_Window *main_window;
     SDL_Renderer *renderer;
     SDL_Event event;
+    int width_px;
+    int height_px;
 
 public:
     /**
@@ -60,6 +67,20 @@ public:
      * drawing methods will show up when this method is called.
      */
     void refresh(void) noexcept;
+
+    /**
+     * This method returns the width of the Canvas in pixels.
+     *
+     * @return width of the Canvas
+     */
+    int get_width(void);
+
+    /**
+     * This method returns the height of the Canvas in pixels.
+     *
+     * @return height of the Canvas
+     */
+    int get_height(void);
 
     /**
      * This method will return true if, when it is called, the user
@@ -191,6 +212,17 @@ public:
      * was picked by the most recent call to set_draw_color().
      */
     void fill_window(void) noexcept;
+
+    /**
+     * This method will draw a Model3d.
+     *
+     * @param model the 3d model to draw
+     * @param persp a Perspective
+     */
+    void draw_model3d(
+        const Model3d& model,
+        const Perspective& persp
+    ) noexcept;
 };
 
 } // end of namespace djf_3d

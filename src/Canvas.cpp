@@ -33,6 +33,11 @@
 #include "KeyboardState.hpp"
 #endif
 
+#ifndef MODEL3D_HPP
+#define MODEL3D_HPP
+#include "Model3d.hpp"
+#endif
+
 #include "Canvas.hpp"
 
 namespace djf_3d {
@@ -43,6 +48,9 @@ Canvas::Canvas(
     const int height
 ) {
     SDL_Init(SDL_INIT_VIDEO);
+
+    width_px = width;
+    height_px = height;
 
     main_window = SDL_CreateWindow(
         title.c_str(),
@@ -94,6 +102,14 @@ bool Canvas::exit(void) noexcept {
     }
 
     return false;
+}
+
+int Canvas::get_width(void) {
+    return width_px;
+}
+
+int Canvas::get_height(void) {
+    return height_px;
 }
 
 KeyboardState Canvas::get_keyboard_state(void) noexcept {
@@ -284,6 +300,40 @@ void Canvas::draw_line(
 
 void Canvas::fill_window(void) noexcept {
     SDL_RenderClear(renderer);
+}
+
+void Canvas::draw_model3d(
+    const Model3d& model,
+    const Perspective& persp
+) noexcept {
+    int num_verts = model.vertex_cnt();
+    if (num_verts == 0) return;
+    if (num_verts == 1) {
+        SDL_RenderDrawPoint(
+            renderer,
+            (int) model.nth_vertex(0).project_2d_x(persp),
+            (int) model.nth_vertex(0).project_2d_y(persp)
+        );
+        return;
+    }
+
+    for (int i = 0; i < num_verts - 1; i++) {
+        SDL_RenderDrawLine(
+            renderer,
+            (int) model.nth_vertex(i).project_2d_x(persp),
+            (int) model.nth_vertex(i).project_2d_y(persp),
+            (int) model.nth_vertex(i+1).project_2d_x(persp),
+            (int) model.nth_vertex(i+1).project_2d_y(persp)
+        );
+    }
+
+    SDL_RenderDrawLine(
+        renderer,
+        (int) model.nth_vertex(num_verts-1).project_2d_x(persp),
+        (int) model.nth_vertex(num_verts-1).project_2d_y(persp),
+        (int) model.nth_vertex(0).project_2d_x(persp),
+        (int) model.nth_vertex(0).project_2d_y(persp)
+    );
 }
 
 } // end of namespace djf_3d

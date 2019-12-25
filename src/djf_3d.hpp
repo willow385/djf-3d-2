@@ -25,3 +25,8 @@
 #define KEYBOARDSTATE_HPP
 #include "KeyboardState.hpp"
 #endif
+
+#ifndef MODEL3D_HPP
+#define MODEL3D_HPP
+#include "Model3d.hpp"
+#endif
