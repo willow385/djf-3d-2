@@ -143,6 +143,7 @@ int game_loop(
                 +2.0
             );
         }
+        if (keyboard_state.X) { break; }
 
         /* Delay refreshing for a 60 FPS framerate. */
         std::this_thread::sleep_for(

@@ -95,10 +95,6 @@ bool Canvas::exit(void) noexcept {
     switch (event.type) {
         case SDL_QUIT:
             return true;
-        case SDL_KEYDOWN:
-            if (event.key.keysym.sym == SDLK_x) {
-                return true;
-            }
     }
 
     return false;

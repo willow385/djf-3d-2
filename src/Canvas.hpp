@@ -84,8 +84,7 @@ public:
 
     /**
      * This method will return true if, when it is called, the user
-     * presses the X key or clicks the close button; otherwise it will
-     * return false.
+     * clicks the close button; otherwise it will return false.
      *
      * @return true if the user tries to close the window, else false
      */
