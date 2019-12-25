@@ -1,12 +1,5 @@
-#ifndef VECTOR
-#define VECTOR
 #include <vector>
-#endif
-
-#ifndef MEMORY
-#define MEMORY
 #include <memory>
-#endif
 
 #ifndef COORDTRIPLE_HPP
 #define COORDTRIPLE_HPP

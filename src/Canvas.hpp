@@ -1,8 +1,3 @@
-#ifndef SDL2_SDL_H
-#define SDL2_SDL_H
-#include <SDL2/SDL.h>
-#endif
-
 #ifndef COORDPAIR_HPP
 #define COORDPAIR_HPP
 #include "CoordPair.hpp"
@@ -28,6 +23,10 @@
 #include "Model3d.hpp"
 #endif
 
+struct SDL_Window;
+struct SDL_Renderer;
+union SDL_Event;
+
 namespace djf_3d {
 
 class Canvas {
@@ -35,7 +34,7 @@ class Canvas {
 private:
     SDL_Window *main_window;
     SDL_Renderer *renderer;
-    SDL_Event event;
+    SDL_Event *event;
     int width_px;
     int height_px;
 

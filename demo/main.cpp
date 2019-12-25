@@ -27,6 +27,7 @@
 */
 
 #include <iostream>
+#include <string>
 #include <stdexcept>
 #include <memory>
 #include <thread>

@@ -1,9 +1,5 @@
-#include "CoordPair.hpp"
-
-#ifndef CMATH
-#define CMATH
 #include <cmath>
-#endif
+#include "CoordPair.hpp"
 
 namespace djf_3d {
 

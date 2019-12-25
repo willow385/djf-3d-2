@@ -1,16 +1,14 @@
-#ifndef STDEXCEPT
-#define STDEXCEPT
 #include <stdexcept>
-#endif
-
-#ifndef CMATH
-#define CMATH
 #include <cmath>
-#endif
 
 #ifndef COORDPAIR_HPP
 #define COORDPAIR_HPP
 #include "CoordPair.hpp"
+#endif
+
+#ifndef PERSPECTIVE_HPP
+#define PERSPECTIVE_HPP
+#include "Perspective.hpp"
 #endif
 
 #include "CoordTriple.hpp"

@@ -1,31 +1,13 @@
-#ifndef VECTOR
-#define VECTOR
 #include <vector>
-#endif
+#include <fstream>
+#include <iostream>
+#include <cstdio>
+#include <stdexcept>
+#include <string>
 
 #ifndef COORDTRIPLE_HPP
 #define COORDTRIPLE_HPP
 #include "CoordTriple.hpp"
-#endif
-
-#ifndef FSTREAM
-#define FSTREAM
-#include <fstream>
-#endif
-
-#ifndef IOSTREAM
-#define IOSTREAM
-#include <iostream>
-#endif
-
-#ifndef CSTDIO
-#define CSTDIO
-#include <cstdio>
-#endif
-
-#ifndef STDEXCEPT
-#define STDEXCEPT
-#include <stdexcept>
 #endif
 
 #include "Model3d.hpp"

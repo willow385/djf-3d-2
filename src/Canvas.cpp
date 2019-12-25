@@ -1,17 +1,7 @@
-#ifndef STDEXCEPT
-#define STDEXCEPT
 #include <stdexcept>
-#endif
-
-#ifndef IOSTREAM
-#define IOSTREAM
 #include <iostream>
-#endif
-
-#ifndef SDL2_SDL_H
-#define SDL2_SDL_H
+#include <string>
 #include <SDL2/SDL.h>
-#endif
 
 #ifndef COORDPAIR_HPP
 #define COORDPAIR_HPP
@@ -91,8 +81,8 @@ void Canvas::refresh(void) noexcept {
 }
 
 bool Canvas::exit(void) noexcept {
-    SDL_PollEvent(&event);
-    switch (event.type) {
+    SDL_PollEvent(event);
+    switch (event->type) {
         case SDL_QUIT:
             return true;
     }
