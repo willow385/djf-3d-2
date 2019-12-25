@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
@@ -57,9 +58,20 @@ Canvas::Canvas(
         0
     );
 
+    /* We have to use malloc() here because SDL is
+       written in C. */
+    event = (SDL_Event *) std::malloc(sizeof(SDL_Event));
+
     if (!main_window || !renderer) {
         std::cerr << "Error in Canvas::Canvas(): "
             << SDL_GetError()
+            << std::endl;
+        throw std::exception();
+    }
+
+    if (!event) {
+        std::cerr << "Error in Canvas::Canvas(): "
+            << "unsuccessful call to std::malloc()"
             << std::endl;
         throw std::exception();
     }
@@ -73,6 +85,7 @@ Canvas::Canvas(
 Canvas::~Canvas(void) noexcept {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
+    std::free(event);
     SDL_Quit();
 }
 

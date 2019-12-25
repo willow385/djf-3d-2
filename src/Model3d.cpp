@@ -135,4 +135,3 @@ unsigned int Model3d::vertex_cnt(void) const noexcept {
 }
 
 } // end of namespace djf_3d
-
