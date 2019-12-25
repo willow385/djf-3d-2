@@ -1,8 +1,8 @@
 
-mtllib chair1.mtl
+o chair1
 
 #
-# object Line08
+# copied from the internet by Dante Falzone
 #
 
 v  -9.0910 45.8656 23.0910
