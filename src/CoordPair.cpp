@@ -1,5 +1,5 @@
 #include <cmath>
-#include "CoordPair.hpp"
+#include "CoordPair.h"
 
 namespace djf_3d {
 

@@ -3,32 +3,32 @@
 #include <string>
 #include <SDL2/SDL.h>
 
-#ifndef COORDPAIR_HPP
-#define COORDPAIR_HPP
-#include "CoordPair.hpp"
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+#include "CoordPair.h"
 #endif
 
-#ifndef COORDTRIPLE_HPP
-#define COORDTRIPLE_HPP
-#include "CoordTriple.hpp"
+#ifndef COORDTRIPLE_H
+#define COORDTRIPLE_H
+#include "CoordTriple.h"
 #endif
 
-#ifndef PERSPECTIVE_HPP
-#define PERSPECTIVE_HPP
-#include "Perspective.hpp"
+#ifndef PERSPECTIVE_H
+#define PERSPECTIVE_H
+#include "Perspective.h"
 #endif
 
-#ifndef KEYBOARDSTATE_HPP
-#define KEYBOARDSTATE_HPP
-#include "KeyboardState.hpp"
+#ifndef KEYBOARDSTATE_H
+#define KEYBOARDSTATE_H
+#include "KeyboardState.h"
 #endif
 
-#ifndef MODEL3D_HPP
-#define MODEL3D_HPP
-#include "Model3d.hpp"
+#ifndef MODEL3D_H
+#define MODEL3D_H
+#include "Model3d.h"
 #endif
 
-#include "Canvas.hpp"
+#include "Canvas.h"
 
 namespace djf_3d {
 

@@ -1,26 +1,26 @@
-#ifndef COORDPAIR_HPP
-#define COORDPAIR_HPP
-#include "CoordPair.hpp"
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+#include "CoordPair.h"
 #endif
 
-#ifndef COORDTRIPLE_HPP
-#define COORDTRIPLE_HPP
-#include "CoordTriple.hpp"
+#ifndef COORDTRIPLE_H
+#define COORDTRIPLE_H
+#include "CoordTriple.h"
 #endif
 
-#ifndef PERSPECTIVE_HPP
-#define PERSPECTIVE_HPP
-#include "Perspective.hpp"
+#ifndef PERSPECTIVE_H
+#define PERSPECTIVE_H
+#include "Perspective.h"
 #endif
 
-#ifndef KEYBOARDSTATE_HPP
-#define KEYBOARDSTATE_HPP
-#include "KeyboardState.hpp"
+#ifndef KEYBOARDSTATE_H
+#define KEYBOARDSTATE_H
+#include "KeyboardState.h"
 #endif
 
-#ifndef MODEL3D_HPP
-#define MODEL3D_HPP
-#include "Model3d.hpp"
+#ifndef MODEL3D_H
+#define MODEL3D_H
+#include "Model3d.h"
 #endif
 
 struct SDL_Window;
@@ -91,7 +91,7 @@ public:
 
     /**
      * This method gets the current state of the keyboard. See the
-     * file "KeyboardState.hpp" for more details.
+     * file "KeyboardState.h" for more details.
      *
      * @return KeyboardState describing which keys are pressed
      */

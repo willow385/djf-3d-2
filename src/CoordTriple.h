@@ -1,11 +1,11 @@
-#ifndef PERSPECTIVE_HPP
-#define PERSPECTIVE_HPP
-#include "Perspective.hpp"
+#ifndef PERSPECTIVE_H
+#define PERSPECTIVE_H
+#include "Perspective.h"
 #endif
 
-#ifndef COORDPAIR_HPP
-#define COORDPAIR_HPP
-#include "CoordPair.hpp"
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+#include "CoordPair.h"
 #endif
 
 namespace djf_3d {

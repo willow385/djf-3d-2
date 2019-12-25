@@ -1,17 +1,17 @@
 #include <stdexcept>
 #include <cmath>
 
-#ifndef COORDPAIR_HPP
-#define COORDPAIR_HPP
-#include "CoordPair.hpp"
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+#include "CoordPair.h"
 #endif
 
-#ifndef PERSPECTIVE_HPP
-#define PERSPECTIVE_HPP
-#include "Perspective.hpp"
+#ifndef PERSPECTIVE_H
+#define PERSPECTIVE_H
+#include "Perspective.h"
 #endif
 
-#include "CoordTriple.hpp"
+#include "CoordTriple.h"
 
 namespace djf_3d {
 

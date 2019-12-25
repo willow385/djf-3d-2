@@ -1,9 +1,9 @@
 #include <vector>
 #include <memory>
 
-#ifndef COORDTRIPLE_HPP
-#define COORDTRIPLE_HPP
-#include "CoordTriple.hpp"
+#ifndef COORDTRIPLE_H
+#define COORDTRIPLE_H
+#include "CoordTriple.h"
 #endif
 
 namespace djf_3d {

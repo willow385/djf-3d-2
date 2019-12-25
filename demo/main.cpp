@@ -32,7 +32,7 @@
 #include <memory>
 #include <thread>
 #include <chrono>
-#include "../src/djf_3d.hpp"
+#include "../src/djf_3d.h"
 
 int game_loop(
     std::unique_ptr<djf_3d::Canvas> canvas,

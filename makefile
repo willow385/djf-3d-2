@@ -13,16 +13,16 @@ OBJS = obj/Canvas.o\
 SDL2 = -D_REENTRANT -I/usr/include/SDL2 -lSDL2
 
 SRC = src/Canvas.cpp\
-      src/Canvas.hpp\
+      src/Canvas.h\
       src/CoordPair.cpp\
-      src/CoordPair.hpp\
+      src/CoordPair.h\
       src/CoordTriple.cpp\
-      src/CoordTriple.hpp\
+      src/CoordTriple.h\
       src/Perspective.cpp\
-      src/Perspective.hpp\
-      src/KeyboardState.hpp\
+      src/Perspective.h\
+      src/KeyboardState.h\
       src/Model3d.cpp\
-      src/Model3d.hpp\
+      src/Model3d.h\
       demo/main.cpp
 
 FLAGS = -O3 -Wall -lm -std=c++11

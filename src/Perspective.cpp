@@ -1,9 +1,9 @@
-#ifndef COORDPAIR_HPP
-#define COORDPAIR_HPP
-#include "CoordPair.hpp"
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+#include "CoordPair.h"
 #endif
 
-#include "Perspective.hpp"
+#include "Perspective.h"
 
 namespace djf_3d {
 

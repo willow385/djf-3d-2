@@ -5,12 +5,12 @@
 #include <stdexcept>
 #include <string>
 
-#ifndef COORDTRIPLE_HPP
-#define COORDTRIPLE_HPP
-#include "CoordTriple.hpp"
+#ifndef COORDTRIPLE_H
+#define COORDTRIPLE_H
+#include "CoordTriple.h"
 #endif
 
-#include "Model3d.hpp"
+#include "Model3d.h"
 
 namespace djf_3d {
 
