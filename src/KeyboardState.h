@@ -9,7 +9,7 @@ namespace djf_3d {
    number keys at the top of a QWERTY keyboard; the rest should
    be self-explanatory by their names. */
 
-typedef struct {
+struct KeyboardState {
     bool escape;
     bool backtick;
     bool dig_1;
@@ -69,6 +69,6 @@ typedef struct {
     bool up_arr;
     bool down_arr;
     bool right_arr;
-} KeyboardState;
+};
 
 } // end of namespace djf_3d
