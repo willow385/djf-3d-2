@@ -1,5 +1,4 @@
 #include <vector>
-#include <memory>
 
 #ifndef COORDTRIPLE_H
 #define COORDTRIPLE_H
