@@ -90,7 +90,7 @@ Model3d::Model3d(const std::string& obj_filepath):
 }
 
 Model3d::~Model3d(void) noexcept {
-    std::cout << "Calling dtor djf_3d::Model3d::~Model3d."
+    std::cout << "Calling dtor djf_3d::Model3d::~Model3d()."
         << std::endl;
 }
 
