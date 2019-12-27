@@ -51,7 +51,7 @@ int game_loop(
     djf_3d::KeyboardState keyboard_state;
 
     /* The method exit() returns true if the user clicks the close
-       button or presses the X key; otherwise it returns false. */
+       button when it's called; otherwise it returns false. */
     while (!canvas->exit()) {
         /* Set the color to black. */
         canvas->set_draw_color(0, 0, 0);
