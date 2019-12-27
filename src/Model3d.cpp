@@ -17,7 +17,9 @@ namespace djf_3d {
 Model3d::Model3d(const std::string& obj_filepath):
     centroid(0.0, 0.0, 0.0)
 {
-    // print a helpful message to the terminal
+    std::cout << "Calling ctor djf_3d::Model3d::Model3d()."
+        << std::endl;
+
     std::cout
         << "djf_3d::Model3d::Model3d(): Attempting to open \""
         << obj_filepath
@@ -28,6 +30,7 @@ Model3d::Model3d(const std::string& obj_filepath):
     // ...and complain and throw an exception if we can't.
     if (obj_file.fail()) {
         std::cerr
+            << " failed."
             << "\nError in djf_3d::Model3d::Model3d(): \""
             << obj_filepath
             << "\": no such file or directory."
@@ -35,7 +38,7 @@ Model3d::Model3d(const std::string& obj_filepath):
         throw std::exception();
     }
     // If we successfully open the file then let's say so
-    std::cout << " successfully opened." << std::endl;
+    std::cout << " success." << std::endl;
 
 
     // Next we read the file (which should be a .obj file).
@@ -73,16 +76,22 @@ Model3d::Model3d(const std::string& obj_filepath):
         vertices_y_sum / num_vertices,
         vertices_z_sum / num_vertices
     );
+
+    std::cout << "ctor djf_3d::Model3d::Model3d() succeeded."
+        << std::endl;
 }
 
-Model3d::~Model3d(void) noexcept {}
+Model3d::~Model3d(void) noexcept {
+    std::cout << "Calling dtor djf_3d::Model3d::~Model3d."
+        << std::endl;
+}
 
 const CoordTriple& Model3d::nth_vertex(
     const unsigned int index
 ) const {
     if (index >= vertices.size()) {
         throw std::invalid_argument(
-            "djf_3d::Model3d::nth_vertex(): index out of bounds"
+            "djf_3d::Model3d::nth_vertex(): error: index out of bounds"
         );
     }
 

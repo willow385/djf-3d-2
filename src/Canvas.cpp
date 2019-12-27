@@ -38,6 +38,8 @@ Canvas::Canvas(
     const int width,
     const int height
 ) {
+    std::cout << "Calling ctor djf_3d::Canvas::Canvas()... ";
+
     SDL_Init(SDL_INIT_VIDEO);
 
     width_px = width;
@@ -63,30 +65,33 @@ Canvas::Canvas(
     event = (SDL_Event *) std::malloc(sizeof(SDL_Event));
 
     if (!main_window || !renderer) {
-        std::cerr << "Error in Canvas::Canvas(): "
+        std::cerr << "failed.\nError in djf_3d::Canvas::Canvas(): "
             << SDL_GetError()
             << std::endl;
         throw std::exception();
     }
 
     if (!event) {
-        std::cerr << "Error in Canvas::Canvas(): "
-            << "unsuccessful call to std::malloc()"
+        std::cerr << "failed.\nError in djf_3d::Canvas::Canvas(): "
+            << "unsuccessful call to std::malloc() when trying"
+            << " to allocate memory for SDL_Event *event"
             << std::endl;
         throw std::exception();
     }
 
     std::cout
-        << "Click the close button or press the X key to exit"
+        << "success.\nClick the close button or press the X key to exit"
         << std::endl;
 
 }
 
 Canvas::~Canvas(void) noexcept {
+    std::cout << "Calling dtor djf_3d::Canvas::~Canvas()... ";
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
     std::free(event);
     SDL_Quit();
+    std::cout << "done." << std::endl;
 }
 
 void Canvas::refresh(void) noexcept {
