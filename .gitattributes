@@ -1,1 +1,2 @@
+# Without this, Github's linguist misidentifies djf_3d.h as C, instead of C++.
 *.h linguist-language=cpp
