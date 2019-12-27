@@ -61,6 +61,14 @@ Model3d::Model3d(const std::string& obj_filepath):
         }
     }
 
+    if (vertices.size() == 0) {
+        std::cout
+            << "djf_3d::Model3d::Model3d(): Note: no vertices"
+            << " found in \"" << obj_filepath << "\"; are you"
+            << " sure that this is a .obj file?"
+            << std::endl;
+    }
+
     // Lastly we calculate where the centroid should be.
     float vertices_x_sum = 0.0;
     float vertices_y_sum = 0.0;
