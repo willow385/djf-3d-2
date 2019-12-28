@@ -3,8 +3,8 @@
 namespace djf_3d {
 
 /* This struct stores a Color by its red, green, and blue
-values. They are store as uint8_t because they should be in
-the range 0..256. */
+values. They are stored as uint8_t because they should be
+in the range 0..256. */
 struct Color {
 public:
     uint8_t red;
