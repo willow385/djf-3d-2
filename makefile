@@ -1,6 +1,6 @@
 CPP = g++
 
-MODEL ?= demo/teapot.obj
+MODEL ?= demo/utah_teapot.obj
 
 TARGET = bin/demo.x86
 

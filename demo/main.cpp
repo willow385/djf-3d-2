@@ -20,10 +20,10 @@
     engine written in modern C++ by Dante Falzone.
 
     If you run "make run" the makefile will use the program to load
-    demo/teapot.obj (a model of the Utah Teapot). You can also load other
-    .obj files with this program, but there's no guarantee that they'll look
-    right, because this program will just draw a line from each vertex to the
-    next one, then one from the last vertex to the zeroth one.
+    demo/utah_teapot.obj You can also load other .obj files with this program,
+    but there's no guarantee that they'll look right, because this program
+    will just draw a line from each vertex to the next one, then one from the
+    last vertex to the zeroth one.
 */
 
 #include <iostream>
