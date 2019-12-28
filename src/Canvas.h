@@ -4,6 +4,7 @@
 #include "KeyboardState.h"
 #include "Model3d.h"
 #include "Color.h"
+#include "Scene.h"
 
 #ifndef CANVAS_H
 #define CANVAS_H
@@ -226,6 +227,18 @@ public:
      */
     void draw_model3d(
         const Model3d& model,
+        const Perspective& persp
+    ) noexcept;
+
+    /**
+     * This method will draw the contents of a Scene
+     * according to a Perspective.
+     *
+     * @param scene the Scene to draw
+     * @param persp the Perpective by which to draw it
+     */
+    void draw_scene(
+        Scene& scene,
         const Perspective& persp
     ) noexcept;
 };

@@ -34,7 +34,7 @@ public:
      * @return const reference to that vertex
      */
     const CoordTriple& nth_vertex(
-        const unsigned int index
+        const size_t index
     ) const;
 
     /**
@@ -71,7 +71,7 @@ public:
      *
      * @return number of vertices
      */
-    unsigned int vertex_cnt(void) const noexcept;
+    size_t vertex_cnt(void) const noexcept;
 };
 
 } // end of namespace djf_3d

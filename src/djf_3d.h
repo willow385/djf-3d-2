@@ -7,3 +7,4 @@
 #include "Canvas.h"
 #include "KeyboardState.h"
 #include "Model3d.h"
+#include "Scene.h"

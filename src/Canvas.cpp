@@ -168,7 +168,8 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
     result.M         = (bool) state[SDL_SCANCODE_M];
     result.comma     = (bool) state[SDL_SCANCODE_COMMA];
     result.period    = (bool) state[SDL_SCANCODE_PERIOD];
-    result.forward_slash = (bool) state[SDL_SCANCODE_SLASH];
+    result.forward_slash
+        = (bool) state[SDL_SCANCODE_SLASH];
     result.ctrl      = (bool) (
         state[SDL_SCANCODE_RCTRL]
     ||
@@ -346,6 +347,33 @@ void Canvas::draw_model3d(
         (int) model.nth_vertex(0).project_2d_x(persp),
         (int) model.nth_vertex(0).project_2d_y(persp)
     );
+}
+
+void Canvas::draw_scene(
+    Scene& scene,
+    const Perspective& persp
+) noexcept {
+    size_t model_cnt = scene.model_cnt();
+    size_t point_2d_cnt = scene.point_2d_cnt();
+    size_t point_3d_cnt = scene.point_3d_cnt();
+
+    for (size_t i = 0; i < model_cnt; i++) {
+        this->draw_model3d(
+            scene.nth_model(i),
+            persp
+        );
+    }
+
+    for (size_t i = 0; i < point_2d_cnt; i++) {
+        this->draw_point(scene.nth_point_2d(i));
+    }
+
+    for (size_t i = 0; i < point_3d_cnt; i++) {
+        this->draw_point(
+            scene.nth_point_3d(i),
+            persp
+        );
+    }
 }
 
 } // end of namespace djf_3d

@@ -97,11 +97,11 @@ Model3d::~Model3d(void) noexcept {
 }
 
 const CoordTriple& Model3d::nth_vertex(
-    const unsigned int index
+    const size_t index
 ) const {
     if (index >= vertices.size()) {
         throw std::invalid_argument(
-            "djf_3d::Model3d::nth_vertex(): error: index out of bounds"
+            "djf_3d::Model3d::nth_vertex(): invalid index"
         );
     }
 
@@ -152,7 +152,7 @@ void Model3d::scale(const float amount) noexcept {
     );
 }
 
-unsigned int Model3d::vertex_cnt(void) const noexcept {
+size_t Model3d::vertex_cnt(void) const noexcept {
     return vertices.size();
 }
 

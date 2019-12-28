@@ -36,7 +36,7 @@
 
 int game_loop(
     std::unique_ptr<djf_3d::Canvas> canvas,
-    std::unique_ptr<djf_3d::Model3d> model
+    std::unique_ptr<djf_3d::Scene> scene
 ) {
 
     /* This will contain information concerning the 2d
@@ -65,8 +65,8 @@ int game_loop(
         canvas->fill_window();
         canvas->set_draw_color(green);
 
-        /* Draw the model. */
-        canvas->draw_model3d(*model, perspective_context);
+        /* Draw the scene. */
+        canvas->draw_scene(*scene, perspective_context);
 
         /* Refresh the frame so we can see what we just
            drew. */
@@ -77,73 +77,73 @@ int game_loop(
 
         /* Move the model based on user input. */
         if (keyboard_state.A) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::Z,
                 -1.0
             );
         }
         if (keyboard_state.D) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::Z,
                 +1.0
             );
         }
         if (keyboard_state.W) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::X,
                 -1.0
             );
         }
         if (keyboard_state.S) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::X,
                 +1.0
             );
         }
         if (keyboard_state.Q) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::Y,
                 -1.0
             );
         }
         if (keyboard_state.E) {
-            model->rotate_self(
+            scene->nth_model(0).rotate_self(
                 djf_3d::Axis::Y,
                 +1.0
             );
         }
         if (keyboard_state.I) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::Y,
                 -5.0
             );
         }
         if (keyboard_state.O) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::Y,
                 +5.0
             );
         }
         if (keyboard_state.left_arr) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::X,
                 -2.0
             );
         }
         if (keyboard_state.right_arr) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::X,
                 +2.0
             );
         }
         if (keyboard_state.up_arr) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::Z,
                 -2.0
             );
         }
         if (keyboard_state.down_arr) {
-            model->translate(
+            scene->nth_model(0).translate(
                 djf_3d::Axis::Z,
                 +2.0
             );
@@ -186,13 +186,19 @@ int main(int argc, char *argv[]) {
             )
         );
 
-        std::unique_ptr<djf_3d::Model3d> model(
+        std::shared_ptr<djf_3d::Model3d> model(
             new djf_3d::Model3d(argv[1])
         );
 
+        std::unique_ptr<djf_3d::Scene> scene(
+            new djf_3d::Scene()
+        );
+
+        scene->add(*std::move(model));
+
         int return_val = game_loop(
             std::move(canvas),
-            std::move(model)
+            std::move(scene)
         );
 
         std::cout << "Game exited normally." << std::endl;
