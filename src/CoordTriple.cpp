@@ -1,16 +1,7 @@
 #include <stdexcept>
 #include <cmath>
-
-#ifndef COORDPAIR_H
-#define COORDPAIR_H
 #include "CoordPair.h"
-#endif
-
-#ifndef PERSPECTIVE_H
-#define PERSPECTIVE_H
 #include "Perspective.h"
-#endif
-
 #include "CoordTriple.h"
 
 namespace djf_3d {
@@ -107,7 +98,8 @@ void CoordTriple::rotate_3d(
             );
     }
 
-    const float radians = theta_degrees * (3.14159 / 180.0);
+    const float radians
+        = theta_degrees * (3.14159 / 180.0);
 
     const float sin_theta = std::sin(radians);
     const float cos_theta = std::cos(radians);
@@ -115,8 +107,10 @@ void CoordTriple::rotate_3d(
     *pos_0 -= about_0;
     *pos_1 -= about_1;
 
-    const float new_0 = *pos_0 * cos_theta - *pos_1 * sin_theta;
-    const float new_1 = *pos_0 * sin_theta + *pos_1 * cos_theta;
+    const float new_0
+        = *pos_0 * cos_theta - *pos_1 * sin_theta;
+    const float new_1
+        = *pos_0 * sin_theta + *pos_1 * cos_theta;
 
     *pos_0 = new_0 + about_0;
     *pos_1 = new_1 + about_1;
@@ -126,9 +120,10 @@ float CoordTriple::project_2d_x(
     const float vanish_x,
     const float fov
 ) const noexcept {
-    /* The apparent x-position is going to be a weighted average
-       between the actual x-position and the x-position of the
-       vanishing point, weighted by the y-position. */
+    /* The apparent x-position is going to be a weighted
+       average between the actual x-position and the
+       x-position of the vanishing point, weighted by the
+       y-position. */
     return (
         x_pos + (
             (y_pos / fov) * vanish_x

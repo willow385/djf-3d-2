@@ -1,13 +1,8 @@
-#ifndef PERSPECTIVE_H
-#define PERSPECTIVE_H
 #include "Perspective.h"
-#endif
-
-#ifndef COORDPAIR_H
-#define COORDPAIR_H
 #include "CoordPair.h"
-#endif
 
+#ifndef COORDTRIPLE_H
+#define COORDTRIPLE_H
 namespace djf_3d {
 
 enum class Axis {
@@ -147,3 +142,5 @@ public:
 };
 
 } // end of namespace djf_3d
+
+#endif // COORDTRIPLE_H

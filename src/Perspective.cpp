@@ -1,8 +1,4 @@
-#ifndef COORDPAIR_H
-#define COORDPAIR_H
 #include "CoordPair.h"
-#endif
-
 #include "Perspective.h"
 
 namespace djf_3d {

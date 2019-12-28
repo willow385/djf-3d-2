@@ -3,32 +3,12 @@
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
-
-#ifndef COORDPAIR_H
-#define COORDPAIR_H
 #include "CoordPair.h"
-#endif
-
-#ifndef COORDTRIPLE_H
-#define COORDTRIPLE_H
 #include "CoordTriple.h"
-#endif
-
-#ifndef PERSPECTIVE_H
-#define PERSPECTIVE_H
 #include "Perspective.h"
-#endif
-
-#ifndef KEYBOARDSTATE_H
-#define KEYBOARDSTATE_H
 #include "KeyboardState.h"
-#endif
-
-#ifndef MODEL3D_H
-#define MODEL3D_H
 #include "Model3d.h"
-#endif
-
+#include "Color.h"
 #include "Canvas.h"
 
 namespace djf_3d {
@@ -38,7 +18,8 @@ Canvas::Canvas(
     const int width,
     const int height
 ) {
-    std::cout << "Calling ctor djf_3d::Canvas::Canvas()... ";
+    std::cout <<
+        "Calling ctor djf_3d::Canvas::Canvas()... ";
 
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -65,28 +46,34 @@ Canvas::Canvas(
     event = (SDL_Event *) std::malloc(sizeof(SDL_Event));
 
     if (!main_window || !renderer) {
-        std::cerr << "failed.\nError in djf_3d::Canvas::Canvas(): "
+        std::cerr
+            << "failed.\nError in djf_3d::Canvas::Canvas()"
+            << ": "
             << SDL_GetError()
             << std::endl;
         throw std::exception();
     }
 
     if (!event) {
-        std::cerr << "failed.\nError in djf_3d::Canvas::Canvas(): "
-            << "unsuccessful call to std::malloc() when trying"
-            << " to allocate memory for SDL_Event *event"
+        std::cerr
+            << "failed.\nError in djf_3d::Canvas::Canvas()"
+            << ": unsuccessful call to std::malloc() when "
+            << "trying to allocate memory for SDL_Event "
+            << "*event"
             << std::endl;
         throw std::exception();
     }
 
     std::cout
-        << "success.\nClick the close button or press the X key to exit"
+        << "success.\nClick the close button or press the "
+        << "X key to exit"
         << std::endl;
 
 }
 
 Canvas::~Canvas(void) noexcept {
-    std::cout << "Calling dtor djf_3d::Canvas::~Canvas()... ";
+    std::cout
+        << "Calling dtor djf_3d::Canvas::~Canvas()... ";
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
     std::free(event);
@@ -147,9 +134,12 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
     result.I         = (bool) state[SDL_SCANCODE_I];
     result.O         = (bool) state[SDL_SCANCODE_O];
     result.P         = (bool) state[SDL_SCANCODE_P];
-    result.open_bracket = (bool) state[SDL_SCANCODE_LEFTBRACKET];
-    result.close_bracket = (bool) state[SDL_SCANCODE_RIGHTBRACKET];
-    result.back_slash = (bool) state[SDL_SCANCODE_BACKSLASH];
+    result.open_bracket
+        = (bool) state[SDL_SCANCODE_LEFTBRACKET];
+    result.close_bracket
+        = (bool) state[SDL_SCANCODE_RIGHTBRACKET];
+    result.back_slash
+        = (bool) state[SDL_SCANCODE_BACKSLASH];
     result.A         = (bool) state[SDL_SCANCODE_A];
     result.S         = (bool) state[SDL_SCANCODE_S];
     result.D         = (bool) state[SDL_SCANCODE_D];
@@ -159,11 +149,15 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
     result.J         = (bool) state[SDL_SCANCODE_J];
     result.K         = (bool) state[SDL_SCANCODE_K];
     result.L         = (bool) state[SDL_SCANCODE_L];
-    result.semicolon = (bool) state[SDL_SCANCODE_SEMICOLON];
-    result.quote     = (bool) state[SDL_SCANCODE_APOSTROPHE];
+    result.semicolon
+        = (bool) state[SDL_SCANCODE_SEMICOLON];
+    result.quote
+        = (bool) state[SDL_SCANCODE_APOSTROPHE];
     result.enter     = (bool) state[SDL_SCANCODE_RETURN];
     result.shift     = (bool) (
-        state[SDL_SCANCODE_RSHIFT] || state[SDL_SCANCODE_LSHIFT]
+        state[SDL_SCANCODE_RSHIFT]
+    ||
+        state[SDL_SCANCODE_LSHIFT]
     );
     result.Z         = (bool) state[SDL_SCANCODE_Z];
     result.X         = (bool) state[SDL_SCANCODE_X];
@@ -176,11 +170,15 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
     result.period    = (bool) state[SDL_SCANCODE_PERIOD];
     result.forward_slash = (bool) state[SDL_SCANCODE_SLASH];
     result.ctrl      = (bool) (
-        state[SDL_SCANCODE_RCTRL] || state[SDL_SCANCODE_LCTRL]
+        state[SDL_SCANCODE_RCTRL]
+    ||
+        state[SDL_SCANCODE_LCTRL]
     );
     result.home      = (bool) state[SDL_SCANCODE_HOME];
     result.alt       = (bool) (
-        state[SDL_SCANCODE_RALT] || state[SDL_SCANCODE_LALT]
+        state[SDL_SCANCODE_RALT]
+    ||
+        state[SDL_SCANCODE_LALT]
     );
     result.left_arr  = (bool) state[SDL_SCANCODE_LEFT];
     result.up_arr    = (bool) state[SDL_SCANCODE_UP];
@@ -200,6 +198,16 @@ void Canvas::set_draw_color(
         r,
         g,
         b,
+        0
+    );
+}
+
+void Canvas::set_draw_color(const Color& color) noexcept {
+    SDL_SetRenderDrawColor(
+        renderer,
+        (int) color.red,
+        (int) color.green,
+        (int) color.blue,
         0
     );
 }

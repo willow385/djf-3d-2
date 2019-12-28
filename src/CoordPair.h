@@ -1,3 +1,6 @@
+#ifndef COORDPAIR_H
+#define COORDPAIR_H
+
 namespace djf_3d {
 
 class CoordPair {
@@ -78,3 +81,5 @@ public:
 };
 
 } // end of namespace djf_3d
+
+#endif // COORDPAIR_H

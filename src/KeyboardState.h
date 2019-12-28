@@ -1,13 +1,17 @@
+#ifndef KEYBOARDSTATE_H
+#define KEYBOARDSTATE_H
 namespace djf_3d {
 
-/* This struct is used to describe the state of the keyboard.
-   It is the return type of djf_3d::Canvas::get_keyboard_state().
-   When that method is called, it returns a KeyboardState where
-   the keys that were pressed at the time of the method call are
-   given a value of "true" and the keys that were not pressed are
-   given a value of "false". The "dig_*" members correspond to the
-   number keys at the top of a QWERTY keyboard; the rest should
-   be self-explanatory by their names. */
+/* This struct is used to describe the state of the
+   keyboard. It is the return type of
+   djf_3d::Canvas::get_keyboard_state(). When that method
+   is called, it returns a KeyboardState where the keys
+   that were pressed at the time of the method call are
+   given a value of "true" and the keys that were not
+   pressed are given a value of "false". The "dig_*"
+   members correspond to the number keys at the top of a
+   QWERTY keyboard; the rest should be self-explanatory by
+   their names. */
 
 struct KeyboardState {
     bool escape;
@@ -72,3 +76,5 @@ struct KeyboardState {
 };
 
 } // end of namespace djf_3d
+
+#endif // KEYBOARDSTATE_H

@@ -1,8 +1,7 @@
-#ifndef COORDPAIR_H
-#define COORDPAIR_H
 #include "CoordPair.h"
-#endif
 
+#ifndef PERSPECTIVE_H
+#define PERSPECTIVE_H
 namespace djf_3d {
 
 /* A lot of the code for projecting 3d objects onto
@@ -30,3 +29,4 @@ public:
 };
 
 } // end of namespace djf_3d
+#endif // PERSPECTIVE_H

@@ -4,12 +4,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <string>
-
-#ifndef COORDTRIPLE_H
-#define COORDTRIPLE_H
 #include "CoordTriple.h"
-#endif
-
 #include "Model3d.h"
 
 namespace djf_3d {
@@ -21,7 +16,8 @@ Model3d::Model3d(const std::string& obj_filepath):
         << std::endl;
 
     std::cout
-        << "djf_3d::Model3d::Model3d(): Attempting to open \""
+        << "djf_3d::Model3d::Model3d(): Attempting to open"
+        << '"'
         << obj_filepath
         << "\"...";
 
@@ -47,8 +43,8 @@ Model3d::Model3d(const std::string& obj_filepath):
         if (file_line[0] == 'v' && file_line[1] == ' ') {
             float vertex_x, vertex_y, vertex_z;
             /* I tried to do this with regexes and string
-               streams, but that's really complicated, and I
-               wanted to use a simpler solution. */
+               streams, but that's really complicated, and
+               I wanted to use a simpler solution. */
             std::sscanf(
                 file_line.c_str(),
                 "v %f %f %f",
@@ -56,16 +52,20 @@ Model3d::Model3d(const std::string& obj_filepath):
                 &vertex_y,
                 &vertex_z
             );
-            CoordTriple vertex(vertex_x, vertex_y, vertex_z);
+            CoordTriple vertex(
+                vertex_x,
+                vertex_y,
+                vertex_z
+            );
             vertices.push_back(vertex);
         }
     }
 
     if (vertices.size() == 0) {
         std::cout
-            << "djf_3d::Model3d::Model3d(): Note: no vertices"
-            << " found in \"" << obj_filepath << "\"; are you"
-            << " sure that this is a .obj file?"
+            << "djf_3d::Model3d::Model3d(): Note: no verti"
+            << "ces found in \"" << obj_filepath << "\"; a"
+            << "re you sure that this is a .obj file?"
             << std::endl;
     }
 
@@ -85,12 +85,14 @@ Model3d::Model3d(const std::string& obj_filepath):
         vertices_z_sum / num_vertices
     );
 
-    std::cout << "ctor djf_3d::Model3d::Model3d() succeeded."
+    std::cout
+        << "ctor djf_3d::Model3d::Model3d() succeeded."
         << std::endl;
 }
 
 Model3d::~Model3d(void) noexcept {
-    std::cout << "Calling dtor djf_3d::Model3d::~Model3d()."
+    std::cout
+        << "Calling dtor djf_3d::Model3d::~Model3d()."
         << std::endl;
 }
 
@@ -137,9 +139,12 @@ void Model3d::scale(const float amount) noexcept {
         vertex.teleport(new_x, new_y, new_z);
     }
 
-    float new_centroid_x = centroid.get_pos(Axis::X) * amount;
-    float new_centroid_y = centroid.get_pos(Axis::Y) * amount;
-    float new_centroid_z = centroid.get_pos(Axis::Z) * amount;
+    float new_centroid_x
+        = centroid.get_pos(Axis::X) * amount;
+    float new_centroid_y
+        = centroid.get_pos(Axis::Y) * amount;
+    float new_centroid_z
+        = centroid.get_pos(Axis::Z) * amount;
     centroid.teleport(
         new_centroid_x,
         new_centroid_y,

@@ -1,9 +1,8 @@
 #include <vector>
-
-#ifndef COORDTRIPLE_H
-#define COORDTRIPLE_H
 #include "CoordTriple.h"
-#endif
+
+#ifndef MODEL3D_H
+#define MODEL3D_H
 
 namespace djf_3d {
 
@@ -76,3 +75,5 @@ public:
 };
 
 } // end of namespace djf_3d
+
+#endif // MODEL3D_H

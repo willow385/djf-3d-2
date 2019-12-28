@@ -39,33 +39,37 @@ int game_loop(
     std::unique_ptr<djf_3d::Model3d> model
 ) {
 
-    /* This will contain information concerning the 2d surface onto which
-       we want to project our 3d points. */
+    /* This will contain information concerning the 2d
+       surface onto which we want to project our 3d points.
+    */
     djf_3d::Perspective perspective_context(
-        (int) (canvas->get_width()  / 2), /* vanishing point x-coord */
-        (int) (canvas->get_height() / 2), /* vanishing point y-coord */
-        1200.0 /* how strongly objects appear to converge to horizon */
+        (int) (canvas->get_width()  / 2), // vp x-coord
+        (int) (canvas->get_height() / 2), // vp y-coord
+        1200.0 // how strongly objects converge to horizon
     );
 
-    /* This will be used to store the state of the keyboard. */
+    /* This will be used to store the state of the
+       keyboard. */
     djf_3d::KeyboardState keyboard_state;
 
-    /* The method exit() returns true if the user clicks the close
-       button when it's called; otherwise it returns false. */
+    /* These are the Colors we'll be using. */
+    djf_3d::Color black = {0, 0, 0};
+    djf_3d::Color green = {0, 255, 50};
+
+    /* The method exit() returns true if the user clicks
+       the close button when it's called; otherwise it
+       returns false. */
     while (!canvas->exit()) {
-        /* Set the color to black. */
-        canvas->set_draw_color(0, 0, 0);
-
-        /* Fill the window. */
+        /* Prepare the Canvas. */
+        canvas->set_draw_color(black);
         canvas->fill_window();
-
-        /* Set the color to green. */
-        canvas->set_draw_color(0, 255, 50);
+        canvas->set_draw_color(green);
 
         /* Draw the model. */
         canvas->draw_model3d(*model, perspective_context);
 
-        /* Refresh the frame so we can see what we just drew. */
+        /* Refresh the frame so we can see what we just
+           drew. */
         canvas->refresh();
 
         /* Get the present keyboard state. */
@@ -170,9 +174,13 @@ int main(int argc, char *argv[]) {
     }
 
     try {
+        std::string titlebar_half0
+            = "Controls: W/A/S/D/Q/E to rotate, I/O to zo";
+        std::string titlebar_half1
+            = "om, arrow keys to pan";
         std::unique_ptr<djf_3d::Canvas> canvas(
             new djf_3d::Canvas(
-                "Controls: W/A/S/D/Q/E to rotate, I/O to zoom, arrow keys to pan",
+                titlebar_half0 + titlebar_half1,
                 600,
                 600
             )
