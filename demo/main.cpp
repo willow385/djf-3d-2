@@ -36,7 +36,7 @@
 
 int game_loop(
     std::unique_ptr<djf_3d::Canvas> canvas,
-    std::unique_ptr<djf_3d::Scene> scene
+    std::shared_ptr<djf_3d::Scene> scene
 ) {
 
     /* This will contain information concerning the 2d
