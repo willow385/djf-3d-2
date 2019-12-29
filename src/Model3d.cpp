@@ -17,7 +17,7 @@ Model3d::Model3d(const std::string& obj_filepath):
 
     std::cout
         << "djf_3d::Model3d::Model3d(): Attempting to open"
-        << '"'
+        << " \""
         << obj_filepath
         << "\"...";
 
