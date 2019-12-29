@@ -35,7 +35,7 @@ template<>
 Model3d& Scene::nth_mutable<Model3d>(const size_t index) {
     if (index >= models.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_model(): invalid index"
+            "djf_3d::Scene::nth_mutable<Model3d>(): invalid index"
         );
     }
 
@@ -48,7 +48,7 @@ CoordTriple& Scene::nth_mutable<CoordTriple>(
 ) {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_point_3d(): invalid index"
+            "djf_3d::Scene::nth_mutable<CoordTriple>(): invalid index"
         );
     }
 
@@ -61,7 +61,7 @@ CoordPair& Scene::nth_mutable<CoordPair>(
 ) {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_point_2d(): invalid index"
+            "djf_3d::Scene::nth_mutable<CoordPair>(): invalid index"
         );
     }
 
@@ -74,7 +74,7 @@ const Model3d& Scene::nth_const<Model3d>(
 ) const {
     if (index >= models.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_model(): invalid index"
+            "djf_3d::Scene::nth_const<Model3d>(): invalid index"
         );
     }
 
@@ -87,7 +87,7 @@ const CoordTriple& Scene::nth_const<CoordTriple>(
 ) const {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_point_3d(): invalid index"
+            "djf_3d::Scene::nth_const<CoordTriple>(): invalid index"
         );
     }
 
@@ -100,7 +100,7 @@ const CoordPair& Scene::nth_const<CoordPair>(
 ) const {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_point_2d(): invalid index"
+            "djf_3d::Scene::nth_const<CoordPair>(): invalid index"
         );
     }
 
