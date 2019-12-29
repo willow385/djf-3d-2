@@ -34,7 +34,7 @@
 #include <chrono>
 #include "../src/djf_3d.h"
 
-int game_loop(
+int program_loop(
     std::unique_ptr<djf_3d::Canvas> canvas,
     std::shared_ptr<djf_3d::Scene> scene
 ) {
@@ -208,12 +208,16 @@ int main(int argc, char *argv[]) {
 
         scene->add(*std::move(model));
 
-        int return_val = game_loop(
+        std::cout << "Click the close button or press the "
+            << "X key to exit the program" << std::endl;
+
+        int return_val = program_loop(
             std::move(canvas),
             std::move(scene)
         );
 
-        std::cout << "Game exited normally." << std::endl;
+        std::cout << "Program exited normally."
+            << std::endl;
         return return_val;
     } catch (std::exception& e) {
         std::cerr << "Aborting the program." << std::endl;
