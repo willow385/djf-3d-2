@@ -96,11 +96,13 @@ public:
      * @param r the red portion of the color
      * @param g the green portion of the color
      * @param b the blue portion of the color
+     * @param alpha the transparency of the color
      */
     void set_draw_color(
         const int r,
         const int g,
-        const int b
+        const int b,
+        const int alpha
     ) noexcept;
 
     /**

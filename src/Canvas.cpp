@@ -192,14 +192,15 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
 void Canvas::set_draw_color(
     const int r,
     const int g,
-    const int b
+    const int b,
+    const int alpha
 ) noexcept {
     SDL_SetRenderDrawColor(
         renderer,
         r,
         g,
         b,
-        0
+        alpha
     );
 }
 
@@ -209,7 +210,7 @@ void Canvas::set_draw_color(const Color& color) noexcept {
         (int) color.red,
         (int) color.green,
         (int) color.blue,
-        0
+        (int) color.alpha
     );
 }
 
