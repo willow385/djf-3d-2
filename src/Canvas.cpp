@@ -95,11 +95,11 @@ bool Canvas::exit(void) noexcept {
     return false;
 }
 
-int Canvas::get_width(void) {
+int Canvas::get_width(void) const noexcept {
     return width_px;
 }
 
-int Canvas::get_height(void) {
+int Canvas::get_height(void) const noexcept {
     return height_px;
 }
 
