@@ -9,6 +9,7 @@
 #include "KeyboardState.h"
 #include "Model3d.h"
 #include "Color.h"
+#include "Scene.h"
 #include "Canvas.h"
 
 namespace djf_3d {
