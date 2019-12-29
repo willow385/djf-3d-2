@@ -60,7 +60,7 @@ public:
      *
      * @return width of the Canvas
      */
-    int get_width(void);
+    int get_width(void) const noexcept;
 
     /**
      * This method returns the height of the Canvas in
@@ -68,7 +68,7 @@ public:
      *
      * @return height of the Canvas
      */
-    int get_height(void);
+    int get_height(void) const noexcept;
 
     /**
      * This method will return true if, when it is called,
