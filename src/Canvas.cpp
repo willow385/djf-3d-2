@@ -66,8 +66,7 @@ Canvas::Canvas(
     }
 
     std::cout
-        << "success.\nClick the close button or press the "
-        << "X key to exit"
+        << "success."
         << std::endl;
 
 }
