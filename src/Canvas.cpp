@@ -350,7 +350,7 @@ void Canvas::draw_model3d(
 }
 
 void Canvas::draw_scene(
-    Scene& scene,
+    const Scene& scene,
     const Perspective& persp
 ) noexcept {
     size_t model_cnt = scene.model_cnt();
@@ -359,18 +359,20 @@ void Canvas::draw_scene(
 
     for (size_t i = 0; i < model_cnt; i++) {
         this->draw_model3d(
-            scene.nth_model(i),
+            scene.nth_const<Model3d>(i),
             persp
         );
     }
 
     for (size_t i = 0; i < point_2d_cnt; i++) {
-        this->draw_point(scene.nth_point_2d(i));
+        this->draw_point(
+            scene.nth_const<CoordPair>(i)
+        );
     }
 
     for (size_t i = 0; i < point_3d_cnt; i++) {
         this->draw_point(
-            scene.nth_point_3d(i),
+            scene.nth_const<CoordTriple>(i),
             persp
         );
     }

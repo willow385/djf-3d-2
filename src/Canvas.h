@@ -238,7 +238,7 @@ public:
      * @param persp the Perpective by which to draw it
      */
     void draw_scene(
-        Scene& scene,
+        const Scene& scene,
         const Perspective& persp
     ) noexcept;
 };

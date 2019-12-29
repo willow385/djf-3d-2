@@ -11,9 +11,14 @@ namespace djf_3d {
 
 class Scene {
 private:
-    std::vector<std::reference_wrapper<Model3d>> models;
-    std::vector<std::reference_wrapper<CoordPair>> points_2d;
-    std::vector<std::reference_wrapper<CoordTriple>> points_3d;
+    std::vector<std::reference_wrapper<Model3d>>
+        models;
+
+    std::vector<std::reference_wrapper<CoordPair>>
+        points_2d;
+
+    std::vector<std::reference_wrapper<CoordTriple>>
+        points_3d;
 
 public:
     /**
@@ -48,29 +53,29 @@ public:
     void add(CoordTriple& point) noexcept;
 
     /**
-     * Method to get the nth Model3d from the
-     * Scene.
+     * The specializations of this method return a mutable
+     * reference to one of the Scene's members.
      *
-     * @param index the index of the desired Model3d
-     * @return reference to that Model3d
+     * @param T either Model3d, CoordPair, or CoordTriple,
+     * depending on which you want
+     * @param index the index of that object
+     * @return mutable reference to the desired object
      */
-    Model3d& nth_model(const size_t index);
+    template <class T>
+    T& nth_mutable(const size_t index);
 
     /**
-     * Method to get the nth CoordTriple from the Scene.
+     * The specializations of this method return a const
+     * reference to one of the Scene's members.
      *
-     * @param index the index of the desired CoordTriple
-     * @return reference to that CoordTriple
+     * @param T either Model3d, CoordPair, or CoordTriple,
+     * depending on which you want
+     * @param index the index of that object
+     * @return const reference to the desired object
      */
-    CoordTriple& nth_point_3d(const size_t index);
+    template <class T>
+    const T& nth_const(const size_t index) const;
 
-    /**
-     * Method to get the nth CoordPair from the Scene.
-     *
-     * @param index the index of the desired CoordPair
-     * @return reference to that CoordPair
-     */
-    CoordPair& nth_point_2d(const size_t index);
 
     /**
      * Method to get the number of 3d models in the Scene.

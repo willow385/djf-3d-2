@@ -77,73 +77,73 @@ int game_loop(
 
         /* Move the model based on user input. */
         if (keyboard_state.A) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::Z,
                 -1.0
             );
         }
         if (keyboard_state.D) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::Z,
                 +1.0
             );
         }
         if (keyboard_state.W) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::X,
                 -1.0
             );
         }
         if (keyboard_state.S) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::X,
                 +1.0
             );
         }
         if (keyboard_state.Q) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::Y,
                 -1.0
             );
         }
         if (keyboard_state.E) {
-            scene->nth_model(0).rotate_self(
+            scene->nth_mutable<djf_3d::Model3d>(0).rotate_self(
                 djf_3d::Axis::Y,
                 +1.0
             );
         }
         if (keyboard_state.I) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::Y,
                 -5.0
             );
         }
         if (keyboard_state.O) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::Y,
                 +5.0
             );
         }
         if (keyboard_state.left_arr) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::X,
                 -2.0
             );
         }
         if (keyboard_state.right_arr) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::X,
                 +2.0
             );
         }
         if (keyboard_state.up_arr) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::Z,
                 -2.0
             );
         }
         if (keyboard_state.down_arr) {
-            scene->nth_model(0).translate(
+            scene->nth_mutable<djf_3d::Model3d>(0).translate(
                 djf_3d::Axis::Z,
                 +2.0
             );
