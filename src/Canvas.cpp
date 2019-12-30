@@ -87,12 +87,7 @@ void Canvas::refresh(void) noexcept {
 
 bool Canvas::exit(void) noexcept {
     SDL_PollEvent(event);
-    switch (event->type) {
-        case SDL_QUIT:
-            return true;
-    }
-
-    return false;
+    return (event->type == SDL_QUIT);
 }
 
 int Canvas::get_width(void) const noexcept {
