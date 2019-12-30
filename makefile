@@ -11,7 +11,7 @@ OBJS = obj/Canvas.o\
        obj/Scene.o\
        obj/Model3d.o
 
-SDL2 = -D_REENTRANT -I/usr/include/SDL2 -lSDL2
+SDL2 = `pkg-config --cflags --libs sdl2`
 
 SRC = src/Canvas.cpp\
       src/Canvas.h\
