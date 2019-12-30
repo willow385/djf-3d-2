@@ -1,12 +1,12 @@
 /*          main.cpp file of djf-3d-2
     Copyright (C) 2019  Dante Falzone
 
-    This program is free software: you can redistribute it and/or modify
+    djf-3d-2 is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
+    djf-3d-2 is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -28,148 +28,9 @@
 
 #include <iostream>
 #include <string>
-#include <stdexcept>
-#include <memory>
 #include <thread>
 #include <chrono>
 #include "../src/djf_3d.h"
-
-int program_loop(
-    std::unique_ptr<djf_3d::Canvas> canvas,
-    std::shared_ptr<djf_3d::Scene> scene
-) {
-
-    /* This will contain information concerning the 2d
-       surface onto which we want to project our 3d points.
-    */
-    djf_3d::Perspective perspective_context(
-        (int) (canvas->get_width()  / 2), // vp x-coord
-        (int) (canvas->get_height() / 2), // vp y-coord
-        1200.0 // how strongly objects converge to horizon
-    );
-
-    /* This will be used to store the state of the
-       keyboard. */
-    djf_3d::KeyboardState keyboard_state;
-
-    /* These are the Colors we'll be using. */
-    djf_3d::Color black = {0, 0, 0, 0};
-    djf_3d::Color green = {0, 255, 50, 0};
-
-    /* The method exit() returns true if the user clicks
-       the close button when it's called; otherwise it
-       returns false. */
-    while (!canvas->exit()) {
-        /* Prepare the Canvas. */
-        canvas->set_draw_color(black);
-        canvas->fill_window();
-        canvas->set_draw_color(green);
-
-        /* Draw the scene. */
-        canvas->draw_scene(*scene, perspective_context);
-
-        /* Refresh the frame so we can see what we just
-           drew. */
-        canvas->refresh();
-
-        /* Get the present keyboard state. */
-        keyboard_state = canvas->get_keyboard_state();
-
-        /* Move the model based on user input. */
-        if (keyboard_state.A) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::Z,
-                -1.0
-            );
-        }
-        if (keyboard_state.D) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::Z,
-                +1.0
-            );
-        }
-        if (keyboard_state.W) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::X,
-                -1.0
-            );
-        }
-        if (keyboard_state.S) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::X,
-                +1.0
-            );
-        }
-        if (keyboard_state.Q) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::Y,
-                -1.0
-            );
-        }
-        if (keyboard_state.E) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
-                djf_3d::Axis::Y,
-                +1.0
-            );
-        }
-        if (keyboard_state.I) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Y,
-                -5.0
-            );
-        }
-        if (keyboard_state.O) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Y,
-                +5.0
-            );
-        }
-        if (keyboard_state.left_arr) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::X,
-                -2.0
-            );
-        }
-        if (keyboard_state.right_arr) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::X,
-                +2.0
-            );
-        }
-        if (keyboard_state.up_arr) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Z,
-                -2.0
-            );
-        }
-        if (keyboard_state.down_arr) {
-            scene->nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Z,
-                +2.0
-            );
-        }
-        if (keyboard_state.X) { break; }
-
-        /* Delay refreshing for a 60 FPS framerate. */
-        std::this_thread::sleep_for(
-            std::chrono::microseconds(16667)
-        );
-    }
-
-    return 0;
-}
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -185,42 +46,151 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    try {
-        std::string titlebar_half0
-            = "Controls: W/A/S/D/Q/E to rotate, I/O to zo";
-        std::string titlebar_half1
-            = "om, arrow keys to pan";
-        std::unique_ptr<djf_3d::Canvas> canvas(
-            new djf_3d::Canvas(
-                titlebar_half0 + titlebar_half1,
-                600,
-                600
-            )
+    // First we create a Canvas to draw things on.
+    std::string title(
+        "Controls: W/A/S/D/Q/E to rotate, I/O to zoom, arrow keys to pan"
+    );
+    djf_3d::Canvas canvas(
+        title,
+        600,
+        600
+    );
+
+    // Next we create a Scene and put a model in it.
+    djf_3d::Scene scene;
+    djf_3d::Model3d model(argv[1]);
+    scene.add(model);
+
+    /* We create a Perspective containing information
+       needed to project 3d objects on a 2d surface,
+       namely the location of the vanishing point and
+       the FOV. */
+    djf_3d::Perspective perspective_context(
+        (int) (canvas.get_width()  / 2), // vp x-coord
+        (int) (canvas.get_height() / 2), // vp y-coord
+        1200.0 // how strongly objects converge to horizon
+    );
+
+    // This object will store info about the keyboard.
+    djf_3d::KeyboardState keyboard_state;
+
+    // Here we create a palette of pretty Colors to use.
+    djf_3d::Color black = {0, 0, 0, 0};
+    djf_3d::Color green = {0, 255, 50, 0};
+
+    /* Let's print a helpful terminal message for the
+       user's sake. */
+    std::cout
+        << "Click the close button or press the X key to e"
+        << "xit the program." << std::endl;
+
+    /* The exit() method will return true if, when it is
+       called, the user clicks the "close" button. */
+    while (!canvas.exit()) {
+        canvas.set_draw_color(black);
+        canvas.fill_window();
+        canvas.set_draw_color(green);
+        canvas.draw_scene(scene, perspective_context);
+        canvas.refresh();
+        keyboard_state = canvas.get_keyboard_state();
+
+        /* We move around the model(s) in the scene based
+           on user input. */
+        if (keyboard_state.A) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::Z,
+                -1.0
+            );
+        }
+        if (keyboard_state.D) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::Z,
+                +1.0
+            );
+        }
+        if (keyboard_state.W) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::X,
+                -1.0
+            );
+        }
+        if (keyboard_state.S) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::X,
+                +1.0
+            );
+        }
+        if (keyboard_state.Q) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::Y,
+                -1.0
+            );
+        }
+        if (keyboard_state.E) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .rotate_self(
+                djf_3d::Axis::Y,
+                +1.0
+            );
+        }
+        if (keyboard_state.I) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::Y,
+                -5.0
+            );
+        }
+        if (keyboard_state.O) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::Y,
+                +5.0
+            );
+        }
+        if (keyboard_state.left_arr) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::X,
+                -2.0
+            );
+        }
+        if (keyboard_state.right_arr) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::X,
+                +2.0
+            );
+        }
+        if (keyboard_state.up_arr) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::Z,
+                -2.0
+            );
+        }
+        if (keyboard_state.down_arr) {
+            scene.nth_mutable<djf_3d::Model3d>(0)
+            .translate(
+                djf_3d::Axis::Z,
+                +2.0
+            );
+        }
+
+        // We exit the loop if the user presses X.
+        if (keyboard_state.X) break;
+
+        /* We delay refreshing the frame so as to get a
+           consistent framerate of 60 fps. */
+        std::this_thread::sleep_for(
+            std::chrono::microseconds(16667)
         );
-
-        std::shared_ptr<djf_3d::Model3d> model(
-            new djf_3d::Model3d(argv[1])
-        );
-
-        std::unique_ptr<djf_3d::Scene> scene(
-            new djf_3d::Scene()
-        );
-
-        scene->add(*std::move(model));
-
-        std::cout << "Click the close button or press the "
-            << "X key to exit the program" << std::endl;
-
-        int return_val = program_loop(
-            std::move(canvas),
-            std::move(scene)
-        );
-
-        std::cout << "Program exited normally."
-            << std::endl;
-        return return_val;
-    } catch (std::exception& e) {
-        std::cerr << "Aborting the program." << std::endl;
-        return 1;
     }
+
+    std::cout << "Program exited normally." << std::endl;
+    return 0;
 }
