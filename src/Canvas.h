@@ -1,3 +1,4 @@
+#include <string>
 #include "CoordPair.h"
 #include "CoordTriple.h"
 #include "Perspective.h"
