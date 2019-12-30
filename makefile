@@ -35,7 +35,6 @@ DEBUG_FLAGS = -g -Wall -lm -std=c++11
 GPROF_FLAGS = -O3 -pg -Wall -lm -std=c++11
 
 ASM_FLAGS = -S\
-	    -masm=intel\
 	    -fno-asynchronous-unwind-tables\
 	    -fno-dwarf2-cfi-asm\
 	    -O3\
