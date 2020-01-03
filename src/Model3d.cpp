@@ -1,10 +1,12 @@
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
 #include <string>
 #include "CoordTriple.h"
+#include "Polygon.h"
 #include "Model3d.h"
 
 namespace djf_3d {
@@ -61,6 +63,44 @@ Model3d::Model3d(const std::string& obj_filepath):
         }
     }
 
+    // Next we get all the faces.
+    obj_file.clear();
+    obj_file.seekg(0);
+    while (std::getline(obj_file, file_line)) {
+        if (file_line[0] == 'f') {
+            unsigned indx_0, indx_1, indx_2;
+            std::sscanf(
+                file_line.c_str(),
+                "f %d %d %d",
+                &indx_0,
+                &indx_1,
+                &indx_2
+            );
+
+            Polygon poly;
+
+            if (indx_0 <= this->vertex_cnt()) {
+                poly.vertices.push_back(
+                    &(this->nth_vertex(indx_0 - 1))
+                );
+            }
+
+            if (indx_1 <= this->vertex_cnt()) {
+                poly.vertices.push_back(
+                    &(this->nth_vertex(indx_1 - 1))
+                );
+            }
+
+            if (indx_2 <= this->vertex_cnt()) {
+                poly.vertices.push_back(
+                    &(this->nth_vertex(indx_2 - 1))
+                );
+            }
+
+            faces.push_back(poly);
+        }
+    }
+
     if (vertices.size() == 0) {
         std::cout
             << "djf_3d::Model3d::Model3d(): Note: no verti"
@@ -106,6 +146,18 @@ const CoordTriple& Model3d::nth_vertex(
     }
 
     return vertices[index];
+}
+
+const Polygon& Model3d::nth_face(
+    const size_t index
+) const {
+    if (index >= faces.size()) {
+        throw std::invalid_argument(
+            "djf_3d::Model3d::nth_face(): invalid index"
+        );
+    }
+
+    return faces[index];
 }
 
 void Model3d::translate(
@@ -154,6 +206,10 @@ void Model3d::scale(const float amount) noexcept {
 
 size_t Model3d::vertex_cnt(void) const noexcept {
     return vertices.size();
+}
+
+size_t Model3d::face_cnt(void) const noexcept {
+    return faces.size();
 }
 
 } // end of namespace djf_3d

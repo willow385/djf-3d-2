@@ -10,6 +10,7 @@
 #include "Model3d.h"
 #include "Color.h"
 #include "Scene.h"
+#include "Polygon.h"
 #include "Canvas.h"
 
 namespace djf_3d {
@@ -316,33 +317,20 @@ void Canvas::draw_model3d(
     const Perspective& persp
 ) noexcept {
     int num_verts = model.vertex_cnt();
-    if (num_verts == 0) return;
-    if (num_verts == 1) {
-        SDL_RenderDrawPoint(
-            renderer,
-            (int) model.nth_vertex(0).project_2d_x(persp),
-            (int) model.nth_vertex(0).project_2d_y(persp)
-        );
-        return;
-    }
-
-    for (int i = 0; i < num_verts - 1; i++) {
-        SDL_RenderDrawLine(
-            renderer,
-            (int) model.nth_vertex(i).project_2d_x(persp),
-            (int) model.nth_vertex(i).project_2d_y(persp),
-            (int) model.nth_vertex(i+1).project_2d_x(persp),
-            (int) model.nth_vertex(i+1).project_2d_y(persp)
+    int num_faces = model.face_cnt();
+    for (int i = 0; i < num_verts; i++) {
+        this->draw_point(
+            model.nth_vertex(i),
+            persp
         );
     }
 
-    SDL_RenderDrawLine(
-        renderer,
-        (int) model.nth_vertex(num_verts-1).project_2d_x(persp),
-        (int) model.nth_vertex(num_verts-1).project_2d_y(persp),
-        (int) model.nth_vertex(0).project_2d_x(persp),
-        (int) model.nth_vertex(0).project_2d_y(persp)
-    );
+    for (int i = 0; i < num_faces; i++) {
+        this->draw_poly(
+            model.nth_face(i),
+            persp
+        );
+    }
 }
 
 void Canvas::draw_scene(
@@ -372,6 +360,45 @@ void Canvas::draw_scene(
             persp
         );
     }
+}
+
+void Canvas::draw_poly(
+    const Polygon& poly,
+    const Perspective& persp
+) noexcept {
+    size_t vert_cnt = poly.vertices.size();
+    if (vert_cnt == 0) return;
+
+    if (vert_cnt == 1) {
+        this->draw_point(
+            *poly.vertices[0],
+            persp
+        );
+        return;
+    }
+
+    if (vert_cnt == 2) {
+        this->draw_line(
+            *poly.vertices[0],
+            *poly.vertices[1],
+            persp
+        );
+        return;
+    }
+
+    for (size_t i = 0; i < vert_cnt - 1; i++) {
+        this->draw_line(
+            *poly.vertices[i],
+            *poly.vertices[i+1],
+            persp
+        );
+    }
+
+    this->draw_line(
+        *poly.vertices[vert_cnt - 1],
+        *poly.vertices[0],
+        persp
+    );
 }
 
 } // end of namespace djf_3d

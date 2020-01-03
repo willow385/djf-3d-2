@@ -1,5 +1,7 @@
 #include <vector>
+#include <string>
 #include "CoordTriple.h"
+#include "Polygon.h"
 
 #ifndef MODEL3D_H
 #define MODEL3D_H
@@ -7,14 +9,16 @@
 namespace djf_3d {
 
 class Model3d {
+
 private:
     std::vector<CoordTriple> vertices;
+    std::vector<Polygon> faces;
     CoordTriple centroid;
 
 public:
     /**
-     * Ctor for a Model3d. Attempts to parse a .obj file; throws
-     * an exception if it can't find the file.
+     * Ctor for a Model3d. Attempts to parse a .obj file;
+     * throws an exception if it can't find the file.
      *
      * @param obj_filepath path to a .obj file
      */
@@ -27,13 +31,25 @@ public:
 
     /**
      * This method returns a const reference to a specific
-     * vertex, throwing an exception if the index passed is out
-     * of range.
+     * vertex, throwing an exception if the index passed is
+     * out of range.
      *
      * @param index the index of the vertex you want
      * @return const reference to that vertex
      */
     const CoordTriple& nth_vertex(
+        const size_t index
+    ) const;
+
+    /**
+     * This method returns a const reference to a specific
+     * face, throwing an exception if the index passed is
+     * out of range.
+     *
+     * @param index the index of the face you want
+     * @return const reference to that face
+     */
+    const Polygon& nth_face(
         const size_t index
     ) const;
 
@@ -49,7 +65,8 @@ public:
     ) noexcept;
 
     /**
-     * This method rotates the Model3d about its own centroid.
+     * This method rotates the Model3d about its own
+     * centroid.
      *
      * @param axis the djf_3d::Axis about which to rotate
      * @param theta_degrees number of degrees to rotate
@@ -67,11 +84,20 @@ public:
     void scale(const float amount) noexcept;
 
     /**
-     * This method finds out how many vertices there are.
+     * This method is for finding out the number of
+     * vertices.
      *
      * @return number of vertices
      */
     size_t vertex_cnt(void) const noexcept;
+
+    /**
+     * This method is for finding out the number of
+     * faces.
+     *
+     * @return number of faces
+     */
+    size_t face_cnt(void) const noexcept;
 };
 
 } // end of namespace djf_3d

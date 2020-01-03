@@ -6,6 +6,7 @@
 #include "Model3d.h"
 #include "Color.h"
 #include "Scene.h"
+#include "Polygon.h"
 
 #ifndef CANVAS_H
 #define CANVAS_H
@@ -244,6 +245,19 @@ public:
         const Scene& scene,
         const Perspective& persp
     ) noexcept;
+
+    /**
+     * This method will draw a Polygon according to a
+     * Perspective.
+     *
+     * @param poly the djf_3d::Polygon to draw
+     * @param persp the Perspective by which to draw it
+     */
+    void draw_poly(
+        const Polygon& poly,
+        const Perspective& persp
+    ) noexcept;
+
 };
 
 } // end of namespace djf_3d
