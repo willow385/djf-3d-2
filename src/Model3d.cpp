@@ -1,3 +1,4 @@
+#include <regex>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -68,14 +69,59 @@ Model3d::Model3d(const std::string& obj_filepath):
     obj_file.seekg(0);
     while (std::getline(obj_file, file_line)) {
         if (file_line[0] == 'f') {
-            unsigned indx_0, indx_1, indx_2;
-            std::sscanf(
-                file_line.c_str(),
-                "f %d %d %d",
-                &indx_0,
-                &indx_1,
-                &indx_2
+            unsigned indx_0, indx_1, indx_2, ignore;
+            std::regex opt_0(
+                "f\\s+\\d+\\s+\\d+\\s+\\d+"
             );
+            std::regex opt_1(
+                "f\\s+\\d+\\/\\d+\\s+\\d+\\/\\d+\\s+\\d+\\/\\d+"
+            );
+            std::regex opt_2(
+                "f\\s+\\d+\\/\\d+\\/\\d+\\/\\s+\\d+\\/\\d+\\/\\d+\\/\\s+\\d+\\/\\d+\\/\\d+"
+            );
+            std::regex opt_3(
+                "f\\s+\\d+\\/\\/\\d+\\s+\\d+\\/\\/\\d+\\s+\\d+\\/\\/\\d+"
+            );
+
+            if (std::regex_search(file_line, opt_0)) {
+                std::sscanf(
+                    file_line.c_str(),
+                    "f %d %d %d",
+                    &indx_0,
+                    &indx_1,
+                    &indx_2
+                );
+            }
+
+            if (std::regex_search(file_line, opt_1)) {
+                std::sscanf(
+                    file_line.c_str(),
+                    "f %d/%d %d/%d %d/%d",
+                    &indx_0, &ignore,
+                    &indx_1, &ignore,
+                    &indx_2, &ignore
+                );
+            }
+
+            if (std::regex_search(file_line, opt_2)) {
+                std::sscanf(
+                    file_line.c_str(),
+                    "f %d/%d/%d %d/%d/%d %d/%d/%d",
+                    &indx_0, &ignore, &ignore,
+                    &indx_1, &ignore, &ignore,
+                    &indx_2, &ignore, &ignore
+                );
+            }
+
+            if (std::regex_search(file_line, opt_3)) {
+                std::sscanf(
+                    file_line.c_str(),
+                    "f %d//%d %d//%d %d//%d",
+                    &indx_0, &ignore,
+                    &indx_1, &ignore,
+                    &indx_2, &ignore
+                );
+            }
 
             Polygon poly;
 
@@ -140,6 +186,13 @@ const CoordTriple& Model3d::nth_vertex(
     const size_t index
 ) const {
     if (index >= vertices.size()) {
+        std::cerr
+            << "djf_3d::Model3d::nth_vertex(): Index "
+            << index
+            << " was passed; only "
+            << vertices.size()
+            << " indices exist"
+            << std::endl;
         throw std::invalid_argument(
             "djf_3d::Model3d::nth_vertex(): invalid index"
         );
