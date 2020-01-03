@@ -8,9 +8,7 @@ This is an attempt to write a much better 3d engine in C++
 using modern C++ features and proper programming practices.
 
 The demo program for this can load 3d models in the
-Wavefront obj file format, but they don't look pretty and
-they often don't look correct because the line-drawing
-algorithm is pretty naive.
+Wavefront obj file format.
 
 C++ may have started out as an extension of C, but I have
 to say that writing in modern C++ doesn't feel anything like
