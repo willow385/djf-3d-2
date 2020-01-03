@@ -21,9 +21,7 @@
 
     If you run "make run" the makefile will use the program to load
     demo/utah_teapot.obj You can also load other .obj files with this program,
-    but there's no guarantee that they'll look right, because this program
-    will just draw a line from each vertex to the next one, then one from the
-    last vertex to the zeroth one.
+    but it doesn't always correctly parse the face info.
 */
 
 #include <iostream>
