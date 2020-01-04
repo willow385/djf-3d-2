@@ -8,14 +8,10 @@ namespace djf_3d {
    a flat surface requires a vanishing point and a
    field-of-view value. Passing these as literal values
    is more verbose and less readable, so instead I have
-   created a class to explicitly associate them and
+   created a struct to explicitly associate them and
    thereby make code clearer. */
-class Perspective {
-public:
-    /* I'm making the data public because there's no
-       real benefit to encapsulating it. It's fine for
-       the data to be exposed as part of the interface
-       here because this is such a simple class. */
+struct Perspective {
+
     CoordPair vanishing_point;
     float fov;
 
