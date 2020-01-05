@@ -13,9 +13,7 @@ enum class Axis {
 
 class Vec3f {
 private:
-    float x_pos; // left/right
-    float y_pos; // close/far
-    float z_pos; // up/down
+    float components[3];
 
 public:
     Vec3f(
@@ -53,9 +51,10 @@ public:
      * This translates the Vec3f along one of the axes.
      *
      * @param axis which axis to move along
-     * @param amount the amount by which to move
+     * @param distance the amount by which to move
      */
-    void translate(const Axis axis, const float amount);
+    template <Axis axis>
+    void translate(const float distance);
 
     /**
      * This rotates the Vec3f about one of the three axes

@@ -11,9 +11,9 @@ Vec3f::Vec3f(
     const float y,
     const float z
 ) noexcept {
-    x_pos = x;
-    y_pos = y;
-    z_pos = z;
+    components[0] = x;
+    components[1] = y;
+    components[2] = z;
 }
 
 Vec3f::~Vec3f(void) noexcept {}
@@ -23,45 +23,39 @@ void Vec3f::set_position(
     const float y,
     const float z
 ) noexcept {
-    x_pos = x;
-    y_pos = y;
-    z_pos = z;
+    components[0] = x;
+    components[1] = y;
+    components[2] = z;
 }
 
 template <>
 float Vec3f::get_pos<Axis::X>(void) const {
-    return x_pos;
+    return components[0];
 }
 
 template <>
 float Vec3f::get_pos<Axis::Y>(void) const {
-    return y_pos;
+    return components[1];
 }
 
 template <>
 float Vec3f::get_pos<Axis::Z>(void) const {
-    return z_pos;
+    return components[2];
 }
 
-void Vec3f::translate(
-    const Axis axis,
-    const float amount
-) {
-    switch (axis) {
-        case Axis::X:
-            x_pos += amount;
-            break;
-        case Axis::Y:
-            y_pos += amount;
-            break;
-        case Axis::Z:
-            z_pos += amount;
-            break;
-        default:
-            throw std::invalid_argument(
-                "Invalid axis for Vec3f::translate()"
-            );
-    }
+template <>
+void Vec3f::translate<Axis::X>(const float distance) {
+    components[0] += distance;
+}
+
+template <>
+void Vec3f::translate<Axis::Y>(const float distance) {
+    components[1] += distance;
+}
+
+template <>
+void Vec3f::translate<Axis::Z>(const float distance) {
+    components[2] += distance;
 }
 
 void Vec3f::rotate_3d(
@@ -75,20 +69,20 @@ void Vec3f::rotate_3d(
     float about_1;
     switch (axis) {
         case Axis::X:
-            pos_0 = &z_pos;
-            pos_1 = &y_pos;
+            pos_0 = components + 2;
+            pos_1 = components + 1;
             about_0 = axis_point.get_pos<Axis::Z>();
             about_1 = axis_point.get_pos<Axis::Y>();
             break;
         case Axis::Y:
-            pos_0 = &x_pos;
-            pos_1 = &z_pos;
+            pos_0 = components;
+            pos_1 = components + 2;
             about_0 = axis_point.get_pos<Axis::X>();
             about_1 = axis_point.get_pos<Axis::Z>();
             break;
         case Axis::Z:
-            pos_0 = &x_pos;
-            pos_1 = &y_pos;
+            pos_0 = components;
+            pos_1 = components + 1;
             about_0 = axis_point.get_pos<Axis::X>();
             about_1 = axis_point.get_pos<Axis::Y>();
             break;
@@ -125,11 +119,11 @@ float Vec3f::project_2d_x(
        x-position of the vanishing point, weighted by the
        y-position. */
     return (
-        x_pos + (
-            (y_pos / fov) * vanish_x
+        components[0] + (
+            (components[1] / fov) * vanish_x
         )
     ) / (
-        1 + (y_pos / fov)
+        1 + (components[1] / fov)
     );
 }
 
@@ -137,13 +131,13 @@ float Vec3f::project_2d_x(
     const Perspective& perspective
 ) const noexcept {
     return (
-        x_pos + (
+        components[0] + (
             (
-                y_pos / perspective.fov
+                components[1] / perspective.fov
             ) * perspective.vanishing_point.get_x_pos()
         )
     ) / (
-        1 + (y_pos / perspective.fov)
+        1 + (components[1] / perspective.fov)
     );
 }
 
@@ -152,11 +146,11 @@ float Vec3f::project_2d_y(
     const float fov
 ) const noexcept {
     return (
-        z_pos + (
-            (y_pos / fov) * vanish_y
+        components[2] + (
+            (components[1] / fov) * vanish_y
         )
     ) / (
-        1 + (y_pos / fov)
+        1 + (components[1] / fov)
     );
 }
 
@@ -164,13 +158,13 @@ float Vec3f::project_2d_y(
     const Perspective& perspective
 ) const noexcept {
     return (
-        z_pos + (
+        components[2] + (
             (
-                y_pos / perspective.fov
+                components[1] / perspective.fov
             ) * perspective.vanishing_point.get_y_pos()
         )
     ) / (
-        1 + (y_pos / perspective.fov)
+        1 + (components[1] / perspective.fov)
     );
 }
 
@@ -179,23 +173,23 @@ Vec2f Vec3f::project_2d(
 ) const noexcept {
     Vec2f result(
         (
-            x_pos + (
+            components[0] + (
                 (
-                    y_pos / perspective.fov
+                    components[1] / perspective.fov
                 ) * perspective.vanishing_point.get_x_pos()
             )
         ) / (
-            1 + (y_pos / perspective.fov)
+            1 + (components[1] / perspective.fov)
         ),
 
         (
-            z_pos + (
+            components[2] + (
                 (
-                    y_pos / perspective.fov
+                    components[1] / perspective.fov
                 ) * perspective.vanishing_point.get_y_pos()
             )
         ) / (
-            1 + (y_pos / perspective.fov)
+            1 + (components[1] / perspective.fov)
         )
     );
 

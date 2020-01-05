@@ -59,8 +59,8 @@ public:
      * @param axis the Axis along which to move
      * @param distance the number of pixels to move
      */
+    template <Axis axis>
     void translate(
-        const Axis axis,
         const float distance
     ) noexcept;
 

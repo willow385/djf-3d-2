@@ -213,15 +213,36 @@ const Polygon& Model3d::nth_face(
     return faces[index];
 }
 
-void Model3d::translate(
-    const Axis axis,
+template <>
+void Model3d::translate<Axis::X>(
     const float distance
 ) noexcept {
-    centroid.translate(axis, distance);
+    centroid.translate<Axis::X>(distance);
     for (auto& vertex: vertices) {
-        vertex.translate(axis, distance);
+        vertex.translate<Axis::X>(distance);
     }
 }
+
+template <>
+void Model3d::translate<Axis::Y>(
+    const float distance
+) noexcept {
+    centroid.translate<Axis::Y>(distance);
+    for (auto& vertex: vertices) {
+        vertex.translate<Axis::Y>(distance);
+    }
+}
+
+template <>
+void Model3d::translate<Axis::Z>(
+    const float distance
+) noexcept {
+    centroid.translate<Axis::Z>(distance);
+    for (auto& vertex: vertices) {
+        vertex.translate<Axis::Z>(distance);
+    }
+}
+
 
 void Model3d::rotate_self(
     const Axis axis,

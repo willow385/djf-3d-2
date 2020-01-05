@@ -54,10 +54,8 @@ int main(int argc, char *argv[]) {
         600
     );
 
-    // Next we create a Scene and put a model in it.
-    djf_3d::Scene scene;
+    // Next we create a Model.
     djf_3d::Model3d model(argv[1]);
-    scene.add(model);
 
     /* We create a Perspective containing information
        needed to project 3d objects on a 2d surface,
@@ -88,95 +86,65 @@ int main(int argc, char *argv[]) {
         canvas.set_draw_color(black);
         canvas.fill_window();
         canvas.set_draw_color(green);
-        canvas.draw_scene(scene, perspective_context);
+        canvas.draw_model3d(model, perspective_context);
         canvas.refresh();
         keyboard_state = canvas.get_keyboard_state();
 
         /* We move around the model(s) in the scene based
            on user input. */
         if (keyboard_state.A) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::Z,
                 -1.0
             );
         }
         if (keyboard_state.D) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::Z,
                 +1.0
             );
         }
         if (keyboard_state.W) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::X,
                 -1.0
             );
         }
         if (keyboard_state.S) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::X,
                 +1.0
             );
         }
         if (keyboard_state.Q) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::Y,
                 -1.0
             );
         }
         if (keyboard_state.E) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .rotate_self(
+            model.rotate_self(
                 djf_3d::Axis::Y,
                 +1.0
             );
         }
         if (keyboard_state.I) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Y,
-                -5.0
-            );
+            model.translate<djf_3d::Axis::Y>(-5.0);
         }
         if (keyboard_state.O) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Y,
-                +5.0
-            );
+            model.translate<djf_3d::Axis::Y>(+5.0);
         }
         if (keyboard_state.left_arr) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::X,
-                -2.0
-            );
+            model.translate<djf_3d::Axis::X>(-2.0);
         }
         if (keyboard_state.right_arr) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::X,
-                +2.0
-            );
+            model.translate<djf_3d::Axis::X>(+2.0);
         }
         if (keyboard_state.up_arr) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Z,
-                -2.0
-            );
+            model.translate<djf_3d::Axis::Z>(-2.0);
         }
         if (keyboard_state.down_arr) {
-            scene.nth_mutable<djf_3d::Model3d>(0)
-            .translate(
-                djf_3d::Axis::Z,
-                +2.0
-            );
+            model.translate<djf_3d::Axis::Z>(+2.0);
         }
 
         // We exit the loop if the user presses X.
