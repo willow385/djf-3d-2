@@ -11,6 +11,6 @@ Perspective::Perspective(
     fov = fov_val;
 }
 
-Perspective::~Perspective(void) {}
+Perspective::~Perspective(void) noexcept {}
 
 } // end of namespace djf_3d

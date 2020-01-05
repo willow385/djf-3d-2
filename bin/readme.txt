@@ -1,4 +1,5 @@
-When you run make, it will deposit a compiled executable
-in this directory named "demo.x86". At present this
-executable takes no arguments. The object files to which
-it links at build time are located in `../obj`.
+When you run "make demo", the makefile will deposit an
+executable in here named "demo.x86". You can run this
+program by passing the path to a file in the Wavefront .obj
+file format to it, for example:
+    ./demo.x86 ../demo/utah_teapot.obj

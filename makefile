@@ -1,3 +1,6 @@
+# If you want to use a different C++ compiler, you may have
+# to change some other stuff first. I tested this with
+# Clang and it works just fine.
 CPP = g++
 
 MODEL ?= demo/utah_teapot.obj
@@ -10,8 +13,6 @@ OBJS = obj/Canvas.o\
        obj/Perspective.o\
        obj/Scene.o\
        obj/Model3d.o
-
-SDL2 = `pkg-config --cflags --libs sdl2`
 
 SRC = src/Canvas.cpp\
       src/Canvas.h\
@@ -27,26 +28,9 @@ SRC = src/Canvas.cpp\
       src/Scene.h\
       src/Scene.cpp
 
-FLAGS = -O3 -Wall -lm -std=c++11
+FLAGS = -O3 -Wall -lm -std=c++11 -fPIC
 
-DEBUG_FLAGS = -g -Wall -lm -std=c++11
-
-GPROF_FLAGS = -O3 -pg -Wall -lm -std=c++11
-
-ASM_FLAGS = -S\
-	    -fno-asynchronous-unwind-tables\
-	    -fno-dwarf2-cfi-asm\
-	    -O3\
-	    -Wall\
-	    -std=c++11
-
-ASM_FILES = asm/CoordPair.asm\
-	    asm/CoordTriple.asm\
-	    asm/Perspective.asm\
-	    asm/Canvas.asm\
-	    asm/Model3d.asm\
-	    asm/Scene.asm\
-	    asm/demo_main.asm
+LD_FLAGS = -ldjf-3d-2 -lSDL2
 
 $(OBJS): $(SRC)
 	$(CPP) $(FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
@@ -56,62 +40,19 @@ $(OBJS): $(SRC)
 	$(CPP) $(FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(FLAGS) -c src/Scene.cpp -o obj/Scene.o
 
-$(DEMO): $(SRC) $(OBJS) demo/main.cpp
-	$(CPP) $(FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
+$(DEMO): demo/main.cpp
+	$(CPP) $(FLAGS) demo/main.cpp -o $(DEMO) $(LD_FLAGS)
 
 demo: $(DEMO)
-
-debug: $(SRC)
-	$(CPP) $(DEBUG_FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
-	$(CPP) $(DEBUG_FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
-	$(CPP) $(DEBUG_FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
-	$(CPP) $(DEBUG_FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
-	$(CPP) $(DEBUG_FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
-	$(CPP) $(DEBUG_FLAGS) -c src/Scene.cpp -o obj/Scene.o
-	$(CPP) $(DEBUG_FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
-
-prof: $(SRC)
-	$(CPP) $(GPROF_FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
-	$(CPP) $(GPROF_FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
-	$(CPP) $(GPROF_FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
-	$(CPP) $(GPROF_FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
-	$(CPP) $(GPROF_FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
-	$(CPP) $(GPROF_FLAGS) -c src/Scene.cpp -o obj/Scene.o
-	$(CPP) $(GPROF_FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
-	./$(DEMO) $(MODEL)
-	gprof $(DEMO) gmon.out > profile.txt
-
-$(ASM_FILES): $(SRC)
-	$(CPP) $(ASM_FLAGS) -c src/CoordPair.cpp -o asm/CoordPair.tmp
-	cat asm/CoordPair.tmp | c++filt > asm/CoordPair.asm
-	rm asm/CoordPair.tmp
-	$(CPP) $(ASM_FLAGS) -c src/Perspective.cpp -o asm/Perspective.tmp
-	cat asm/Perspective.tmp | c++filt > asm/Perspective.asm
-	rm asm/Perspective.tmp
-	$(CPP) $(ASM_FLAGS) -c src/Canvas.cpp -o asm/Canvas.tmp
-	cat asm/Canvas.tmp | c++filt > asm/Canvas.asm
-	rm asm/Canvas.tmp
-	$(CPP) $(ASM_FLAGS) -c src/CoordTriple.cpp -o asm/CoordTriple.tmp
-	cat asm/CoordTriple.tmp | c++filt > asm/CoordTriple.asm
-	rm asm/CoordTriple.tmp
-	$(CPP) $(ASM_FLAGS) -c src/Model3d.cpp -o asm/Model3d.tmp
-	cat asm/Model3d.tmp | c++filt > asm/Model3d.asm
-	rm asm/Model3d.tmp
-	$(CPP) $(ASM_FLAGS) -c src/Scene.cpp -o asm/Scene.tmp
-	cat asm/Scene.tmp | c++filt > asm/Scene.asm
-	rm asm/Scene.tmp
-	$(CPP) $(ASM_FLAGS) demo/main.cpp -o asm/demo_main.tmp
-	cat asm/demo_main.tmp | c++filt > asm/demo_main.asm
-	rm asm/demo_main.tmp
-
-asm: $(ASM_FILES)
 
 run-demo: $(DEMO)
 	./$(DEMO) $(MODEL)
 
-clean: $(DEMO) $(OBJS)
+clean: $(DEMO)
 	rm $(DEMO)
-	rm $(OBJS)
 
-clean-asm: $(ASM_FILES)
-	rm asm/*.asm
+install: $(OBJS) install.sh
+	./install.sh
+
+uninstall: uninstall.sh
+	./uninstall.sh

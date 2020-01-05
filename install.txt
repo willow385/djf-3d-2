@@ -1,0 +1,26 @@
+Installing djf-3d-2 on GNU/Linux is very easy. Your mileage
+may vary on other *nix systems.
+
+All you have to do is this:
+    0. Open up the tarball (tar -xzvf djf-3d-2.tar.gz).
+    1. make
+    2. sudo make install
+
+That's it! Now you can write programs that use djf-3d-2 by
+putting "#include <djf-3d-2/djf-3d.h>" in them. Remember to
+link them to the engine by passing "-ldjf-3d-2 -lSDL2" to
+GCC when compiling; they MUST be in that order.
+
+The header files are filled with documentation comments, so
+be sure to read /usr/include/djf-3d-2/*.h for guidance on
+writing programs that use djf-3d-2. Later I will write
+better documentation.
+
+djf-3d-2 is written in C++. It is NOT written to integrate
+with C. Your C++ compiler MUST support C++11 or later for
+any of this to work.
+
+To uninstall djf-3d-2, run "sudo make uninstall".
+
+To see an example program that uses djf-3d-2, make sure that
+the library is installed, then run "make run-demo". 

@@ -28,7 +28,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
-#include "../src/djf_3d.h"
+#include <djf-3d-2/djf-3d.h>
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
