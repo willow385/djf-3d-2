@@ -1,10 +1,12 @@
 Installing djf-3d-2 on GNU/Linux is very easy. Your mileage
 may vary on other *nix systems.
 
-All you have to do is this:
-    0. Open up the tarball (tar -xzvf djf-3d-2.tar.gz).
-    1. make
-    2. sudo make install
+There's no need to clone the repo if you just want to install
+the library. All you have to do is this:
+    0. wget https://github.com/DanteFalzone0/djf-3d-2/raw/master/djf-3d-2.tar.gz
+    1. Open up the tarball (tar -xzvf djf-3d-2.tar.gz)
+    2. make
+    3. sudo make install
 
 That's it! Now you can write programs that use djf-3d-2 by
 putting "#include <djf-3d-2/djf-3d.h>" in them. Remember to
