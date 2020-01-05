@@ -71,8 +71,8 @@ public:
      * @param axis the djf_3d::Axis about which to rotate
      * @param theta_degrees number of degrees to rotate
      */
+    template <Axis axis>
     void rotate_self(
-        const Axis axis,
         const float theta_degrees
     ) noexcept;
 

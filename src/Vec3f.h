@@ -6,9 +6,9 @@
 namespace djf_3d {
 
 enum class Axis {
-    X, // left/right axis (horizontal, paralell to screen)
-    Y, // near/far axis (horizontal, perpendicular to screen)
-    Z  // up/down axis (vertical)
+    X = 0, // left/right axis (horizontal, paralell to screen)
+    Y = 1, // near/far axis (horizontal, perpendicular to screen)
+    Z = 2  // up/down axis (vertical)
 };
 
 class Vec3f {
@@ -45,7 +45,7 @@ public:
      * @return x_pos, y_pos, or z_pos, according to the axis
      */
     template <Axis axis>
-    float get_pos(void) const;
+    float get_pos(void) const noexcept;
 
     /**
      * This translates the Vec3f along one of the axes.
@@ -54,7 +54,7 @@ public:
      * @param distance the amount by which to move
      */
     template <Axis axis>
-    void translate(const float distance);
+    void translate(const float distance) noexcept;
 
     /**
      * This rotates the Vec3f about one of the three axes
@@ -64,11 +64,11 @@ public:
      * @param axis_point point to rotate around
      * @param theta_degrees number of degrees to rotate
      */
+    template <Axis axis>
     void rotate_3d(
-        const Axis axis,
         const Vec3f& axis_point,
         const float theta_degrees
-    );
+    ) noexcept;
 
 
     /* IMPORTANT: REGARDING THE PROJECTION METHODS.

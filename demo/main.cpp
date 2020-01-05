@@ -26,8 +26,6 @@
 
 #include <iostream>
 #include <string>
-#include <thread>
-#include <chrono>
 #include <djf-3d-2/djf-3d.h>
 
 int main(int argc, char *argv[]) {
@@ -92,42 +90,24 @@ int main(int argc, char *argv[]) {
 
         /* We move around the model(s) in the scene based
            on user input. */
-        if (keyboard_state.A) {
-            model.rotate_self(
-                djf_3d::Axis::Z,
-                -1.0
-            );
-        }
-        if (keyboard_state.D) {
-            model.rotate_self(
-                djf_3d::Axis::Z,
-                +1.0
-            );
-        }
-        if (keyboard_state.W) {
-            model.rotate_self(
-                djf_3d::Axis::X,
-                -1.0
-            );
-        }
-        if (keyboard_state.S) {
-            model.rotate_self(
-                djf_3d::Axis::X,
-                +1.0
-            );
-        }
-        if (keyboard_state.Q) {
-            model.rotate_self(
-                djf_3d::Axis::Y,
-                -1.0
-            );
-        }
-        if (keyboard_state.E) {
-            model.rotate_self(
-                djf_3d::Axis::Y,
-                +1.0
-            );
-        }
+        if (keyboard_state.A)
+            model.rotate_self<djf_3d::Axis::Z>(-0.5);
+
+        if (keyboard_state.D)
+            model.rotate_self<djf_3d::Axis::Z>(+0.5);
+
+        if (keyboard_state.W)
+            model.rotate_self<djf_3d::Axis::X>(-0.5);
+
+        if (keyboard_state.S)
+            model.rotate_self<djf_3d::Axis::X>(+0.5);
+
+        if (keyboard_state.Q)
+            model.rotate_self<djf_3d::Axis::Y>(-0.5);
+
+        if (keyboard_state.E)
+            model.rotate_self<djf_3d::Axis::Y>(+0.5);
+
         if (keyboard_state.I) {
             model.translate<djf_3d::Axis::Y>(-5.0);
         }
@@ -150,11 +130,6 @@ int main(int argc, char *argv[]) {
         // We exit the loop if the user presses X.
         if (keyboard_state.X) break;
 
-        /* We delay refreshing the frame so as to get a
-           consistent framerate of 60 fps. */
-        std::this_thread::sleep_for(
-            std::chrono::microseconds(16667)
-        );
     }
 
     std::cout << "Program exited normally." << std::endl;

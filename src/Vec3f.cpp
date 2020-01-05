@@ -23,74 +23,44 @@ void Vec3f::set_position(
     const float y,
     const float z
 ) noexcept {
-    components[0] = x;
-    components[1] = y;
-    components[2] = z;
+    components[(int) Axis::X] = x;
+    components[(int) Axis::Y] = y;
+    components[(int) Axis::Z] = z;
 }
+
+template <Axis axis>
+float Vec3f::get_pos(void) const noexcept {
+    return components[(int) axis];
+}
+
+template float Vec3f::get_pos<Axis::X>(void) const noexcept;
+template float Vec3f::get_pos<Axis::Y>(void) const noexcept;
+template float Vec3f::get_pos<Axis::Z>(void) const noexcept;
+
+template <Axis axis>
+void Vec3f::translate(const float distance) noexcept {
+    components[(int) axis] += distance;
+}
+
+template void Vec3f::translate<Axis::X>(
+    const float distance
+) noexcept;
+template void Vec3f::translate<Axis::Y>(
+    const float distance
+) noexcept;
+template void Vec3f::translate<Axis::Z>(
+    const float distance
+) noexcept;
 
 template <>
-float Vec3f::get_pos<Axis::X>(void) const {
-    return components[0];
-}
-
-template <>
-float Vec3f::get_pos<Axis::Y>(void) const {
-    return components[1];
-}
-
-template <>
-float Vec3f::get_pos<Axis::Z>(void) const {
-    return components[2];
-}
-
-template <>
-void Vec3f::translate<Axis::X>(const float distance) {
-    components[0] += distance;
-}
-
-template <>
-void Vec3f::translate<Axis::Y>(const float distance) {
-    components[1] += distance;
-}
-
-template <>
-void Vec3f::translate<Axis::Z>(const float distance) {
-    components[2] += distance;
-}
-
-void Vec3f::rotate_3d(
-    const Axis axis,
+void Vec3f::rotate_3d<Axis::X>(
     const Vec3f& axis_point,
     const float theta_degrees
-) {
-    float *pos_0;
-    float *pos_1;
-    float about_0;
-    float about_1;
-    switch (axis) {
-        case Axis::X:
-            pos_0 = components + 2;
-            pos_1 = components + 1;
-            about_0 = axis_point.get_pos<Axis::Z>();
-            about_1 = axis_point.get_pos<Axis::Y>();
-            break;
-        case Axis::Y:
-            pos_0 = components;
-            pos_1 = components + 2;
-            about_0 = axis_point.get_pos<Axis::X>();
-            about_1 = axis_point.get_pos<Axis::Z>();
-            break;
-        case Axis::Z:
-            pos_0 = components;
-            pos_1 = components + 1;
-            about_0 = axis_point.get_pos<Axis::X>();
-            about_1 = axis_point.get_pos<Axis::Y>();
-            break;
-        default:
-            throw std::invalid_argument(
-                "Invalid axis for Vec3f::rotate_3d()"
-            );
-    }
+) noexcept {
+    float *pos_0 = components + 2;
+    float *pos_1 = components + 1;
+    float about_0 = axis_point.get_pos<Axis::Z>();
+    float about_1 = axis_point.get_pos<Axis::Y>();
 
     const float radians
         = theta_degrees * (3.14159 / 180.0);
@@ -109,6 +79,63 @@ void Vec3f::rotate_3d(
     *pos_0 = new_0 + about_0;
     *pos_1 = new_1 + about_1;
 }
+
+template <>
+void Vec3f::rotate_3d<Axis::Y>(
+    const Vec3f& axis_point,
+    const float theta_degrees
+) noexcept {
+    float *pos_0 = components;
+    float *pos_1 = components + 2;
+    float about_0 = axis_point.get_pos<Axis::X>();
+    float about_1 = axis_point.get_pos<Axis::Z>();
+
+    const float radians
+        = theta_degrees * (3.14159 / 180.0);
+
+    const float sin_theta = std::sin(radians);
+    const float cos_theta = std::cos(radians);
+
+    *pos_0 -= about_0;
+    *pos_1 -= about_1;
+
+    const float new_0
+        = *pos_0 * cos_theta - *pos_1 * sin_theta;
+    const float new_1
+        = *pos_0 * sin_theta + *pos_1 * cos_theta;
+
+    *pos_0 = new_0 + about_0;
+    *pos_1 = new_1 + about_1;
+}
+
+template <>
+void Vec3f::rotate_3d<Axis::Z>(
+    const Vec3f& axis_point,
+    const float theta_degrees
+) noexcept {
+    float *pos_0 = components;
+    float *pos_1 = components + 1;
+    float about_0 = axis_point.get_pos<Axis::X>();
+    float about_1 = axis_point.get_pos<Axis::Y>();
+
+    const float radians
+        = theta_degrees * (3.14159 / 180.0);
+
+    const float sin_theta = std::sin(radians);
+    const float cos_theta = std::cos(radians);
+
+    *pos_0 -= about_0;
+    *pos_1 -= about_1;
+
+    const float new_0
+        = *pos_0 * cos_theta - *pos_1 * sin_theta;
+    const float new_1
+        = *pos_0 * sin_theta + *pos_1 * cos_theta;
+
+    *pos_0 = new_0 + about_0;
+    *pos_1 = new_1 + about_1;
+}
+
 
 float Vec3f::project_2d_x(
     const float vanish_x,

@@ -213,49 +213,56 @@ const Polygon& Model3d::nth_face(
     return faces[index];
 }
 
-template <>
-void Model3d::translate<Axis::X>(
+template <Axis axis>
+void Model3d::translate(
     const float distance
 ) noexcept {
-    centroid.translate<Axis::X>(distance);
+    centroid.translate<axis>(distance);
     for (auto& vertex: vertices) {
-        vertex.translate<Axis::X>(distance);
+        vertex.translate<axis>(distance);
     }
 }
 
-template <>
-void Model3d::translate<Axis::Y>(
+template void Model3d::translate<Axis::X>(
     const float distance
-) noexcept {
-    centroid.translate<Axis::Y>(distance);
-    for (auto& vertex: vertices) {
-        vertex.translate<Axis::Y>(distance);
-    }
-}
+) noexcept;
 
-template <>
-void Model3d::translate<Axis::Z>(
+template void Model3d::translate<Axis::Y>(
     const float distance
-) noexcept {
-    centroid.translate<Axis::Z>(distance);
-    for (auto& vertex: vertices) {
-        vertex.translate<Axis::Z>(distance);
-    }
-}
+) noexcept;
+
+template void Model3d::translate<Axis::Z>(
+    const float distance
+) noexcept;
 
 
+template <Axis axis>
 void Model3d::rotate_self(
-    const Axis axis,
     const float theta_degrees
 ) noexcept {
     for (auto& vertex: vertices) {
-        vertex.rotate_3d(
-            axis,
+        vertex.rotate_3d<axis>(
             centroid,
             theta_degrees
         );
     }
 }
+
+template
+void Model3d::rotate_self<Axis::X>(
+    const float theta_degrees
+) noexcept;
+
+template
+void Model3d::rotate_self<Axis::Y>(
+    const float theta_degrees
+) noexcept;
+
+template
+void Model3d::rotate_self<Axis::Z>(
+    const float theta_degrees
+) noexcept;
+
 
 void Model3d::scale(const float amount) noexcept {
     for (auto& vertex: vertices) {
