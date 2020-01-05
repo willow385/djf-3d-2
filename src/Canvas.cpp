@@ -104,83 +104,83 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
 
     SDL_PumpEvents();
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    result.escape    = (bool) state[SDL_SCANCODE_ESCAPE];
-    result.backtick  = (bool) state[SDL_SCANCODE_GRAVE];
-    result.dig_1     = (bool) state[SDL_SCANCODE_1];
-    result.dig_2     = (bool) state[SDL_SCANCODE_2];
-    result.dig_3     = (bool) state[SDL_SCANCODE_3];
-    result.dig_4     = (bool) state[SDL_SCANCODE_4];
-    result.dig_5     = (bool) state[SDL_SCANCODE_5];
-    result.dig_6     = (bool) state[SDL_SCANCODE_6];
-    result.dig_7     = (bool) state[SDL_SCANCODE_7];
-    result.dig_8     = (bool) state[SDL_SCANCODE_8];
-    result.dig_9     = (bool) state[SDL_SCANCODE_9];
-    result.dig_0     = (bool) state[SDL_SCANCODE_0];
-    result.hyphen    = (bool) state[SDL_SCANCODE_MINUS];
-    result.equals    = (bool) state[SDL_SCANCODE_EQUALS];
-    result.backspace = (bool) state[SDL_SCANCODE_BACKSPACE];
-    result.tab       = (bool) state[SDL_SCANCODE_TAB];
-    result.Q         = (bool) state[SDL_SCANCODE_Q];
-    result.W         = (bool) state[SDL_SCANCODE_W];
-    result.E         = (bool) state[SDL_SCANCODE_E];
-    result.R         = (bool) state[SDL_SCANCODE_R];
-    result.T         = (bool) state[SDL_SCANCODE_T];
-    result.Y         = (bool) state[SDL_SCANCODE_Y];
-    result.U         = (bool) state[SDL_SCANCODE_U];
-    result.I         = (bool) state[SDL_SCANCODE_I];
-    result.O         = (bool) state[SDL_SCANCODE_O];
-    result.P         = (bool) state[SDL_SCANCODE_P];
+    result.escape    = static_cast<bool>(state[SDL_SCANCODE_ESCAPE]);
+    result.backtick  = static_cast<bool>(state[SDL_SCANCODE_GRAVE]);
+    result.dig_1     = static_cast<bool>(state[SDL_SCANCODE_1]);
+    result.dig_2     = static_cast<bool>(state[SDL_SCANCODE_2]);
+    result.dig_3     = static_cast<bool>(state[SDL_SCANCODE_3]);
+    result.dig_4     = static_cast<bool>(state[SDL_SCANCODE_4]);
+    result.dig_5     = static_cast<bool>(state[SDL_SCANCODE_5]);
+    result.dig_6     = static_cast<bool>(state[SDL_SCANCODE_6]);
+    result.dig_7     = static_cast<bool>(state[SDL_SCANCODE_7]);
+    result.dig_8     = static_cast<bool>(state[SDL_SCANCODE_8]);
+    result.dig_9     = static_cast<bool>(state[SDL_SCANCODE_9]);
+    result.dig_0     = static_cast<bool>(state[SDL_SCANCODE_0]);
+    result.hyphen    = static_cast<bool>(state[SDL_SCANCODE_MINUS]);
+    result.equals    = static_cast<bool>(state[SDL_SCANCODE_EQUALS]);
+    result.backspace = static_cast<bool>(state[SDL_SCANCODE_BACKSPACE]);
+    result.tab       = static_cast<bool>(state[SDL_SCANCODE_TAB]);
+    result.Q         = static_cast<bool>(state[SDL_SCANCODE_Q]);
+    result.W         = static_cast<bool>(state[SDL_SCANCODE_W]);
+    result.E         = static_cast<bool>(state[SDL_SCANCODE_E]);
+    result.R         = static_cast<bool>(state[SDL_SCANCODE_R]);
+    result.T         = static_cast<bool>(state[SDL_SCANCODE_T]);
+    result.Y         = static_cast<bool>(state[SDL_SCANCODE_Y]);
+    result.U         = static_cast<bool>(state[SDL_SCANCODE_U]);
+    result.I         = static_cast<bool>(state[SDL_SCANCODE_I]);
+    result.O         = static_cast<bool>(state[SDL_SCANCODE_O]);
+    result.P         = static_cast<bool>(state[SDL_SCANCODE_P]);
     result.open_bracket
-        = (bool) state[SDL_SCANCODE_LEFTBRACKET];
+        = static_cast<bool>(state[SDL_SCANCODE_LEFTBRACKET]);
     result.close_bracket
-        = (bool) state[SDL_SCANCODE_RIGHTBRACKET];
+        = static_cast<bool>(state[SDL_SCANCODE_RIGHTBRACKET]);
     result.back_slash
-        = (bool) state[SDL_SCANCODE_BACKSLASH];
-    result.A         = (bool) state[SDL_SCANCODE_A];
-    result.S         = (bool) state[SDL_SCANCODE_S];
-    result.D         = (bool) state[SDL_SCANCODE_D];
-    result.F         = (bool) state[SDL_SCANCODE_F];
-    result.G         = (bool) state[SDL_SCANCODE_G];
-    result.H         = (bool) state[SDL_SCANCODE_H];
-    result.J         = (bool) state[SDL_SCANCODE_J];
-    result.K         = (bool) state[SDL_SCANCODE_K];
-    result.L         = (bool) state[SDL_SCANCODE_L];
+        = static_cast<bool>(state[SDL_SCANCODE_BACKSLASH]);
+    result.A         = static_cast<bool>(state[SDL_SCANCODE_A]);
+    result.S         = static_cast<bool>(state[SDL_SCANCODE_S]);
+    result.D         = static_cast<bool>(state[SDL_SCANCODE_D]);
+    result.F         = static_cast<bool>(state[SDL_SCANCODE_F]);
+    result.G         = static_cast<bool>(state[SDL_SCANCODE_G]);
+    result.H         = static_cast<bool>(state[SDL_SCANCODE_H]);
+    result.J         = static_cast<bool>(state[SDL_SCANCODE_J]);
+    result.K         = static_cast<bool>(state[SDL_SCANCODE_K]);
+    result.L         = static_cast<bool>(state[SDL_SCANCODE_L]);
     result.semicolon
-        = (bool) state[SDL_SCANCODE_SEMICOLON];
+        = static_cast<bool>(state[SDL_SCANCODE_SEMICOLON]);
     result.quote
-        = (bool) state[SDL_SCANCODE_APOSTROPHE];
-    result.enter     = (bool) state[SDL_SCANCODE_RETURN];
-    result.shift     = (bool) (
+        = static_cast<bool>(state[SDL_SCANCODE_APOSTROPHE]);
+    result.enter     = static_cast<bool>(state[SDL_SCANCODE_RETURN]);
+    result.shift     = static_cast<bool>(
         state[SDL_SCANCODE_RSHIFT]
     ||
         state[SDL_SCANCODE_LSHIFT]
     );
-    result.Z         = (bool) state[SDL_SCANCODE_Z];
-    result.X         = (bool) state[SDL_SCANCODE_X];
-    result.C         = (bool) state[SDL_SCANCODE_C];
-    result.V         = (bool) state[SDL_SCANCODE_V];
-    result.B         = (bool) state[SDL_SCANCODE_B];
-    result.N         = (bool) state[SDL_SCANCODE_N];
-    result.M         = (bool) state[SDL_SCANCODE_M];
-    result.comma     = (bool) state[SDL_SCANCODE_COMMA];
-    result.period    = (bool) state[SDL_SCANCODE_PERIOD];
+    result.Z         = static_cast<bool>(state[SDL_SCANCODE_Z]);
+    result.X         = static_cast<bool>(state[SDL_SCANCODE_X]);
+    result.C         = static_cast<bool>(state[SDL_SCANCODE_C]);
+    result.V         = static_cast<bool>(state[SDL_SCANCODE_V]);
+    result.B         = static_cast<bool>(state[SDL_SCANCODE_B]);
+    result.N         = static_cast<bool>(state[SDL_SCANCODE_N]);
+    result.M         = static_cast<bool>(state[SDL_SCANCODE_M]);
+    result.comma     = static_cast<bool>(state[SDL_SCANCODE_COMMA]);
+    result.period    = static_cast<bool>(state[SDL_SCANCODE_PERIOD]);
     result.forward_slash
-        = (bool) state[SDL_SCANCODE_SLASH];
-    result.ctrl      = (bool) (
+        = static_cast<bool>(state[SDL_SCANCODE_SLASH]);
+    result.ctrl      = static_cast<bool>(
         state[SDL_SCANCODE_RCTRL]
     ||
         state[SDL_SCANCODE_LCTRL]
     );
-    result.home      = (bool) state[SDL_SCANCODE_HOME];
-    result.alt       = (bool) (
+    result.home      = static_cast<bool>(state[SDL_SCANCODE_HOME]);
+    result.alt       = static_cast<bool>(
         state[SDL_SCANCODE_RALT]
     ||
         state[SDL_SCANCODE_LALT]
     );
-    result.left_arr  = (bool) state[SDL_SCANCODE_LEFT];
-    result.up_arr    = (bool) state[SDL_SCANCODE_UP];
-    result.down_arr  = (bool) state[SDL_SCANCODE_DOWN];
-    result.right_arr = (bool) state[SDL_SCANCODE_RIGHT];
+    result.left_arr  = static_cast<bool>(state[SDL_SCANCODE_LEFT]);
+    result.up_arr    = static_cast<bool>(state[SDL_SCANCODE_UP]);
+    result.down_arr  = static_cast<bool>(state[SDL_SCANCODE_DOWN]);
+    result.right_arr = static_cast<bool>(state[SDL_SCANCODE_RIGHT]);
 
     return result;
 }
@@ -203,10 +203,10 @@ void Canvas::set_draw_color(
 void Canvas::set_draw_color(const Color& color) noexcept {
     SDL_SetRenderDrawColor(
         renderer,
-        (int) color.red,
-        (int) color.green,
-        (int) color.blue,
-        (int) color.alpha
+        static_cast<Uint8>(color.red),
+        static_cast<Uint8>(color.green),
+        static_cast<Uint8>(color.blue),
+        static_cast<Uint8>(color.alpha)
     );
 }
 
@@ -226,8 +226,8 @@ void Canvas::draw_point(
 ) noexcept {
     SDL_RenderDrawPoint(
         renderer,
-        (int) point.get_x_pos(),
-        (int) point.get_y_pos()
+        static_cast<int>(point.get_x_pos()),
+        static_cast<int>(point.get_y_pos())
     );
 }
 
@@ -238,14 +238,14 @@ void Canvas::draw_point(
 ) noexcept {
     SDL_RenderDrawPoint(
         renderer,
-        (int) point.project_2d_x(
-            (int) vanish_point.get_x_pos(),
+        static_cast<int>(point.project_2d_x(
+            static_cast<int>(vanish_point.get_x_pos()),
             fov
-        ),
-        (int) point.project_2d_y(
-            (int) vanish_point.get_y_pos(),
+        )),
+        static_cast<int>(point.project_2d_y(
+            static_cast<int>(vanish_point.get_y_pos()),
             fov
-        )
+        ))
     );
 }
 
@@ -257,8 +257,8 @@ void Canvas::draw_point(
         = point.project_2d(perspective);
     SDL_RenderDrawPoint(
         renderer,
-        (int) projection_2d.get_x_pos(),
-        (int) projection_2d.get_y_pos()
+        static_cast<int>(projection_2d.get_x_pos()),
+        static_cast<int>(projection_2d.get_y_pos())
     );
 }
 
@@ -283,10 +283,10 @@ void Canvas::draw_line(
 ) noexcept {
     SDL_RenderDrawLine(
         renderer,
-        (int) point_0.get_x_pos(),
-        (int) point_0.get_y_pos(),
-        (int) point_1.get_x_pos(),
-        (int) point_1.get_y_pos()
+        static_cast<int>(point_0.get_x_pos()),
+        static_cast<int>(point_0.get_y_pos()),
+        static_cast<int>(point_1.get_x_pos()),
+        static_cast<int>(point_1.get_y_pos())
     );
 }
 
@@ -301,10 +301,10 @@ void Canvas::draw_line(
         = point_1.project_2d(perspective);
     SDL_RenderDrawLine(
         renderer,
-        (int) point_0_2d.get_x_pos(),
-        (int) point_0_2d.get_y_pos(),
-        (int) point_1_2d.get_x_pos(),
-        (int) point_1_2d.get_y_pos()
+        static_cast<int>(point_0_2d.get_x_pos()),
+        static_cast<int>(point_0_2d.get_y_pos()),
+        static_cast<int>(point_1_2d.get_x_pos()),
+        static_cast<int>(point_1_2d.get_y_pos())
     );
 }
 

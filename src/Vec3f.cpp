@@ -23,14 +23,14 @@ void Vec3f::set_position(
     const float y,
     const float z
 ) noexcept {
-    components[(int) Axis::X] = x;
-    components[(int) Axis::Y] = y;
-    components[(int) Axis::Z] = z;
+    components[static_cast<int>(Axis::X)] = x;
+    components[static_cast<int>(Axis::Y)] = y;
+    components[static_cast<int>(Axis::Z)] = z;
 }
 
 template <Axis axis>
 float Vec3f::get_pos(void) const noexcept {
-    return components[(int) axis];
+    return components[static_cast<int>(axis)];
 }
 
 template float Vec3f::get_pos<Axis::X>(void) const noexcept;
@@ -39,7 +39,7 @@ template float Vec3f::get_pos<Axis::Z>(void) const noexcept;
 
 template <Axis axis>
 void Vec3f::translate(const float distance) noexcept {
-    components[(int) axis] += distance;
+    components[static_cast<int>(axis)] += distance;
 }
 
 template void Vec3f::translate<Axis::X>(
