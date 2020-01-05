@@ -23,9 +23,9 @@ void Vec3f::set_position(
     const float y,
     const float z
 ) noexcept {
-    components[static_cast<int>(Axis::X)] = x;
-    components[static_cast<int>(Axis::Y)] = y;
-    components[static_cast<int>(Axis::Z)] = z;
+    components[0] = x;
+    components[1] = y;
+    components[2] = z;
 }
 
 template <Axis axis>
@@ -136,15 +136,13 @@ void Vec3f::rotate_3d<Axis::Z>(
     *pos_1 = new_1 + about_1;
 }
 
+/* Instead of matrix multiplication, we just use a weighted
+   average to project things onto the surface. */
 
 float Vec3f::project_2d_x(
     const float vanish_x,
     const float fov
 ) const noexcept {
-    /* The apparent x-position is going to be a weighted
-       average between the actual x-position and the
-       x-position of the vanishing point, weighted by the
-       y-position. */
     return (
         components[0] + (
             (components[1] / fov) * vanish_x

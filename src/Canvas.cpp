@@ -193,10 +193,10 @@ void Canvas::set_draw_color(
 ) noexcept {
     SDL_SetRenderDrawColor(
         renderer,
-        r,
-        g,
-        b,
-        alpha
+        static_cast<Uint8>(r),
+        static_cast<Uint8>(g),
+        static_cast<Uint8>(b),
+        static_cast<Uint8>(alpha)
     );
 }
 

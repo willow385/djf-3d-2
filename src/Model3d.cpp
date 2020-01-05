@@ -24,9 +24,7 @@ Model3d::Model3d(const std::string& obj_filepath):
         << obj_filepath
         << "\"...";
 
-    // We attempt to open the file...
     std::ifstream obj_file(obj_filepath);
-    // ...and complain and throw an exception if we can't.
     if (obj_file.fail()) {
         std::cerr
             << " failed."
@@ -36,18 +34,13 @@ Model3d::Model3d(const std::string& obj_filepath):
             << std::endl;
         throw std::exception();
     }
-    // If we successfully open the file then let's say so
     std::cout << " success." << std::endl;
 
 
-    // Next we read the file (which should be a .obj file).
     std::string file_line;
     while (std::getline(obj_file, file_line)) {
         if (file_line[0] == 'v' && file_line[1] == ' ') {
             float vertex_x, vertex_y, vertex_z;
-            /* I tried to do this with regexes and string
-               streams, but that's really complicated, and
-               I wanted to use a simpler solution. */
             std::sscanf(
                 file_line.c_str(),
                 "v %f %f %f",
@@ -64,7 +57,6 @@ Model3d::Model3d(const std::string& obj_filepath):
         }
     }
 
-    // Next we get all the faces.
     obj_file.clear();
     obj_file.seekg(0);
     while (std::getline(obj_file, file_line)) {
@@ -155,7 +147,6 @@ Model3d::Model3d(const std::string& obj_filepath):
             << std::endl;
     }
 
-    // Lastly we calculate where the centroid should be.
     float vertices_x_sum = 0.0;
     float vertices_y_sum = 0.0;
     float vertices_z_sum = 0.0;
