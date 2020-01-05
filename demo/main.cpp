@@ -19,7 +19,7 @@
     This program is a demonstration of djf-3d-2, an object-oriented 3d
     engine written in modern C++ by Dante Falzone.
 
-    If you run "make run" the makefile will use the program to load
+    If you run "make run-demo" the makefile will use the program to load
     demo/utah_teapot.obj You can also load other .obj files with this program,
     but it doesn't always correctly parse the face info.
 */

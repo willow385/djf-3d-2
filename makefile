@@ -2,7 +2,7 @@ CPP = g++
 
 MODEL ?= demo/utah_teapot.obj
 
-TARGET = bin/demo.x86
+DEMO = bin/demo.x86
 
 OBJS = obj/Canvas.o\
        obj/CoordPair.o\
@@ -25,8 +25,7 @@ SRC = src/Canvas.cpp\
       src/Model3d.cpp\
       src/Model3d.h\
       src/Scene.h\
-      src/Scene.cpp\
-      demo/main.cpp
+      src/Scene.cpp
 
 FLAGS = -O3 -Wall -lm -std=c++11
 
@@ -49,14 +48,18 @@ ASM_FILES = asm/CoordPair.asm\
 	    asm/Scene.asm\
 	    asm/demo_main.asm
 
-$(TARGET): $(SRC)
+$(OBJS): $(SRC)
 	$(CPP) $(FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
 	$(CPP) $(FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
 	$(CPP) $(FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
 	$(CPP) $(FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
 	$(CPP) $(FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(FLAGS) -c src/Scene.cpp -o obj/Scene.o
-	$(CPP) $(FLAGS) $(OBJS) demo/main.cpp -o $(TARGET) $(SDL2)
+
+$(DEMO): $(SRC) $(OBJS) demo/main.cpp
+	$(CPP) $(FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
+
+demo: $(DEMO)
 
 debug: $(SRC)
 	$(CPP) $(DEBUG_FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
@@ -65,7 +68,7 @@ debug: $(SRC)
 	$(CPP) $(DEBUG_FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
 	$(CPP) $(DEBUG_FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(DEBUG_FLAGS) -c src/Scene.cpp -o obj/Scene.o
-	$(CPP) $(DEBUG_FLAGS) $(OBJS) demo/main.cpp -o $(TARGET) $(SDL2)
+	$(CPP) $(DEBUG_FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
 
 prof: $(SRC)
 	$(CPP) $(GPROF_FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
@@ -74,9 +77,9 @@ prof: $(SRC)
 	$(CPP) $(GPROF_FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
 	$(CPP) $(GPROF_FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(GPROF_FLAGS) -c src/Scene.cpp -o obj/Scene.o
-	$(CPP) $(GPROF_FLAGS) $(OBJS) demo/main.cpp -o $(TARGET) $(SDL2)
-	./$(TARGET) $(MODEL)
-	gprof $(TARGET) gmon.out > profile.txt
+	$(CPP) $(GPROF_FLAGS) $(OBJS) demo/main.cpp -o $(DEMO) $(SDL2)
+	./$(DEMO) $(MODEL)
+	gprof $(DEMO) gmon.out > profile.txt
 
 $(ASM_FILES): $(SRC)
 	$(CPP) $(ASM_FLAGS) -c src/CoordPair.cpp -o asm/CoordPair.tmp
@@ -103,11 +106,11 @@ $(ASM_FILES): $(SRC)
 
 asm: $(ASM_FILES)
 
-run: $(TARGET)
-	./$(TARGET) $(MODEL)
+run-demo: $(DEMO)
+	./$(DEMO) $(MODEL)
 
-clean: $(TARGET) $(OBJS)
-	rm $(TARGET)
+clean: $(DEMO) $(OBJS)
+	rm $(DEMO)
 	rm $(OBJS)
 
 clean-asm: $(ASM_FILES)
