@@ -1,4 +1,4 @@
-#include "CoordPair.h"
+#include "Vec2f.h"
 
 #ifndef PERSPECTIVE_H
 #define PERSPECTIVE_H
@@ -12,7 +12,7 @@ namespace djf_3d {
    thereby make code clearer. */
 struct Perspective {
 
-    CoordPair vanishing_point;
+    Vec2f vanishing_point;
     float fov;
 
     Perspective(

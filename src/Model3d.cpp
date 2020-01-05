@@ -6,7 +6,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <string>
-#include "CoordTriple.h"
+#include "Vec3f.h"
 #include "Polygon.h"
 #include "Model3d.h"
 
@@ -55,7 +55,7 @@ Model3d::Model3d(const std::string& obj_filepath):
                 &vertex_y,
                 &vertex_z
             );
-            CoordTriple vertex(
+            Vec3f vertex(
                 vertex_x,
                 vertex_y,
                 vertex_z
@@ -165,7 +165,7 @@ Model3d::Model3d(const std::string& obj_filepath):
         vertices_y_sum += vertex.get_pos(Axis::Y);
         vertices_z_sum += vertex.get_pos(Axis::Z);
     }
-    centroid.teleport(
+    centroid.set_position(
         vertices_x_sum / num_vertices,
         vertices_y_sum / num_vertices,
         vertices_z_sum / num_vertices
@@ -182,7 +182,7 @@ Model3d::~Model3d(void) noexcept {
         << std::endl;
 }
 
-const CoordTriple& Model3d::nth_vertex(
+const Vec3f& Model3d::nth_vertex(
     const size_t index
 ) const {
     if (index >= vertices.size()) {
@@ -241,7 +241,7 @@ void Model3d::scale(const float amount) noexcept {
         float new_x = vertex.get_pos(Axis::X) * amount;
         float new_y = vertex.get_pos(Axis::Y) * amount;
         float new_z = vertex.get_pos(Axis::Z) * amount;
-        vertex.teleport(new_x, new_y, new_z);
+        vertex.set_position(new_x, new_y, new_z);
     }
 
     float new_centroid_x
@@ -250,7 +250,7 @@ void Model3d::scale(const float amount) noexcept {
         = centroid.get_pos(Axis::Y) * amount;
     float new_centroid_z
         = centroid.get_pos(Axis::Z) * amount;
-    centroid.teleport(
+    centroid.set_position(
         new_centroid_x,
         new_centroid_y,
         new_centroid_z

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
-#include "CoordPair.h"
-#include "CoordTriple.h"
+#include "Vec2f.h"
+#include "Vec3f.h"
 #include "Perspective.h"
 #include "KeyboardState.h"
 #include "Model3d.h"
@@ -222,7 +222,7 @@ void Canvas::draw_point(
 }
 
 void Canvas::draw_point(
-    const CoordPair& point
+    const Vec2f& point
 ) noexcept {
     SDL_RenderDrawPoint(
         renderer,
@@ -232,8 +232,8 @@ void Canvas::draw_point(
 }
 
 void Canvas::draw_point(
-    const CoordTriple& point,
-    const CoordPair& vanish_point,
+    const Vec3f& point,
+    const Vec2f& vanish_point,
     const float fov
 ) noexcept {
     SDL_RenderDrawPoint(
@@ -250,10 +250,10 @@ void Canvas::draw_point(
 }
 
 void Canvas::draw_point(
-    const CoordTriple& point,
+    const Vec3f& point,
     const Perspective& perspective
 ) noexcept {
-    CoordPair projection_2d
+    Vec2f projection_2d
         = point.project_2d(perspective);
     SDL_RenderDrawPoint(
         renderer,
@@ -278,8 +278,8 @@ void Canvas::draw_line(
 }
 
 void Canvas::draw_line(
-    const CoordPair& point_0,
-    const CoordPair& point_1
+    const Vec2f& point_0,
+    const Vec2f& point_1
 ) noexcept {
     SDL_RenderDrawLine(
         renderer,
@@ -291,13 +291,13 @@ void Canvas::draw_line(
 }
 
 void Canvas::draw_line(
-    const CoordTriple& point_0,
-    const CoordTriple& point_1,
+    const Vec3f& point_0,
+    const Vec3f& point_1,
     const Perspective& perspective
 ) noexcept {
-    CoordPair point_0_2d
+    Vec2f point_0_2d
         = point_0.project_2d(perspective);
-    CoordPair point_1_2d
+    Vec2f point_1_2d
         = point_1.project_2d(perspective);
     SDL_RenderDrawLine(
         renderer,
@@ -350,13 +350,13 @@ void Canvas::draw_scene(
 
     for (size_t i = 0; i < point_2d_cnt; i++) {
         this->draw_point(
-            scene.nth_const<CoordPair>(i)
+            scene.nth_const<Vec2f>(i)
         );
     }
 
     for (size_t i = 0; i < point_3d_cnt; i++) {
         this->draw_point(
-            scene.nth_const<CoordTriple>(i),
+            scene.nth_const<Vec3f>(i),
             persp
         );
     }

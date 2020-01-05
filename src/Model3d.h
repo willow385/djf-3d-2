@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include "CoordTriple.h"
+#include "Vec3f.h"
 #include "Polygon.h"
 
 #ifndef MODEL3D_H
@@ -11,9 +11,9 @@ namespace djf_3d {
 class Model3d {
 
 private:
-    std::vector<CoordTriple> vertices;
+    std::vector<Vec3f> vertices;
     std::vector<Polygon> faces;
-    CoordTriple centroid;
+    Vec3f centroid;
 
 public:
     /**
@@ -37,7 +37,7 @@ public:
      * @param index the index of the vertex you want
      * @return const reference to that vertex
      */
-    const CoordTriple& nth_vertex(
+    const Vec3f& nth_vertex(
         const size_t index
     ) const;
 

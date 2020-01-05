@@ -1,6 +1,6 @@
 #include <string>
-#include "CoordPair.h"
-#include "CoordTriple.h"
+#include "Vec2f.h"
+#include "Vec3f.h"
 #include "Perspective.h"
 #include "KeyboardState.h"
 #include "Model3d.h"
@@ -129,45 +129,45 @@ public:
     ) noexcept;
 
     /**
-     * This method will draw a djf::CoordPair in the color
+     * This method will draw a djf::Vec2f in the color
      * picked by the last call to set_draw_color().
      *
-     * @param point the djf_3d::CoordPair to draw a point
+     * @param point the djf_3d::Vec2f to draw a point
      * at
      */
     void draw_point(
-        const CoordPair& point
+        const Vec2f& point
     ) noexcept;
 
     /**
-     * This method will draw a djf::CoordTriple in the
+     * This method will draw a djf::Vec3f in the
      * color picked by the last call to set_draw_color(),
      * projected according to a vanishing point and field
      * of view.
      *
-     * @param point the djf_3d::CoordTriple to draw
-     * @param vanish_point djf_3d::CoordPair where lines
+     * @param point the djf_3d::Vec3f to draw
+     * @param vanish_point djf_3d::Vec2f where lines
      * converge
      * @param fov the degree to which a point appears
      * distorted by perspective
      */
     void draw_point(
-        const CoordTriple& point,
-        const CoordPair& vanish_point,
+        const Vec3f& point,
+        const Vec2f& vanish_point,
         const float fov
     ) noexcept;
 
     /**
-     * This method will draw a djf::CoordTriple in the
+     * This method will draw a djf::Vec3f in the
      * color picked by the last call to set_draw_color(),
      * projected according to a vanishing point and field
      * of view.
      *
-     * @param point the djf_3d::CoordTriple to draw
+     * @param point the djf_3d::Vec3f to draw
      * @param perspective a Perspective
      */
     void draw_point(
-        const CoordTriple& point,
+        const Vec3f& point,
         const Perspective& perspective
     ) noexcept;
 
@@ -190,20 +190,20 @@ public:
 
     /**
      * This method will draw a straight line between two
-     * CoordPairs in whatever color was picked by the most
+     * Vec2fs in whatever color was picked by the most
      * recent call to set_draw_color().
      *
      * @param point_0 the first endpoint
      * @param point_1 the second endpoint
      */
     void draw_line(
-        const CoordPair& point_0,
-        const CoordPair& point_1
+        const Vec2f& point_0,
+        const Vec2f& point_1
     ) noexcept;
 
     /**
      * This method will draw a straight line betwen two
-     * CoordTriples according to the Perspective passed
+     * Vec3fs according to the Perspective passed
      * to it.
      *
      * @param point_0 the first endpoint
@@ -211,8 +211,8 @@ public:
      * @param perspective a Perspective
      */
     void draw_line(
-        const CoordTriple& point_0,
-        const CoordTriple& point_1,
+        const Vec3f& point_0,
+        const Vec3f& point_1,
         const Perspective& perspective
     ) noexcept;
 

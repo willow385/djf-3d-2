@@ -1,8 +1,8 @@
 #include <vector>
 #include <memory>
 #include "Model3d.h"
-#include "CoordPair.h"
-#include "CoordTriple.h"
+#include "Vec2f.h"
+#include "Vec3f.h"
 
 #ifndef SCENE_H
 #define SCENE_H
@@ -14,10 +14,10 @@ private:
     std::vector<std::reference_wrapper<Model3d>>
         models;
 
-    std::vector<std::reference_wrapper<CoordPair>>
+    std::vector<std::reference_wrapper<Vec2f>>
         points_2d;
 
-    std::vector<std::reference_wrapper<CoordTriple>>
+    std::vector<std::reference_wrapper<Vec3f>>
         points_3d;
 
 public:
@@ -41,22 +41,22 @@ public:
     /**
      * Method to add 2d points to the Scene.
      *
-     * @param point the CoordPair to add
+     * @param point the Vec2f to add
      */
-    void add(CoordPair& point) noexcept;
+    void add(Vec2f& point) noexcept;
 
     /**
      * Method to add 3d points to the Scene.
      *
-     * @param point the CoordTriple to add
+     * @param point the Vec3f to add
      */
-    void add(CoordTriple& point) noexcept;
+    void add(Vec3f& point) noexcept;
 
     /**
      * The specializations of this method return a mutable
      * reference to one of the Scene's members.
      *
-     * @param T either Model3d, CoordPair, or CoordTriple,
+     * @param T either Model3d, Vec2f, or Vec3f,
      * depending on which you want
      * @param index the index of that object
      * @return mutable reference to the desired object
@@ -68,7 +68,7 @@ public:
      * The specializations of this method return a const
      * reference to one of the Scene's members.
      *
-     * @param T either Model3d, CoordPair, or CoordTriple,
+     * @param T either Model3d, Vec2f, or Vec3f,
      * depending on which you want
      * @param index the index of that object
      * @return const reference to the desired object
@@ -87,7 +87,7 @@ public:
     /**
      * Method to get the number of 2d points in the Scene.
      *
-     * @return number of CoordPairs
+     * @return number of Vec2fs
      */
     size_t point_2d_cnt(void) const noexcept;
 
@@ -95,7 +95,7 @@ public:
      * Method to get the number of 3d points (that are not
      * part of a model) in the Scene.
      *
-     * @return number of CoordTriples
+     * @return number of Vec3fs
      */
     size_t point_3d_cnt(void) const noexcept;
 

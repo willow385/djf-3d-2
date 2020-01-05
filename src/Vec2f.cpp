@@ -1,9 +1,9 @@
 #include <cmath>
-#include "CoordPair.h"
+#include "Vec2f.h"
 
 namespace djf_3d {
 
-CoordPair::CoordPair(
+Vec2f::Vec2f(
     const float x,
     const float y
 ) noexcept {
@@ -11,29 +11,29 @@ CoordPair::CoordPair(
     y_pos = y;
 }
 
-CoordPair::~CoordPair(void) noexcept {}
+Vec2f::~Vec2f(void) noexcept {}
 
-float CoordPair::get_x_pos(void) const noexcept {
+float Vec2f::get_x_pos(void) const noexcept {
     return x_pos;
 }
 
-float CoordPair::get_y_pos(void) const noexcept {
+float Vec2f::get_y_pos(void) const noexcept {
     return y_pos;
 }
 
-void CoordPair::translate_x_pos(
+void Vec2f::translate_x_pos(
     const float amount
 ) noexcept {
     x_pos += amount;
 }
 
-void CoordPair::translate_y_pos(
+void Vec2f::translate_y_pos(
     const float amount
 ) noexcept {
     y_pos += amount;
 }
 
-void CoordPair::rotate_around(
+void Vec2f::rotate_around(
     const float axis_x,
     const float axis_y,
     const float theta_degrees
@@ -56,8 +56,8 @@ void CoordPair::rotate_around(
     y_pos = ynew + axis_y;
 }
 
-void CoordPair::rotate_around(
-    const CoordPair& axis,
+void Vec2f::rotate_around(
+    const Vec2f& axis,
     const float theta_degrees
 ) noexcept {
     const float radians

@@ -1,4 +1,4 @@
-#include "CoordPair.h"
+#include "Vec2f.h"
 #include "Perspective.h"
 
 namespace djf_3d {

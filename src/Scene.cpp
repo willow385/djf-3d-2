@@ -3,8 +3,8 @@
 #include <vector>
 #include <memory>
 #include "Model3d.h"
-#include "CoordPair.h"
-#include "CoordTriple.h"
+#include "Vec2f.h"
+#include "Vec3f.h"
 #include "Scene.h"
 
 namespace djf_3d {
@@ -23,11 +23,11 @@ void Scene::add(Model3d& model) noexcept {
     models.emplace_back(model);
 }
 
-void Scene::add(CoordPair& point) noexcept {
+void Scene::add(Vec2f& point) noexcept {
     points_2d.emplace_back(point);
 }
 
-void Scene::add(CoordTriple& point) noexcept {
+void Scene::add(Vec3f& point) noexcept {
     points_3d.emplace_back(point);
 }
 
@@ -43,12 +43,12 @@ Model3d& Scene::nth_mutable<Model3d>(const size_t index) {
 }
 
 template<>
-CoordTriple& Scene::nth_mutable<CoordTriple>(
+Vec3f& Scene::nth_mutable<Vec3f>(
     const size_t index
 ) {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_mutable<CoordTriple>(): invalid index"
+            "djf_3d::Scene::nth_mutable<Vec3f>(): invalid index"
         );
     }
 
@@ -56,12 +56,12 @@ CoordTriple& Scene::nth_mutable<CoordTriple>(
 }
 
 template<>
-CoordPair& Scene::nth_mutable<CoordPair>(
+Vec2f& Scene::nth_mutable<Vec2f>(
     const size_t index
 ) {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_mutable<CoordPair>(): invalid index"
+            "djf_3d::Scene::nth_mutable<Vec2f>(): invalid index"
         );
     }
 
@@ -82,12 +82,12 @@ const Model3d& Scene::nth_const<Model3d>(
 }
 
 template<>
-const CoordTriple& Scene::nth_const<CoordTriple>(
+const Vec3f& Scene::nth_const<Vec3f>(
     const size_t index
 ) const {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_const<CoordTriple>(): invalid index"
+            "djf_3d::Scene::nth_const<Vec3f>(): invalid index"
         );
     }
 
@@ -95,12 +95,12 @@ const CoordTriple& Scene::nth_const<CoordTriple>(
 }
 
 template<>
-const CoordPair& Scene::nth_const<CoordPair>(
+const Vec2f& Scene::nth_const<Vec2f>(
     const size_t index
 ) const {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_const<CoordPair>(): invalid index"
+            "djf_3d::Scene::nth_const<Vec2f>(): invalid index"
         );
     }
 

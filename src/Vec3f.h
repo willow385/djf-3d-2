@@ -1,8 +1,8 @@
 #include "Perspective.h"
-#include "CoordPair.h"
+#include "Vec2f.h"
 
-#ifndef COORDTRIPLE_H
-#define COORDTRIPLE_H
+#ifndef VEC3F_H
+#define VEC3F_H
 namespace djf_3d {
 
 enum class Axis {
@@ -11,36 +11,36 @@ enum class Axis {
     Z  // up/down axis (vertical)
 };
 
-class CoordTriple {
+class Vec3f {
 private:
     float x_pos; // left/right
     float y_pos; // close/far
     float z_pos; // up/down
 
 public:
-    CoordTriple(
+    Vec3f(
         const float x,
         const float y,
         const float z
     ) noexcept;
 
-    ~CoordTriple(void) noexcept;
+    ~Vec3f(void) noexcept;
 
     /**
-     * This moves a CoordTriple to somewhere else immediately.
+     * This moves a Vec3f to somewhere else immediately.
      *
      * @param x destination x-coordinate
      * @param y destination y-coordinate
      * @param z destination z-coordinate
      */
-    void teleport(
+    void set_position(
         const float x,
         const float y,
         const float z
     ) noexcept;
 
     /**
-     * This returns the value of one of a CoordTriple's
+     * This returns the value of one of a Vec3f's
      * properties.
      *
      * @param axis whether the axis is X, Y, or Z
@@ -49,7 +49,7 @@ public:
     float get_pos(const Axis axis) const;
 
     /**
-     * This translates the CoordTriple along one of the axes.
+     * This translates the Vec3f along one of the axes.
      *
      * @param axis which axis to move along
      * @param amount the amount by which to move
@@ -57,7 +57,7 @@ public:
     void translate(const Axis axis, const float amount);
 
     /**
-     * This rotates the CoordTriple about one of the three axes
+     * This rotates the Vec3f about one of the three axes
      * of three-dimensional space.
      *
      * @param axis which axis to rotate around
@@ -66,7 +66,7 @@ public:
      */
     void rotate_3d(
         const Axis axis,
-        const CoordTriple& axis_point,
+        const Vec3f& axis_point,
         const float theta_degrees
     );
 
@@ -83,7 +83,7 @@ public:
 
     /**
      * This returns the x-position corresponding to the 2d
-     * projection of the CoordTriple.
+     * projection of the Vec3f.
      *
      * @param vanish_x 2d x-coordinate of the vanishing point
      * @param fov the field of view
@@ -96,7 +96,7 @@ public:
 
     /**
      * This returns the x-position corresponding to the 2d
-     * projection of the CoordTriple.
+     * projection of the Vec3f.
      *
      * @param perspective a Perspective with vp and fov
      * @return 2d projection x-coordinate
@@ -108,7 +108,7 @@ public:
 
     /**
      * This returns the y-position corresponding to the 2d
-     * projection of the CoordTriple.
+     * projection of the Vec3f.
      *
      * @param vanish_y 2d y-coordinate of the vanishing point
      * @param fov degree of perspective distortion
@@ -121,7 +121,7 @@ public:
 
     /**
      * This returns the y-position corresponding to the 2d
-     * projection of the CoordTriple.
+     * projection of the Vec3f.
      *
      * @param perspective a Perspective with vp and fov
      * @return 2d projection y-coordinate
@@ -131,16 +131,16 @@ public:
     ) const noexcept;
 
     /**
-     * This projects the CoordTriple into a CoordPair
+     * This projects the Vec3f into a Vec2f
      * based on a Perspective.
      * @param perspective a Perspective
-     * @return 2d projection of the CoordTriple
+     * @return 2d projection of the Vec3f
      */
-    CoordPair project_2d(
+    Vec2f project_2d(
         const Perspective& perspective
     ) const noexcept;
 };
 
 } // end of namespace djf_3d
 
-#endif // COORDTRIPLE_H
+#endif // VEC3F_H

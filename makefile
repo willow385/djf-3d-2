@@ -8,18 +8,18 @@ MODEL ?= demo/utah_teapot.obj
 DEMO = bin/demo.x86
 
 OBJS = obj/Canvas.o\
-       obj/CoordPair.o\
-       obj/CoordTriple.o\
+       obj/Vec2f.o\
+       obj/Vec3f.o\
        obj/Perspective.o\
        obj/Scene.o\
        obj/Model3d.o
 
 SRC = src/Canvas.cpp\
       src/Canvas.h\
-      src/CoordPair.cpp\
-      src/CoordPair.h\
-      src/CoordTriple.cpp\
-      src/CoordTriple.h\
+      src/Vec2f.cpp\
+      src/Vec2f.h\
+      src/Vec3f.cpp\
+      src/Vec3f.h\
       src/Perspective.cpp\
       src/Perspective.h\
       src/KeyboardState.h\
@@ -33,10 +33,10 @@ FLAGS = -O3 -Wall -lm -std=c++11 -fPIC
 LD_FLAGS = -ldjf-3d-2 -lSDL2
 
 $(OBJS): $(SRC)
-	$(CPP) $(FLAGS) -c src/CoordPair.cpp -o obj/CoordPair.o
+	$(CPP) $(FLAGS) -c src/Vec2f.cpp -o obj/Vec2f.o
 	$(CPP) $(FLAGS) -c src/Perspective.cpp -o obj/Perspective.o
 	$(CPP) $(FLAGS) -c src/Canvas.cpp -o obj/Canvas.o
-	$(CPP) $(FLAGS) -c src/CoordTriple.cpp -o obj/CoordTriple.o
+	$(CPP) $(FLAGS) -c src/Vec3f.cpp -o obj/Vec3f.o
 	$(CPP) $(FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(FLAGS) -c src/Scene.cpp -o obj/Scene.o
 

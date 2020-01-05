@@ -1,12 +1,12 @@
 #include <stdexcept>
 #include <cmath>
-#include "CoordPair.h"
+#include "Vec2f.h"
 #include "Perspective.h"
-#include "CoordTriple.h"
+#include "Vec3f.h"
 
 namespace djf_3d {
 
-CoordTriple::CoordTriple(
+Vec3f::Vec3f(
     const float x,
     const float y,
     const float z
@@ -16,9 +16,9 @@ CoordTriple::CoordTriple(
     z_pos = z;
 }
 
-CoordTriple::~CoordTriple(void) noexcept {}
+Vec3f::~Vec3f(void) noexcept {}
 
-void CoordTriple::teleport(
+void Vec3f::set_position(
     const float x,
     const float y,
     const float z
@@ -28,7 +28,7 @@ void CoordTriple::teleport(
     z_pos = z;
 }
 
-float CoordTriple::get_pos(const Axis axis) const {
+float Vec3f::get_pos(const Axis axis) const {
     switch (axis) {
         case Axis::X:
             return x_pos;
@@ -38,12 +38,12 @@ float CoordTriple::get_pos(const Axis axis) const {
             return z_pos;
         default:
             throw std::invalid_argument(
-                "Invalid axis for CoordTriple::get_pos()"
+                "Invalid axis for Vec3f::get_pos()"
             );
     }
 }
 
-void CoordTriple::translate(
+void Vec3f::translate(
     const Axis axis,
     const float amount
 ) {
@@ -59,14 +59,14 @@ void CoordTriple::translate(
             break;
         default:
             throw std::invalid_argument(
-                "Invalid axis for CoordTriple::translate()"
+                "Invalid axis for Vec3f::translate()"
             );
     }
 }
 
-void CoordTriple::rotate_3d(
+void Vec3f::rotate_3d(
     const Axis axis,
-    const CoordTriple& axis_point,
+    const Vec3f& axis_point,
     const float theta_degrees
 ) {
     float *pos_0;
@@ -94,7 +94,7 @@ void CoordTriple::rotate_3d(
             break;
         default:
             throw std::invalid_argument(
-                "Invalid axis for CoordTriple::rotate_3d()"
+                "Invalid axis for Vec3f::rotate_3d()"
             );
     }
 
@@ -116,7 +116,7 @@ void CoordTriple::rotate_3d(
     *pos_1 = new_1 + about_1;
 }
 
-float CoordTriple::project_2d_x(
+float Vec3f::project_2d_x(
     const float vanish_x,
     const float fov
 ) const noexcept {
@@ -133,7 +133,7 @@ float CoordTriple::project_2d_x(
     );
 }
 
-float CoordTriple::project_2d_x(
+float Vec3f::project_2d_x(
     const Perspective& perspective
 ) const noexcept {
     return (
@@ -147,7 +147,7 @@ float CoordTriple::project_2d_x(
     );
 }
 
-float CoordTriple::project_2d_y(
+float Vec3f::project_2d_y(
     const float vanish_y,
     const float fov
 ) const noexcept {
@@ -160,7 +160,7 @@ float CoordTriple::project_2d_y(
     );
 }
 
-float CoordTriple::project_2d_y(
+float Vec3f::project_2d_y(
     const Perspective& perspective
 ) const noexcept {
     return (
@@ -174,10 +174,10 @@ float CoordTriple::project_2d_y(
     );
 }
 
-CoordPair CoordTriple::project_2d(
+Vec2f Vec3f::project_2d(
     const Perspective& perspective
 ) const noexcept {
-    CoordPair result(
+    Vec2f result(
         (
             x_pos + (
                 (
