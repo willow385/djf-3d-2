@@ -46,7 +46,8 @@ public:
      * @param axis whether the axis is X, Y, or Z
      * @return x_pos, y_pos, or z_pos, according to the axis
      */
-    float get_pos(const Axis axis) const;
+    template <Axis axis>
+    float get_pos(void) const;
 
     /**
      * This translates the Vec3f along one of the axes.

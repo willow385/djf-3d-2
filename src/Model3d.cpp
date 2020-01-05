@@ -161,9 +161,9 @@ Model3d::Model3d(const std::string& obj_filepath):
     float vertices_z_sum = 0.0;
     int num_vertices = vertices.size();
     for (auto vertex: vertices) {
-        vertices_x_sum += vertex.get_pos(Axis::X);
-        vertices_y_sum += vertex.get_pos(Axis::Y);
-        vertices_z_sum += vertex.get_pos(Axis::Z);
+        vertices_x_sum += vertex.get_pos<Axis::X>();
+        vertices_y_sum += vertex.get_pos<Axis::Y>();
+        vertices_z_sum += vertex.get_pos<Axis::Z>();
     }
     centroid.set_position(
         vertices_x_sum / num_vertices,
@@ -238,18 +238,18 @@ void Model3d::rotate_self(
 
 void Model3d::scale(const float amount) noexcept {
     for (auto& vertex: vertices) {
-        float new_x = vertex.get_pos(Axis::X) * amount;
-        float new_y = vertex.get_pos(Axis::Y) * amount;
-        float new_z = vertex.get_pos(Axis::Z) * amount;
+        float new_x = vertex.get_pos<Axis::X>() * amount;
+        float new_y = vertex.get_pos<Axis::Y>() * amount;
+        float new_z = vertex.get_pos<Axis::Z>() * amount;
         vertex.set_position(new_x, new_y, new_z);
     }
 
     float new_centroid_x
-        = centroid.get_pos(Axis::X) * amount;
+        = centroid.get_pos<Axis::X>() * amount;
     float new_centroid_y
-        = centroid.get_pos(Axis::Y) * amount;
+        = centroid.get_pos<Axis::Y>() * amount;
     float new_centroid_z
-        = centroid.get_pos(Axis::Z) * amount;
+        = centroid.get_pos<Axis::Z>() * amount;
     centroid.set_position(
         new_centroid_x,
         new_centroid_y,

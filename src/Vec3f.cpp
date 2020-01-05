@@ -28,19 +28,19 @@ void Vec3f::set_position(
     z_pos = z;
 }
 
-float Vec3f::get_pos(const Axis axis) const {
-    switch (axis) {
-        case Axis::X:
-            return x_pos;
-        case Axis::Y:
-            return y_pos;
-        case Axis::Z:
-            return z_pos;
-        default:
-            throw std::invalid_argument(
-                "Invalid axis for Vec3f::get_pos()"
-            );
-    }
+template <>
+float Vec3f::get_pos<Axis::X>(void) const {
+    return x_pos;
+}
+
+template <>
+float Vec3f::get_pos<Axis::Y>(void) const {
+    return y_pos;
+}
+
+template <>
+float Vec3f::get_pos<Axis::Z>(void) const {
+    return z_pos;
 }
 
 void Vec3f::translate(
@@ -77,20 +77,20 @@ void Vec3f::rotate_3d(
         case Axis::X:
             pos_0 = &z_pos;
             pos_1 = &y_pos;
-            about_0 = axis_point.get_pos(Axis::Z);
-            about_1 = axis_point.get_pos(Axis::Y);
+            about_0 = axis_point.get_pos<Axis::Z>();
+            about_1 = axis_point.get_pos<Axis::Y>();
             break;
         case Axis::Y:
             pos_0 = &x_pos;
             pos_1 = &z_pos;
-            about_0 = axis_point.get_pos(Axis::X);
-            about_1 = axis_point.get_pos(Axis::Z);
+            about_0 = axis_point.get_pos<Axis::X>();
+            about_1 = axis_point.get_pos<Axis::Z>();
             break;
         case Axis::Z:
             pos_0 = &x_pos;
             pos_1 = &y_pos;
-            about_0 = axis_point.get_pos(Axis::X);
-            about_1 = axis_point.get_pos(Axis::Y);
+            about_0 = axis_point.get_pos<Axis::X>();
+            about_1 = axis_point.get_pos<Axis::Y>();
             break;
         default:
             throw std::invalid_argument(
