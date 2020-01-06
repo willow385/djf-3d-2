@@ -45,7 +45,9 @@ Canvas::Canvas(
 
     /* We have to use malloc() here because SDL is
        written in C. */
-    event = (SDL_Event *) std::malloc(sizeof(SDL_Event));
+    event = static_cast<SDL_Event *>(
+        std::malloc(sizeof(SDL_Event))
+    );
 
     if (!main_window || !renderer) {
         std::cerr
