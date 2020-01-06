@@ -53,7 +53,7 @@ public:
     void add(Vec3f& point) noexcept;
 
     /**
-     * The specializations of this method return a mutable
+     * The specializations of these methods return a
      * reference to one of the Scene's members.
      *
      * @param T either Model3d, Vec2f, or Vec3f,
@@ -62,19 +62,10 @@ public:
      * @return mutable reference to the desired object
      */
     template <class T>
-    T& nth_mutable(const size_t index);
+    T& nth(const size_t index);
 
-    /**
-     * The specializations of this method return a const
-     * reference to one of the Scene's members.
-     *
-     * @param T either Model3d, Vec2f, or Vec3f,
-     * depending on which you want
-     * @param index the index of that object
-     * @return const reference to the desired object
-     */
     template <class T>
-    const T& nth_const(const size_t index) const;
+    const T& nth(const size_t index) const;
 
 
     /**

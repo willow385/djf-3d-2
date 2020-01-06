@@ -32,10 +32,10 @@ void Scene::add(Vec3f& point) noexcept {
 }
 
 template<>
-Model3d& Scene::nth_mutable<Model3d>(const size_t index) {
+Model3d& Scene::nth<Model3d>(const size_t index) {
     if (index >= models.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_mutable<Model3d>(): invalid index"
+            "djf_3d::Scene::nth<Model3d>(): invalid index"
         );
     }
 
@@ -43,12 +43,12 @@ Model3d& Scene::nth_mutable<Model3d>(const size_t index) {
 }
 
 template<>
-Vec3f& Scene::nth_mutable<Vec3f>(
+Vec3f& Scene::nth<Vec3f>(
     const size_t index
 ) {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_mutable<Vec3f>(): invalid index"
+            "djf_3d::Scene::nth<Vec3f>(): invalid index"
         );
     }
 
@@ -56,12 +56,12 @@ Vec3f& Scene::nth_mutable<Vec3f>(
 }
 
 template<>
-Vec2f& Scene::nth_mutable<Vec2f>(
+Vec2f& Scene::nth<Vec2f>(
     const size_t index
 ) {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_mutable<Vec2f>(): invalid index"
+            "djf_3d::Scene::nth<Vec2f>(): invalid index"
         );
     }
 
@@ -69,12 +69,12 @@ Vec2f& Scene::nth_mutable<Vec2f>(
 }
 
 template<>
-const Model3d& Scene::nth_const<Model3d>(
+const Model3d& Scene::nth<Model3d>(
     const size_t index
 ) const {
     if (index >= models.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_const<Model3d>(): invalid index"
+            "djf_3d::Scene::nth<Model3d>(): invalid index"
         );
     }
 
@@ -82,12 +82,12 @@ const Model3d& Scene::nth_const<Model3d>(
 }
 
 template<>
-const Vec3f& Scene::nth_const<Vec3f>(
+const Vec3f& Scene::nth<Vec3f>(
     const size_t index
 ) const {
     if (index >= points_3d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_const<Vec3f>(): invalid index"
+            "djf_3d::Scene::nth<Vec3f>(): invalid index"
         );
     }
 
@@ -95,12 +95,12 @@ const Vec3f& Scene::nth_const<Vec3f>(
 }
 
 template<>
-const Vec2f& Scene::nth_const<Vec2f>(
+const Vec2f& Scene::nth<Vec2f>(
     const size_t index
 ) const {
     if (index >= points_2d.size()) {
         throw std::invalid_argument(
-            "djf_3d::Scene::nth_const<Vec2f>(): invalid index"
+            "djf_3d::Scene::nth<Vec2f>(): invalid index"
         );
     }
 

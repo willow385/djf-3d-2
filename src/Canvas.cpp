@@ -343,20 +343,20 @@ void Canvas::draw_scene(
 
     for (size_t i = 0; i < model_cnt; i++) {
         this->draw_model3d(
-            scene.nth_const<Model3d>(i),
+            scene.nth<Model3d>(i),
             persp
         );
     }
 
     for (size_t i = 0; i < point_2d_cnt; i++) {
         this->draw_point(
-            scene.nth_const<Vec2f>(i)
+            scene.nth<Vec2f>(i)
         );
     }
 
     for (size_t i = 0; i < point_3d_cnt; i++) {
         this->draw_point(
-            scene.nth_const<Vec3f>(i),
+            scene.nth<Vec3f>(i),
             persp
         );
     }
