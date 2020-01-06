@@ -59,7 +59,7 @@ public:
      * @param T either Model3d, Vec2f, or Vec3f,
      * depending on which you want
      * @param index the index of that object
-     * @return mutable reference to the desired object
+     * @return reference to the desired object
      */
     template <class T>
     T& nth(const size_t index);
