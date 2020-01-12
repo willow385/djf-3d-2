@@ -10,7 +10,7 @@ if [ ! -d external/SDL2-2.0.10/SDL2 ]; then
     # if installing locally, gotta add the directory where lib/cmake/SDL2Config.cmake is to CMAKE_PREFIX_PATH in the line before find_package in CMakeLists.txt
     # cmake -DCMAKE_INSTALL_PREFIX=external/ .. 
     cmake .. 
-    RUN cmake --build . --target install
+    cmake --build . --target install
     cd ../../../
 fi
 
