@@ -1,5 +1,9 @@
-gcc -lSDL2
+echo '#include<SDL2/SDL.h> 
+int main(){ ; }' >> test.c
+gcc test.c -o test.o -lSDL2 
 returnVal=$?
+rm test.c
+
 if [ $returnVal -ne 0 ] && [ ! -d external/SDL2 ]; then
     mkdir temp
     curl https://libsdl.org/release/SDL2-2.0.10.tar.gz -o temp/SDL2.tar.gz
