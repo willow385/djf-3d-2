@@ -4,7 +4,9 @@ gcc test.c -o test.o -lSDL2
 returnVal=$?
 rm test.c
 
+SDL2_PATH=""
 if [ $returnVal -ne 0 ] && [ ! -d external/SDL2 ]; then
+    SDL2_PATH="$PWD/external/SDL2"
     mkdir temp
     curl https://libsdl.org/release/SDL2-2.0.10.tar.gz -o temp/SDL2.tar.gz
     mkdir -p external/SDL2
@@ -13,9 +15,7 @@ if [ $returnVal -ne 0 ] && [ ! -d external/SDL2 ]; then
     cd external/SDL2-2.0.10
     mkdir build
     cd build
-    # if installing locally, gotta add the directory where lib/cmake/SDL2Config.cmake is to CMAKE_PREFIX_PATH in the line before find_package in CMakeLists.txt
-    # cmake -DCMAKE_INSTALL_PREFIX=external/SDL2 .. 
-    cmake .. 
+    cmake -DCMAKE_INSTALL_PREFIX=${SDL2_PATH} .. 
     cmake --build . --target install
     cd ../../../
 fi
@@ -26,7 +26,7 @@ fi
 
 # build project
 cd build
-cmake ..
+cmake -DSDL2_PATH="${SDL2_PATH}" ..
 cmake --build . --target install 
 
 # build demo

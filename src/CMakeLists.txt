@@ -19,8 +19,6 @@ add_library(Scene Scene.cpp Scene.h)
 target_link_libraries(Scene PRIVATE Vec2f Vec3f Model3d)
 target_compile_options(Scene PRIVATE -O3 -Wall -fPIC)
 
-# list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_LIST_DIR}/external/SDL2-2.0.10/SDL2/lib/cmake")
-find_package(SDL2 REQUIRED CONFIG)
 add_library(Canvas Canvas.cpp Canvas.h)
 target_link_libraries(Canvas PRIVATE SDL2::SDL2 Vec2f Perspective Vec3f Model3d Scene)
 target_compile_options(Canvas PRIVATE -O3 -Wall -fPIC)
@@ -43,8 +41,6 @@ target_link_libraries(djf-3d-2 INTERFACE
     Canvas
     KeyboardStateAndColorAndPolygon
 )
-
-include(GNUInstallDirs)
 
 install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/djf-3d-2"
