@@ -2,12 +2,23 @@ Installing djf-3d-2 on GNU/Linux is very easy. Your mileage
 may vary on other *nix systems.
 
 There's no need to clone the repo if you just want to install
-the library. All you have to do is this:
+the library. All you have to do is either 
+
     0. wget https://github.com/DanteFalzone0/djf-3d-2/raw/master/djf-3d-2.tar.gz
     1. Open up the tarball (tar -xzvf djf-3d-2.tar.gz)
     2. cd djf-3d-2
     3. make
     4. sudo make install
+
+or
+
+    0. bash main.sh (alternatively use bash simulate_build.sh)
+
+Note that the second approach assumes that your SDL2 library is either 
+installed in external/SDL2 or the default installation directory
+(/usr/local/include etc or equivalent). If not, the script would build SDL2 and 
+install it into the default installation directories.
+
 
 That's it! Now you can write programs that use djf-3d-2 by
 putting "#include <djf-3d-2/djf-3d.h>" in them. Remember to
