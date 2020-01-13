@@ -20,7 +20,7 @@ target_link_libraries(Scene PRIVATE Vec2f Vec3f Model3d)
 target_compile_options(Scene PRIVATE -O3 -Wall -fPIC)
 
 add_library(Canvas Canvas.cpp Canvas.h)
-target_link_libraries(Canvas PRIVATE SDL2::SDL2 Vec2f Perspective Vec3f Model3d Scene)
+target_link_libraries(Canvas PRIVATE SDL2 Vec2f Perspective Vec3f Model3d Scene)
 target_compile_options(Canvas PRIVATE -O3 -Wall -fPIC)
 
 add_library(KeyboardStateAndColorAndPolygon INTERFACE)

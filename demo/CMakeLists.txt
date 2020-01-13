@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(djf-3d-2 REQUIRED CONFIG)
 add_executable(Demo main.cpp)
-target_link_libraries(Demo PRIVATE djf-3d-2::djf-3d-2)
+target_link_libraries(Demo PRIVATE djf-3d-2 SDL2)
 
 # this will fail in Docker since the current image doesn't support making a window.
 add_custom_target(createDemo ALL
