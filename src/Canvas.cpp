@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "Vec2f.h"
 #include "Vec3f.h"
 #include "Perspective.h"
