@@ -61,7 +61,7 @@ Model3d::Model3d(const std::string& obj_filepath):
     obj_file.seekg(0);
     while (std::getline(obj_file, file_line)) {
         if (file_line[0] == 'f') {
-            unsigned indx_0, indx_1, indx_2, ignore;
+            size_t indx_0, indx_1, indx_2, ignore;
             std::regex opt_0(
                 "f\\s+\\d+\\s+\\d+\\s+\\d+"
             );
@@ -78,7 +78,7 @@ Model3d::Model3d(const std::string& obj_filepath):
             if (std::regex_search(file_line, opt_0)) {
                 std::sscanf(
                     file_line.c_str(),
-                    "f %d %d %d",
+                    "f %zu %zu %zu",
                     &indx_0,
                     &indx_1,
                     &indx_2
@@ -88,7 +88,7 @@ Model3d::Model3d(const std::string& obj_filepath):
             if (std::regex_search(file_line, opt_1)) {
                 std::sscanf(
                     file_line.c_str(),
-                    "f %d/%d %d/%d %d/%d",
+                    "f %zu/%zu %zu/%zu %zu/%zu",
                     &indx_0, &ignore,
                     &indx_1, &ignore,
                     &indx_2, &ignore
@@ -98,7 +98,7 @@ Model3d::Model3d(const std::string& obj_filepath):
             if (std::regex_search(file_line, opt_2)) {
                 std::sscanf(
                     file_line.c_str(),
-                    "f %d/%d/%d %d/%d/%d %d/%d/%d",
+                    "f %zu/%zu/%zu %zu/%zu/%zu %zu/%zu/%zu",
                     &indx_0, &ignore, &ignore,
                     &indx_1, &ignore, &ignore,
                     &indx_2, &ignore, &ignore
@@ -108,7 +108,7 @@ Model3d::Model3d(const std::string& obj_filepath):
             if (std::regex_search(file_line, opt_3)) {
                 std::sscanf(
                     file_line.c_str(),
-                    "f %d//%d %d//%d %d//%d",
+                    "f %zu//%zu %zu//%zu %zu//%zu",
                     &indx_0, &ignore,
                     &indx_1, &ignore,
                     &indx_2, &ignore
@@ -119,19 +119,25 @@ Model3d::Model3d(const std::string& obj_filepath):
 
             if (indx_0 <= this->vertex_cnt()) {
                 poly.vertices.push_back(
-                    &(this->nth_vertex(indx_0 - 1))
+                    &(this->nth_vertex(
+                        static_cast<size_t>(indx_0 - 1)
+                    ))
                 );
             }
 
             if (indx_1 <= this->vertex_cnt()) {
                 poly.vertices.push_back(
-                    &(this->nth_vertex(indx_1 - 1))
+                    &(this->nth_vertex(
+                        static_cast<size_t>(indx_1 - 1)
+                    ))
                 );
             }
 
             if (indx_2 <= this->vertex_cnt()) {
                 poly.vertices.push_back(
-                    &(this->nth_vertex(indx_2 - 1))
+                    &(this->nth_vertex(
+                        static_cast<size_t>(indx_2 - 1)
+                    ))
                 );
             }
 
