@@ -79,6 +79,20 @@ public:
     ) noexcept;
 
     /**
+     * This method rotates the Model3d around something
+     * else.
+     *
+     * @param axis the axis about which to rotate
+     * @param point the point around which to rotate
+     * @param theta_degrees the number of degrees to rotate
+     */
+    template <Axis axis>
+    void rotate_around(
+        const Vec3f& point,
+        const float theta_degrees
+    ) noexcept;
+
+    /**
      * This method resizes the Model3d.
      *
      * @param amount factor by which to scale the Model3d

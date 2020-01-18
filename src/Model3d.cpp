@@ -272,17 +272,37 @@ template
 void Model3d::rotate_self<Axis::X>(
     const float theta_degrees
 ) noexcept;
-
 template
 void Model3d::rotate_self<Axis::Y>(
     const float theta_degrees
 ) noexcept;
-
 template
 void Model3d::rotate_self<Axis::Z>(
     const float theta_degrees
 ) noexcept;
 
+template <Axis axis>
+void Model3d::rotate_around(
+    const Vec3f& point,
+    const float theta_degrees
+) noexcept {
+    for (auto& vertex: vertices) {
+        vertex.rotate_3d<axis>(
+            point,
+            theta_degrees
+        );
+    }
+}
+
+template void Model3d::rotate_around<Axis::X>(
+    const Vec3f& point, const float theta_degrees
+) noexcept;
+template void Model3d::rotate_around<Axis::Y>(
+    const Vec3f& point, const float theta_degrees
+) noexcept;
+template void Model3d::rotate_around<Axis::Z>(
+    const Vec3f& point, const float theta_degrees
+) noexcept;
 
 void Model3d::scale(const float amount) noexcept {
     for (auto& vertex: vertices) {
