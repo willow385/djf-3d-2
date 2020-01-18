@@ -238,6 +238,8 @@ void Canvas::draw_point(
     const Vec2f& vanish_point,
     const float fov
 ) noexcept {
+    if (point.get_y_pos() < 0) return;
+
     SDL_RenderDrawPoint(
         renderer,
         static_cast<int>(point.project_2d_x(
@@ -255,6 +257,8 @@ void Canvas::draw_point(
     const Vec3f& point,
     const Perspective& perspective
 ) noexcept {
+    if (point.get_y_pos() < 0) return;
+
     Vec2f projection_2d
         = point.project_2d(perspective);
     SDL_RenderDrawPoint(
@@ -297,6 +301,12 @@ void Canvas::draw_line(
     const Vec3f& point_1,
     const Perspective& perspective
 ) noexcept {
+    if (
+        point_0.get_y_pos() < 0
+    ||
+        point_1.get_y_pos() < 0
+    ) return;
+
     Vec2f point_0_2d
         = point_0.project_2d(perspective);
     Vec2f point_1_2d
