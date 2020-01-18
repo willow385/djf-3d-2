@@ -179,6 +179,29 @@ Model3d::~Model3d(void) noexcept {
         << std::endl;
 }
 
+void Model3d::set_position(const Vec3f& pos) noexcept {
+    float x_diff =
+        pos.get_pos<Axis::X>()
+      - centroid.get_pos<Axis::X>();
+    float y_diff =
+        pos.get_pos<Axis::Y>()
+      - centroid.get_pos<Axis::Y>();
+    float z_diff =
+        pos.get_pos<Axis::Z>()
+      - centroid.get_pos<Axis::Z>();
+
+    for (auto& vertex: vertices) {
+        vertex.translate<Axis::X>(x_diff);
+        vertex.translate<Axis::Y>(y_diff);
+        vertex.translate<Axis::Z>(z_diff);
+    }
+
+    centroid.translate<Axis::X>(x_diff);
+    centroid.translate<Axis::Y>(y_diff);
+    centroid.translate<Axis::Z>(z_diff);
+
+}
+
 const Vec3f& Model3d::nth_vertex(
     const size_t index
 ) const {

@@ -29,6 +29,8 @@ public:
      */
     ~Model3d(void) noexcept;
 
+    void set_position(const Vec3f& pos) noexcept;
+
     /**
      * This method returns a const reference to a specific
      * vertex, throwing an exception if the index passed is
