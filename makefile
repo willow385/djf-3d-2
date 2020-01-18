@@ -12,7 +12,8 @@ OBJS = obj/Canvas.o\
        obj/Vec3f.o\
        obj/Perspective.o\
        obj/Scene.o\
-       obj/Model3d.o
+       obj/Model3d.o\
+       obj/TextRenderer.o
 
 SRC = src/Canvas.cpp\
       src/Canvas.h\
@@ -26,7 +27,9 @@ SRC = src/Canvas.cpp\
       src/Model3d.cpp\
       src/Model3d.h\
       src/Scene.h\
-      src/Scene.cpp
+      src/Scene.cpp\
+      src/TextRenderer.h\
+      src/TextRenderer.cpp
 
 FLAGS = -O3 -Wall -lm -std=c++11 -fPIC
 
@@ -39,6 +42,7 @@ $(OBJS): $(SRC)
 	$(CPP) $(FLAGS) -c src/Vec3f.cpp -o obj/Vec3f.o
 	$(CPP) $(FLAGS) -c src/Model3d.cpp -o obj/Model3d.o
 	$(CPP) $(FLAGS) -c src/Scene.cpp -o obj/Scene.o
+	$(CPP) $(FLAGS) -c src/TextRenderer.cpp -o obj/TextRenderer.o
 
 $(DEMO): demo/main.cpp
 	$(CPP) $(FLAGS) demo/main.cpp -o $(DEMO) $(LD_FLAGS)
