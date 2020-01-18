@@ -9,3 +9,4 @@
 #include "Model3d.h"
 #include "Color.h"
 #include "Scene.h"
+#include "TextRenderer.h"
