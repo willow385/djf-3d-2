@@ -5,8 +5,8 @@ namespace djf_3d {
 
 void TextRenderer::render_char(
     Canvas& canvas,
-    float x,
-    float y,
+    int x,
+    int y,
     const char character
 ) const noexcept {
     /* Every character is 8 pixels tall and 5 pixels wide.
@@ -103,6 +103,7 @@ void TextRenderer::render_char(
             canvas.draw_line(x, y+5, x+2, y+7);
             canvas.draw_line(x+4, y+5, x+2, y+7);
             canvas.draw_line(x, y+5, x+4, y+2);
+            canvas.draw_point(x+4, y+2);
             break;
         case '1':
             canvas.draw_line(x, y, x+2, y);
@@ -588,8 +589,8 @@ void TextRenderer::render_char(
 
 void TextRenderer::render_string(
     Canvas& canvas,
-    float x, /* top-left corner of the string */
-    float y,
+    int x, /* top-left corner of the string */
+    int y,
     const char *string
 ) const noexcept {
     for (int i = 0; string[i]; i++) {

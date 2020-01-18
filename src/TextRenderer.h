@@ -13,8 +13,8 @@ public:
      */
     void render_char(
         Canvas& canvas,
-        float x,
-        float y,
+        int x,
+        int y,
         const char character
     ) const noexcept;
 
@@ -24,8 +24,8 @@ public:
      */
     void render_string(
         Canvas& canvas,
-        float x,
-        float y,
+        int x,
+        int y,
         const char *string
     ) const noexcept;
 };
