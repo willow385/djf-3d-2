@@ -18,7 +18,8 @@ namespace djf_3d {
 Canvas::Canvas(
     const std::string& title,
     const int width,
-    const int height
+    const int height,
+    const int viewer_y_pos
 ) {
     std::cout <<
         "Calling ctor djf_3d::Canvas::Canvas()... ";
@@ -27,6 +28,7 @@ Canvas::Canvas(
 
     width_px = width;
     height_px = height;
+    viewer_y_position = viewer_y_pos;
 
     main_window = SDL_CreateWindow(
         title.c_str(),
@@ -86,6 +88,10 @@ Canvas::~Canvas(void) noexcept {
 
 void Canvas::refresh(void) noexcept {
     SDL_RenderPresent(renderer);
+}
+
+int Canvas::get_viewer_y_pos(void) const noexcept {
+    return viewer_y_position;
 }
 
 bool Canvas::exit(void) noexcept {
@@ -238,7 +244,7 @@ void Canvas::draw_point(
     const Vec2f& vanish_point,
     const float fov
 ) noexcept {
-    if (point.get_y_pos() < 0) return;
+    if (point.get_pos<Axis::Y>() < viewer_y_position) return;
 
     SDL_RenderDrawPoint(
         renderer,
@@ -257,7 +263,7 @@ void Canvas::draw_point(
     const Vec3f& point,
     const Perspective& perspective
 ) noexcept {
-    if (point.get_y_pos() < 0) return;
+    if (point.get_pos<Axis::Y>() < viewer_y_position) return;
 
     Vec2f projection_2d
         = point.project_2d(perspective);
@@ -302,9 +308,9 @@ void Canvas::draw_line(
     const Perspective& perspective
 ) noexcept {
     if (
-        point_0.get_y_pos() < 0
+        point_0.get_pos<Axis::Y>() < viewer_y_position
     ||
-        point_1.get_y_pos() < 0
+        point_1.get_pos<Axis::Y>() < viewer_y_position
     ) return;
 
     Vec2f point_0_2d

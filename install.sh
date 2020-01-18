@@ -14,8 +14,10 @@ mv libdjf-3d-2.a /usr/lib/
 
 # Put the headers in the appropriate location for GCC to
 # find them.
-mkdir /usr/include/djf-3d-2/
-cp src/*.h /usr/include/djf-3d-2/
+if [ ! -d "/usr/local/include/djf-3d-2" ]; then
+    mkdir /usr/local/include/djf-3d-2/
+fi
+cp src/*.h /usr/local/include/djf-3d-2/
 
 # Let the user know how to use it.
 echo "\

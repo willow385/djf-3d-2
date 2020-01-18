@@ -48,8 +48,9 @@ int main(int argc, char *argv[]) {
     );
     djf_3d::Canvas canvas(
         title,
-        600,
-        600
+        600, // window width
+        600, // window height
+        -1100 // lowest y-pos where models are visible
     );
 
     // Next we create a Model.

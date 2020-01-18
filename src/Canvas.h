@@ -25,6 +25,7 @@ private:
     SDL_Event *event;
     int width_px;
     int height_px;
+    int viewer_y_position;
 
 public:
     /**
@@ -37,11 +38,13 @@ public:
      * @param title the text to display in the titlebar
      * @param width the width of the window in pixels
      * @param height the height of the window in pixels
+     * @param viewer_y_pos where objects disappear
      */
     Canvas(
         const std::string& title,
         const int width,
-        const int height
+        const int height,
+        const int viewer_y_pos
     );
 
     /**
@@ -55,6 +58,11 @@ public:
      * method is called.
      */
     void refresh(void) noexcept;
+
+    /**
+     * This method returns the location
+     */
+    int get_viewer_y_pos(void) const noexcept;
 
     /**
      * This method returns the width of the Canvas in
