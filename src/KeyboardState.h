@@ -73,6 +73,7 @@ struct KeyboardState {
     bool up_arr;
     bool down_arr;
     bool right_arr;
+    bool space;
 };
 
 } // end of namespace djf_3d

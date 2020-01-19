@@ -189,6 +189,7 @@ KeyboardState Canvas::get_keyboard_state(void) noexcept {
     result.up_arr    = static_cast<bool>(state[SDL_SCANCODE_UP]);
     result.down_arr  = static_cast<bool>(state[SDL_SCANCODE_DOWN]);
     result.right_arr = static_cast<bool>(state[SDL_SCANCODE_RIGHT]);
+    result.space     = static_cast<bool>(state[SDL_SCANCODE_SPACE]);
 
     return result;
 }
