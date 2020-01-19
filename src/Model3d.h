@@ -114,6 +114,11 @@ public:
      * @return number of faces
      */
     size_t face_cnt(void) const noexcept;
+
+    /**
+     * @return reference to the centroid
+     */
+    const Vec3f& get_centroid(void) const noexcept;
 };
 
 } // end of namespace djf_3d

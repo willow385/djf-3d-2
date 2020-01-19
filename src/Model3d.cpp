@@ -333,4 +333,8 @@ size_t Model3d::face_cnt(void) const noexcept {
     return faces.size();
 }
 
+const Vec3f& Model3d::get_centroid(void) const noexcept {
+    return centroid;
+}
+
 } // end of namespace djf_3d
