@@ -107,68 +107,69 @@ void TextRenderer::render_char(
             break;
         case '1':
             canvas.draw_line(x, y, x+2, y);
-            canvas.draw_line(x+2, y, x+2, y+6);
-            canvas.draw_line(x, y+7, x+4, y+7);
+            canvas.draw_line(x+2, y, x+2, y+7);
+            canvas.draw_line(x, y+7, x+5, y+7);
             break;
         case '2':
             canvas.draw_line(x, y+1, x+1, y);
             canvas.draw_line(x+1, y, x+3, y);
             canvas.draw_line(x+3, y, x+4, y+1);
-            canvas.draw_line(x+4, y+1, x+4, y+3);
+            canvas.draw_line(x+4, y+1, x+4, y+4);
             canvas.draw_line(x+4, y+3, x, y+7);
-            canvas.draw_line(x, y+7, x+4, y+7);
+            canvas.draw_line(x, y+7, x+5, y+7);
             break;
         case '3':
             canvas.draw_line(x, y+1, x+1, y);
-            canvas.draw_line(x+1, y, x+3, y);
+            canvas.draw_line(x+1, y, x+4, y);
             canvas.draw_line(x+4, y+1, x+4, y+3);
             canvas.draw_line(x+4, y+3, x+2, y+3);
             canvas.draw_line(x+2, y+3, x+4, y+5);
             canvas.draw_line(x+4, y+5, x+4, y+6);
-            canvas.draw_line(x+1, y+7, x+3, y+7);
+            canvas.draw_line(x+1, y+7, x+4, y+7);
             canvas.draw_line(x, y+6, x+1, y+7);
+            canvas.draw_point(x+4, y+6);
             break;
         case '4':
             canvas.draw_line(x, y, x, y+4);
             canvas.draw_line(x, y+4, x+4, y+4);
-            canvas.draw_line(x+4, y, x+4, y+7);
+            canvas.draw_line(x+4, y, x+4, y+8);
             break;
         case '5':
-            canvas.draw_line(x+4, y, x, y);
+            canvas.draw_line(x, y, x+5, y);
             canvas.draw_line(x, y, x, y+4);
-            canvas.draw_line(x+1, y+3, x+3, y+3);
-            canvas.draw_line(x+4, y+4, x+4, y+6);
-            canvas.draw_line(x+3, y+7, x+1, y+7);
-            canvas.draw_point(x, y+6);
+            canvas.draw_line(x, y+3, x+4, y+3);
+            canvas.draw_line(x+4, y+4, x+4, y+7);
+            canvas.draw_line(x+1, y+7, x+4, y+7);
+            canvas.draw_point(x, y+7);
             break;
         case '6':
-            canvas.draw_line(x+3, y, x+1, y);
+            canvas.draw_line(x+1, y, x+4, y);
             canvas.draw_point(x+4, y+1);
-            canvas.draw_line(x, y+1, x, y+6);
-            canvas.draw_line(x+1, y+7, x+3, y+7);
-            canvas.draw_line(x+4, y+6, x+4, y+4);
-            canvas.draw_line(x+3, y+3, x+1, y+3);
+            canvas.draw_line(x, y+1, x, y+7);
+            canvas.draw_line(x+1, y+7, x+4, y+7);
+            canvas.draw_line(x, y+3, x+4, y+3);
+            canvas.draw_line(x+4, y+4, x+4, y+7);
             break;
         case '7':
             canvas.draw_line(x, y, x, y+1);
             canvas.draw_line(x, y, x+4, y);
-            canvas.draw_line(x+4, y, x+3, y+7);
+            canvas.draw_line(x+4, y, x+3, y+8);
             break;
         case '8':
-            canvas.draw_line(x+1, y, x+3, y);
-            canvas.draw_line(x, y+1, x, y+2);
-            canvas.draw_line(x+1, y+3, x+3, y+3);
-            canvas.draw_line(x+4, y+1, x+4, y+2);
-            canvas.draw_line(x, y+4, x, y+6);
-            canvas.draw_line(x+4, y+4, x+4, y+6);
-            canvas.draw_line(x+1, y+7, x+3, y+7);
+            canvas.draw_line(x+1, y, x+4, y);
+            canvas.draw_line(x, y+1, x, y+3);
+            canvas.draw_line(x+1, y+3, x+4, y+3);
+            canvas.draw_line(x+4, y+1, x+4, y+3);
+            canvas.draw_line(x, y+4, x, y+7);
+            canvas.draw_line(x+4, y+4, x+4, y+7);
+            canvas.draw_line(x+1, y+7, x+4, y+7);
             break;
         case '9':
-            canvas.draw_line(x+1, y, x+3, y);
-            canvas.draw_line(x, y+1, x, y+2);
-            canvas.draw_line(x+1, y+3, x+3, y+3);
-            canvas.draw_line(x+4, y+1, x+4, y+6);
-            canvas.draw_line(x+3, y+7, x+1, y+7);
+            canvas.draw_line(x+1, y, x+4, y);
+            canvas.draw_line(x, y+1, x, y+3);
+            canvas.draw_line(x+1, y+3, x+4, y+3);
+            canvas.draw_line(x+4, y+1, x+4, y+7);
+            canvas.draw_line(x+1, y+7, x+4, y+7);
             break;
         case ':':
             canvas.draw_line(x+2, y, x+3, y+1);
