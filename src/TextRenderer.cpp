@@ -40,7 +40,7 @@ void TextRenderer::render_char(
             canvas.draw_line(x+2, y-1, x+2, y+9);
             break;
         case '%':
-            canvas.draw_line(x+4, y+2, x, y+5);
+            canvas.draw_line(x, y+4, x+5, y+2);
             canvas.draw_point(x+1, y);
             canvas.draw_point(x, y+1);
             canvas.draw_point(x+2, y+1);
@@ -57,28 +57,46 @@ void TextRenderer::render_char(
             canvas.draw_line(x+1, y+4, x+4, y+7);
             canvas.draw_line(x+1, y+7, x+4, y+4);
             canvas.draw_line(x, y+5, x, y+6);
+            canvas.draw_point(x+2, y);
+            canvas.draw_point(x, y+3);
+            canvas.draw_point(x+4, y+4);
+            canvas.draw_point(x+4, y+7);
             break;
         case '\'':
-            canvas.draw_line(x+2, y, x+2, y+1);
+            canvas.draw_line(x+2, y, x+2, y+2);
             break;
         case '(':
-            canvas.draw_line(x+3, y, x+1, y+2);
-            canvas.draw_line(x+1, y+5, x+3, y+7);
-            canvas.draw_line(x+1, y+2, x+1, y+5);
+            canvas.draw_point(x+3, y);
+            canvas.draw_point(x+2, y);
+            canvas.draw_point(x+1, y+1);
+            canvas.draw_line(x, y+2, x, y+6);
+            canvas.draw_point(x+1, y+6);
+            canvas.draw_point(x+2, y+7);
+            canvas.draw_point(x+3, y+7);
             break;
         case ')':
-            canvas.draw_line(x+1, y, x+3, y+2);
-            canvas.draw_line(x+3, y+5, x+1, y+7);
-            canvas.draw_line(x+3, y+2, x+3, y+5);
+            canvas.draw_point(x+1, y);
+            canvas.draw_point(x+2, y);
+            canvas.draw_point(x+3, y+1);
+            canvas.draw_line(x+4, y+2, x+4, y+6);
+            canvas.draw_point(x+3, y+6);
+            canvas.draw_point(x+2, y+7);
+            canvas.draw_point(x+1, y+7);
             break;
         case '*':
-            canvas.draw_line(x+1, y, x+3, y+4);
-            canvas.draw_line(x+3, y, x+1, y+4);
-            canvas.draw_line(x, y+2, x+4, y+2);
+            canvas.draw_line(x+2, y+1, x+2, y+8);
+            canvas.draw_point(x+1, y+3);
+            canvas.draw_point(x+1, y+5);
+            canvas.draw_point(x, y+2);
+            canvas.draw_point(x, y+6);
+            canvas.draw_point(x+3, y+3);
+            canvas.draw_point(x+3, y+5);
+            canvas.draw_point(x+4, y+2);
+            canvas.draw_point(x+4, y+6);
             break;
         case '+':
-            canvas.draw_line(x+2, y+1, x+2, y+5);
-            canvas.draw_line(x, y+3, x+4, y+3);
+            canvas.draw_line(x+2, y+1, x+2, y+6);
+            canvas.draw_line(x, y+3, x+5, y+3);
             break;
         case ',':
             canvas.draw_line(x+2, y+5, x+2, y+7);
@@ -93,7 +111,7 @@ void TextRenderer::render_char(
             canvas.draw_line(x+1, y+7, x+2, y+6);
             break;
         case '/':
-            canvas.draw_line(x, y+7, x+4, y);
+            canvas.draw_line(x+4, y, x, y+8);
             break;
         case '0':
             canvas.draw_line(x+2, y, x, y+2);
@@ -185,24 +203,36 @@ void TextRenderer::render_char(
             canvas.draw_point(x+1, y+8);
             break;
         case '<':
-            canvas.draw_line(x, y+4, x+4, y+1);
-            canvas.draw_line(x, y+4, x+4, y+6);
+            canvas.draw_point(x, y+4);
+            canvas.draw_point(x+1, y+3);
+            canvas.draw_point(x+2, y+2);
+            canvas.draw_point(x+3, y+1);
+            canvas.draw_point(x+1, y+5);
+            canvas.draw_point(x+2, y+6);
+            canvas.draw_point(x+3, y+7);
             break;
         case '=':
-            canvas.draw_line(x, y+3, x+4, y+3);
-            canvas.draw_line(x, y+5, x+4, y+5);
+            canvas.draw_line(x, y+3, x+5, y+3);
+            canvas.draw_line(x, y+5, x+5, y+5);
             break;
         case '>':
-            canvas.draw_line(x+4, y+4, x, y+1);
-            canvas.draw_line(x+4, y+4, x, y+6);
+            canvas.draw_point(x+4, y+4);
+            canvas.draw_point(x+3, y+3);
+            canvas.draw_point(x+2, y+2);
+            canvas.draw_point(x+1, y+1);
+            canvas.draw_point(x+3, y+5);
+            canvas.draw_point(x+2, y+6);
+            canvas.draw_point(x+1, y+7);
             break;
         case '?':
-            canvas.draw_line(x, y+1, x+1, y);
-            canvas.draw_line(x+1, y, x+3, y);
-            canvas.draw_line(x+4, y+1, x+4, y+2);
-            canvas.draw_line(x+3, y+3, x+2, y+3);
-            canvas.draw_line(x+1, y+4, x+1, y+5);
-            canvas.draw_point(x+1, y+7);
+            canvas.draw_line(x+1, y, x+4, y);
+            canvas.draw_point(x, y+1);
+            canvas.draw_point(x+4, y+1);
+            canvas.draw_point(x+3, y+2);
+            canvas.draw_point(x+2, y+3);
+            canvas.draw_point(x+2, y+4);
+            canvas.draw_point(x+2, y+5);
+            canvas.draw_point(x+2, y+7);
             break;
         case '@':
             canvas.draw_line(x+1, y, x+4, y);
@@ -212,6 +242,10 @@ void TextRenderer::render_char(
             canvas.draw_line(x+3, y+2, x+2, y+2);
             canvas.draw_line(x+2, y+2, x+2, y+4);
             canvas.draw_line(x+2, y+4, x+4, y+4);
+            canvas.draw_point(x, y+6);
+            canvas.draw_point(x+3, y+2);
+            canvas.draw_point(x+4, y+2);
+            canvas.draw_point(x+4, y);
             break;
         case 'A':
             canvas.draw_line(x+2, y, x, y+2);
@@ -376,16 +410,16 @@ void TextRenderer::render_char(
             canvas.draw_line(x, y+7, x+5, y+7);
             break;
         case '[':
-            canvas.draw_line(x, y, x+3, y);
-            canvas.draw_line(x, y, x, y+7);
-            canvas.draw_line(x, y+7, x+3, y+7);
+            canvas.draw_line(x, y, x+4, y);
+            canvas.draw_line(x, y, x, y+8);
+            canvas.draw_line(x, y+7, x+4, y+7);
             break;
         case '\\':
-            canvas.draw_line(x, y, x+4, y+7);
+            canvas.draw_line(x, y, x+4, y+8);
             break;
         case ']':
             canvas.draw_line(x+1, y, x+4, y);
-            canvas.draw_line(x+4, y, x+4, y+7);
+            canvas.draw_line(x+4, y, x+4, y+8);
             canvas.draw_line(x+1, y+7, x+4, y+7);
             break;
         case '^':
@@ -547,28 +581,31 @@ void TextRenderer::render_char(
             canvas.draw_line(x, y+7, x+4, y+7);
             break;
         case '{':
-            canvas.draw_line(x+3, y, x+4, y);
-            canvas.draw_line(x+2, y+1, x+2, y+2);
-            canvas.draw_line(x, y+3, x+1, y+3);
-            canvas.draw_line(x, y+4, x+1, y+4);
-            canvas.draw_line(x+2, y+5, x+2, y+6);
-            canvas.draw_line(x+3, y+7, x+4, y+7);
+            canvas.draw_point(x+4, y);
+            canvas.draw_point(x+3, y);
+            canvas.draw_line(x+2, y+1, x+2, y+4);
+            canvas.draw_line(x, y+4, x+2, y+4);
+            canvas.draw_line(x+2, y+5, x+2, y+7);
+            canvas.draw_point(x+3, y+7);
+            canvas.draw_point(x+4, y+7);
             break;
         case '|':
-            canvas.draw_line(x+2, y, x+2, y+7);
+            canvas.draw_line(x+2, y, x+2, y+8);
             break;
         case '}':
-            canvas.draw_line(x+1, y, x, y);
-            canvas.draw_line(x+2, y+1, x+2, y+2);
-            canvas.draw_line(x+3, y+3, x+4, y+3);
-            canvas.draw_line(x+3, y+4, x+4, y+4);
-            canvas.draw_line(x+2, y+5, x+2, y+6);
-            canvas.draw_line(x, y+7, x+1, y+7);
+            canvas.draw_point(x, y);
+            canvas.draw_point(x+1, y);
+            canvas.draw_line(x+2, y+1, x+2, y+4);
+            canvas.draw_line(x+3, y+4, x+5, y+4);
+            canvas.draw_line(x+2, y+5, x+2, y+7);
+            canvas.draw_point(x+1, y+7);
+            canvas.draw_point(x, y+7);
             break;
         case '~':
             canvas.draw_point(x, y+2);
             canvas.draw_line(x+1, y+1, x+3, y+3);
             canvas.draw_point(x+4, y+2);
+            canvas.draw_point(x+3, y+3);
             break;
         default:
             canvas.draw_line(x, y, x, y+7);
