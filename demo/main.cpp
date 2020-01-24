@@ -43,9 +43,7 @@ int main(int argc, char *argv[]) {
     }
 
     // First we create a Canvas to draw things on.
-    std::string title(
-        "Controls: W/A/S/D/Q/E to rotate, I/O to zoom, arrow keys to pan"
-    );
+    std::string title("Demonstration of djf-3d-2");
     djf_3d::Canvas canvas(
         title,
         600, // window width
@@ -69,6 +67,9 @@ int main(int argc, char *argv[]) {
     // This object will store info about the keyboard.
     djf_3d::KeyboardState keyboard_state;
 
+    // This object will write text on the Canvas.
+    djf_3d::TextRenderer text_renderer;
+
     // Here we create a palette of pretty Colors to use.
     djf_3d::Color black = {0, 0, 0, 0};
     djf_3d::Color green = {0, 255, 50, 0};
@@ -85,6 +86,12 @@ int main(int argc, char *argv[]) {
         canvas.set_draw_color(black);
         canvas.fill_window();
         canvas.set_draw_color(green);
+
+        text_renderer.render_string(canvas, 10, 10, "Controls:");
+        text_renderer.render_string(canvas, 10, 20, "W/A/S/D/Q/E to rotate the object");
+        text_renderer.render_string(canvas, 10, 30, "Arrow keys to move the object up/down/forwards/backwards");
+        text_renderer.render_string(canvas, 10, 40, "I/O to move the object closer to/further away from the viewer");
+
         canvas.draw_model3d(model, perspective_context);
         canvas.refresh();
         keyboard_state = canvas.get_keyboard_state();
